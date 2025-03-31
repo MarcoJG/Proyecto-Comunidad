@@ -1,8 +1,5 @@
 <?php
-/*TODO: 
-- migrar datos a archivo de configuración
-- indicar credenciale scorrectas de la BBDD
-*/
+
 $host = 'localhost';
 $db   = 'comunidad_db';
 $user = 'root';
@@ -42,16 +39,6 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         } catch (PDOException $e) {
             echo "Error al registrar usuario: " . $e->getMessage();
         }
-
-		// $stmt = $pdo->prepare("SELECT username FROM usuario WHERE username = :username and password = SHA2(:password, 256)");
-		// $stmt->execute(['username' => $username, 'password' => $password,]);
-		// $user = $stmt->fetch();
-
-		// if ($user) {
-		// 	echo "Bienvenido, " . htmlspecialchars($user['username']);
-		// } else {
-		// 	echo "Usuario o contraseña incorrectos.";
-		// }
 	}
 }
 
