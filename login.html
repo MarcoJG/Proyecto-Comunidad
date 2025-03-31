@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login y registro</title>
+</head>
+<body>
+    <main>
+        <section class="contenedor__todo">
+            <div class="caja__trasera">
+                <div class="caja__trasera-login">
+                    <h3>¿Ya tienes una cuenta?</h3>
+                    <p>Inicia sesión para entrar en la página</p>
+                    <button type="submit" id="btn__iniciar-sesion">Iniciar Sesión</button>
+                </div>
+            </div>
+        </section>
+        <section class="contenedor__todo">
+            <div class="caja__trasera">
+                <div class="caja__trasera-register">
+                    <h3>¿Aún no tienes una cuenta?</h3>
+                    <p>Regístrate para poder iniciar sesión</p>
+                    <button type="submit" id="btn__registrarse">Registrarse</button>
+                </div>
+            </div>
+            <!--Formulario de login y Registro-->
+            <div class="contenedor__login-register">
+                <!--Login-->
+                <form action="" class="formulario__login">
+                    <h2>Iniciar Sesión</h2>
+                    <input type="text" name="is-correo" id="is-correo" placeholder="Correo Electrónico" REQUIRED>
+                    <input type="password" name="is-contrasenya" id="is-contrasenya" placeholder="Contraseña" REQUIRED>
+                    <button>Entrar</button>
+                </form>
+                <!--Registro-->
+                <form action="" class="formulario__register">
+                    <h2>Registrarse</h2>
+                    <input type="text" name="r-nombre" id="r-nombre" placeholder="Nombre Completo" REQUIRED>
+                    <input type="text" name="r-correo" id="r-correo" placeholder="Correo Electrónico" REQUIRED>
+                    <input type="text" name="r-usuario" id="r-usuario" placeholder="Usuario" REQUIRED>
+                    <input type="text" name="r-contrasenya" id="r-contrasenya" placeholder="Contraseña" REQUIRED>
+                </form>
+            </div>
+        </section>
+    </main>
+</body>
+</html>
