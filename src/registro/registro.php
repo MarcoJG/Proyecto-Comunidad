@@ -23,11 +23,11 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 		$password = htmlspecialchars($_POST['password']);
 		$email = $_POST['email'];
 		try {
-            // Preparar la consulta SQL
+            
             $stmt = $pdo->prepare("INSERT INTO usuario (nombre_completo, email, contrasena, id_roles) 
                                    VALUES (:nombre_completo, :email, :contrasena, :id_roles)");
             
-            // Ejecutar la consulta con valores seguros
+            
             $stmt->execute([
                 'nombre_completo' => $username,
                 'email' => $email,
