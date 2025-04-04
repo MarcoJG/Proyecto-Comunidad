@@ -3,49 +3,38 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login y registro</title>
+    <!--Meta descripción para SEO-->
+    <meta name="description" content="Inicie sesión en la plataforma de la Comunidad de Vecinos. Acceda con su correo y contraseña.">
+
+    <!--keywords-->
+    <meta name="keywords" content="login, acceso, comunidad de vecinos, iniciar sesión">
+    <meta name="author" content="Comunidad de vecinos">
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+    
+    <title>Iniciar sesión</title>
+    <link rel="stylesheet" href="login.css">
 </head>
 <body>
+    <header>
+        <img src="../assets/LOGO 2.png" alt="Imagen de logo de la comunidad de vecinos.">
+    </header>
     <main>
-        <section class="contenedor__todo">
-            <div class="caja__trasera">
-                <div class="caja__trasera-login">
-                    <h3>¿Ya tienes una cuenta?</h3>
-                    <p>Inicia sesión para entrar en la página</p>
-                    <button type="submit" id="btn__iniciar-sesion">Iniciar Sesión</button>
-                </div>
-            </div>
-        </section>
-        <section class="contenedor__todo">
-            <div class="caja__trasera">
-                <div class="caja__trasera-register">
-                    <h3>¿Aún no tienes una cuenta?</h3>
-                    <p>Regístrate para poder iniciar sesión</p>
-                    <button type="submit" id="btn__registrarse">Registrarse</button>
-                </div>
-            </div>
-            <!--Formulario de login y Registro-->
-            <div class="contenedor__login-register">
-                <!--Login-->
-                <form action="../PHP/login-registro.php" method="POST" class="formulario__login">
-                    <h2>Iniciar Sesión</h2>
-                    <input type="hidden" name="action" value="login">
-                    <input type="text" name="correo" id="correo" placeholder="Correo Electrónico" REQUIRED>
-                    <input type="password" name="contrasenya" id="contrasenya" placeholder="Contraseña" REQUIRED>
-                    <button type="submit">Entrar</button>
-                </form>
-                <!--Registro-->
-                <form action="../PHP/login-registro.php" method="POST" class="formulario__register">
-                    <h2>Registrarse</h2>
-                    <input type="hidden" name="action" value="register">
-                    <input type="text" name="nombre" id="nombre" placeholder="Nombre Completo" REQUIRED>
-                    <input type="text" name="correo" id="correo" placeholder="Correo Electrónico" REQUIRED>
-                    <input type="text" name="usuario" id="usuario" placeholder="Usuario" REQUIRED>
-                    <input type="text" name="contrasenya" id="contrasenya" placeholder="Contraseña" REQUIRED>
-                    <button type="submit">Registrarse</button>
-                </form>
-            </div>
+        <section class="login-container">
+            <h1>Iniciar Sesión</h1>
+
+            <form action="../PHP/login.php" method="POST">
+                <label for="correo">Su dirección de correo electrónico:</label>
+                <input type="text" name="correo" placeholder="Correo Electrónico..." required aria-label="Correo electrónico">
+
+                <label for="contrasenya">Su contraseña:</label>
+                <input type="password" name="contrasenya" placeholder="Contraseña..." required aria-label="Contraseña">
+
+                <button type="submit">Acceder</button>
+            </form>
         </section>
     </main>
+    <footer>
+        <p>&copy; 2025 Comunidad de Vecinos. Todos los derechos reservados.</p>
+    </footer>
 </body>
 </html>
