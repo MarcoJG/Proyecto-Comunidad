@@ -1,0 +1,225 @@
+/* Importando fuente Roboto */
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+
+/* Reseteo de estilos */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Fuente y colores principales */
+body {
+    font-family: 'Roboto', sans-serif;
+    background-color: #f5f5f5;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 100vh;
+}
+
+/* Contenedor principal usando GRID */
+main {
+    display: grid;
+    grid-template-columns: 2fr 1fr; /* 2 columnas */
+    gap: 32px; /* Espaciado mayor */
+    width: 90%;
+    max-width: 1200px;
+    margin: 40px auto;
+}
+
+/* Estilos generales para los bloques */
+.bloque {
+    background-color: #fff;
+    padding: 25px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    display: grid;
+    gap: 20px;
+}
+
+#bloque-noticias, #bloque-eventos {
+    grid-column: span 1;
+}
+
+#bloque-noticias h2, #bloque-eventos h2, #bloqueDestacado h2 {
+    color: #243D51;
+    font-weight: 700;
+    margin-bottom: 20px;
+    font-size: 22px;
+}
+
+#bloque-noticias p, #bloque-eventos p {
+    margin-bottom: 20px;
+}
+
+.noticias-container, .eventos-container {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 20px;
+}
+
+.noticia, .evento {
+    display: grid;
+    grid-template-columns: 100px 1fr;
+    background: #fff;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    align-items: center;
+    gap: 20px;
+}
+
+.noticia img, .evento img {
+    width: 100px;
+    height: 100px;
+    border-radius: 8px;
+}
+
+.noticia h3, .evento h3 {
+    color: #243D51;
+    font-size: 18px;
+    font-weight: 700;
+    margin-bottom: 5px;
+}
+
+.noticia p, .evento p {
+    color: #757575;
+    font-size: 14px;
+    margin: 5px 0;
+}
+
+.noticia button, .evento button, #bloqueDestacado button {
+    background-color: #243D51;
+    color: white;
+    border: none;
+    padding: 12px 20px;
+    cursor: pointer;
+    border-radius: 6px;
+    font-size: 14px;
+}
+
+.noticia button:hover, .evento button:hover, #bloqueDestacado button:hover {
+    background-color: #1a2e3e;
+}
+
+/* Estilo del calendario */
+#calendario {
+    background-color: #f5f5f5;
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    display: grid;
+    gap: 15px;
+    grid-area: 1 / 2 / 2 / 3;
+    grid-template-columns: 1fr; /* Una sola columna */
+}
+
+.calendar-header {
+    display: grid;
+    grid-template-columns: 1fr; /* Una sola columna */
+    gap: 10px;
+}
+
+.calendar-header span:first-child {
+    font-size: 0.8em;
+    color: #786247;
+}
+
+.selected-date-container {
+    display: flex;
+    align-items: center;
+}
+
+#selectedDate {
+    font-size: 1.2em;
+    color: #243D51;
+    margin: 0;
+    margin-right: 5px;
+}
+
+.edit-icon {
+    color: #555;
+}
+
+.month-selector {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.month-year-container {
+    display: flex;
+    align-items: center;
+}
+
+#monthYear {
+    font-size: 0.9em;
+    color: #333;
+    margin-right: 5px;
+}
+
+.month-dropdown {
+    color: #555;
+}
+
+.calendar-header button {
+    background: none;
+    border: none;
+    font-size: 1.2em;
+    cursor: pointer;
+    color: #555;
+}
+
+.calendar-grid {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 5px;
+}
+
+.calendar-grid div {
+    text-align: center;
+    padding: 8px;
+    border-radius: 5px;
+    cursor: pointer;
+    color: #333;
+}
+
+.calendar-grid .selected {
+    background-color: #007bff;
+    color: white;
+    cursor: pointer;
+    border-radius: 50%;
+}
+
+/* Estilo del bloque destacado */
+#bloqueDestacado {
+    background-color: #fff;
+    padding: 25px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    display: grid;
+    gap: 15px;
+    grid-area: 2 / 2 / 3 / 3; /* Cambiado para la posición */
+}
+
+#bloqueDestacado h2 {
+    font-size: 20px;
+}
+
+/* Media query para responsive */
+@media (max-width: 768px) {
+    main {
+        grid-template-columns: 1fr;
+    }
+
+    .noticia, .evento {
+        grid-template-columns: 1fr;
+        text-align: center;
+    }
+    
+    .noticia img, .evento img {
+        margin: 0 auto;
+    }
+}
