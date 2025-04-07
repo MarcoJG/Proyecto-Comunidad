@@ -47,7 +47,7 @@ CREATE TABLE IF NOT EXISTS voto (
 id_voto INT AUTO_INCREMENT PRIMARY KEY,
 id_usuario INT NOT NULL,
 id_votacion INT NOT NULL,
-opciones ENUM('Sí', 'No') NOT NULL DEFAULT 'Sí',
+opciones ENUM('Sí', 'No', 'En blanco') NOT NULL DEFAULT 'En blanco',
 CONSTRAINT fk_voto_usuarios FOREIGN KEY (id_usuario) REFERENCES
 usuarios(id_usuario),
 CONSTRAINT fk_voto_votacion FOREIGN KEY (id_votacion) REFERENCES
