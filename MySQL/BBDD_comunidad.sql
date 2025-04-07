@@ -104,7 +104,3 @@ estado ENUM('Pendiente', 'En proceso', 'Resuelta') NOT NULL DEFAULT 'PENDIENTE',
 CONSTRAINT fk_incidencia_usuarios FOREIGN KEY(id_usuario) REFERENCES
 usuarios(id_usuario)
 );
-
-INSERT INTO roles (nombre) VALUES ('Admin');
-INSERT INTO roles (nombre) VALUES ('Presidente');
-INSERT INTO roles (nombre) VALUES ('Usuario');
