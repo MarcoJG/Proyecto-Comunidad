@@ -1,0 +1,62 @@
+* {
+    font-family: Arial, sans-serif;
+    box-sizing: border-box;
+}
+
+body.fondo-cuerpo {
+    background-color: #f3f3ec;
+    margin: 0;
+    padding: 0;
+}
+
+.contenedor-principal {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 60px 20px;
+}
+
+.evento-header {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    margin-bottom: 30px;
+}
+
+.evento-imagen img {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    border-radius: 4px;
+}
+
+.evento-info {
+    flex: 1;
+}
+
+.titulo-evento {
+    color: #243D51;
+    font-size: 20px;
+    margin: 0 0 5px 0;
+    text-align: left;
+}
+
+.detalle-evento {
+    color: #9c907d;
+    margin: 0;
+    text-align: left;
+}
+
+.descripcion-evento {
+    background-color: #ffffff;
+    padding: 20px;
+    border-radius: 6px;
+    border: 1px solid #d0d0d0;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.05);
+    line-height: 1.6;
+}
+
+.descripcion-evento h3 {
+    margin-top: 0;
+    color: #243D51;
+    font-size: 18px;
+}
