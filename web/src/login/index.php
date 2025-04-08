@@ -12,9 +12,9 @@
     <link rel="icon" href="favicon.ico" type="image/x-icon">
     
     <title>Iniciar sesión</title>
-    <link rel="stylesheet" href="login.css">
+    <link rel="stylesheet" href="../../../web/etc/assets/css/styles.css">
 </head>
-<body>
+<body class="bg-light">
     <header>
         <img src="../assets/LOGO 2.png" alt="Imagen de logo de la comunidad de vecinos.">
     </header>
@@ -23,13 +23,14 @@
             <h1>Iniciar Sesión</h1>
 
             <form action="../PHP/login.php" method="POST">
-                <label for="correo">Su dirección de correo electrónico:</label>
-                <input type="text" name="correo" placeholder="Correo Electrónico..." required aria-label="Correo electrónico">
-
+            <div class="mb-3">    
+                <label for="correo" class="form-label">Su dirección de correo electrónico:</label>
+                <input type="text" class="form-control" name="correo" placeholder="Correo Electrónico..." required aria-label="Correo electrónico">
+            </div>
                 <label for="contrasenya">Su contraseña:</label>
                 <input type="password" name="contrasenya" placeholder="Contraseña..." required aria-label="Contraseña">
 
-                <button type="submit">Acceder</button>
+                <button type="submit" class="btn btn-dark">Acceder</button>
             </form>
         </section>
     </main>
