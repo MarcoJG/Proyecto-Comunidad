@@ -9,7 +9,7 @@
     <meta name="keywords" content="comunidad de vecinos, noticias, eventos, foro, reservas">
     <meta name="author" content="Equipo Proyecto Comunidad">
     <link rel="icon" type="" href="">
-    <link rel="stylesheet" href="home.css">
+    <link rel="stylesheet" href="../../../web/etc/assets/css/styles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap">
