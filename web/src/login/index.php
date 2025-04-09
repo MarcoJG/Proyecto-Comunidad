@@ -12,9 +12,9 @@
     <link rel="icon" href="favicon.ico" type="image/x-icon">
     
     <title>Iniciar sesión</title>
-    <link rel="stylesheet" href="../../../web/etc/assets/css/styles.css">
+    <link rel="stylesheet" href="../../../web/src/login/login.css">
 </head>
-<body class="bg-light">
+<body>
     <header>
         <img src="../assets/LOGO 2.png" alt="Imagen de logo de la comunidad de vecinos.">
     </header>
