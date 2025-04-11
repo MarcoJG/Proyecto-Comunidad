@@ -28,7 +28,7 @@ CONSTRAINT fk_noticias_usuario FOREIGN KEY(id_usuario) REFERENCES usuarios(id_us
 CREATE TABLE IF NOT EXISTS eventos (
 id_evento INT AUTO_INCREMENT PRIMARY KEY,
 titulo VARCHAR(100) NOT NULL,
-descripción VARCHAR(255) NOT NULL,
+descripcion VARCHAR(255) NOT NULL,
 fecha DATE NOT NULL,
 id_usuario INT NOT NULL,
 CONSTRAINT fk_eventos_usuarios FOREIGN KEY (id_usuario) REFERENCES
@@ -36,7 +36,7 @@ usuarios(id_usuario)
 );
 CREATE TABLE IF NOT EXISTS votacion (
 id_votacion INT AUTO_INCREMENT PRIMARY KEY,
-descripción VARCHAR(255) NOT NULL,
+descripcion VARCHAR(255) NOT NULL,
 fecha_inicio DATETIME,
 fecha_fin DATETIME,
 id_usuario INT NOT NULL,
