@@ -17,4 +17,5 @@ Permite la gestión de usuarios, noticias, eventos, votaciones y reservas de zon
    git clone https://github.com/MarcoJG/Proyecto-Comunidad.git
 ## 📌 Funcionalidades Implementadas
 
-✔ **Registro de Usuarios**: Permite a los vecinos registrarse en la plataforma ([aquí](http://localhost/Proyecto-Comunidad/src/registro/formulario.php)).  
+✔ **Registro de Usuarios:** Permite a los vecinos registrarse en la plataforma.  
+✔ **Gestión de Eventos:** Visualización separada de eventos futuros y eventos pasados en la sección de eventos ([aquí](http://localhost/Proyecto-Comunidad/web/src/eventos/eventos.php)).
