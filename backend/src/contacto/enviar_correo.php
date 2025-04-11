@@ -2,10 +2,10 @@
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 
-// Asegurate de que esta ruta sea correcta respecto a donde están los archivos
-require 'phpmailer/PHPMailer.php';
-require 'phpmailer/SMTP.php';
-require 'phpmailer/Exception.php';
+
+require '../../../lib/phpmailer/PHPMailer.php';
+require '../../../lib/phpmailer/SMTP.php';
+require '../../../lib/phpmailer/Exception.php';
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $nombre = $_POST["name"];

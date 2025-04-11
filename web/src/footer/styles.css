@@ -8,9 +8,9 @@ footer {
     display: flex;
     justify-content: space-around;
     align-items: center;
-    max-width: 1200px;
+    width: 100%;
     margin: auto;
-    box-shadow: 0px -2px 0px rgba(0, 0, 0, 0.1);
+    box-shadow: 0px -3px 0px rgba(0, 0, 0, 0.1);
 }
 
 .footer-section {
@@ -41,9 +41,11 @@ footer {
     display: flex;
     justify-content: center;
     gap: 10px;
+    text-align: center;
 }
 
 .social-icons img {
     width: 24px;
     height: 24px;
 }
+

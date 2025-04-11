@@ -147,7 +147,7 @@ header{
 }
 
 .social-icons {
-  display: inline-block;
+  display: flex;
   gap: 10px; /* Espaciado entre iconos */
   padding: 4%;  
 }

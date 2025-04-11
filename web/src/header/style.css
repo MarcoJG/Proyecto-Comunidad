@@ -24,6 +24,10 @@ header{
     display: flex;
 }
 
+.logo:hover{
+    cursor: pointer;
+    transform: scale(1.02);
+}
 .logo img{
     height: 150px;
     width: 250px;
@@ -45,25 +49,31 @@ a.nav-link:hover{
     color: #786247;
 }
 
-nav{
-    padding-left: 10px;
+
     
-}
+
 
 .buttons-container {
     display: flex;
+    align-items: center;
+    margin-right: 5%;
+    
 }
 
-.idioma{
+/*.idioma{
     background-color: white;
     color:#243d51 ;
     padding: 7px 20px;
     margin-left: 10px;
 }
+*/
 
-.login{
+.boton-login{
     background-color:#243d51;
+    border: #243d51;
     color: white;
     padding: 7px ;
     margin-left: 10px;
+    cursor: pointer;
+    font-family: sans-serif;
 }

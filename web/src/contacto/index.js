@@ -35,7 +35,7 @@ document.getElementById('formularioContacto').addEventListener('submit', functio
 
     const formData = new FormData(this);
 
-    fetch('enviar_correo.php', {
+    fetch('../../../backend/src/contacto/enviar_correo.php', {
         method: 'POST',
         body: formData
     })
