@@ -9,95 +9,44 @@
 </head>
 
 <body class="fondo-cuerpo">
+    <main>
 
-    <!-- Aquí irá la cabecera -->
+        <!-- Aquí irá la cabecera -->
 
-    <div class="contenedor-principal">
+        <section class="contenedor-principal">
 
-        <!-- Próximos Eventos -->
-        <div class="contenedor proximos-eventos">
-            <h2 class="titulo-eventos">Próximos eventos</h2>
-            <p class="subtitulo">Consulta todos los eventos de nuestra comunidad aquí</p>
+            <!-- Próximos Eventos -->
+            <section class="contenedor proximos-eventos">
+                <h2 class="titulo-eventos">
+                    Próximos eventos
+                </h2>
+                <p class="subtitulo">Consulta todos los eventos de nuestra comunidad aquí</p>
 
-            <!--Evento 1 -->
-            <div class="evento">
+                <?php
+                /* Incluimos la lógica específica para eventos futuros desde un archivo concreto (eventos_futuros.php)
+                 Esto responde al principio de responsabilidad única (SRP) del modelo SOLID,
+                 manteniendo separada la lógica de eventos futuros y pasados para facilitar el mantenimiento,
+                 pruebas unitarias e independencia de cambios. Lo mismo hacemos para eventos_pasados.php */
+                include '../../../backend/src/eventos/eventos_futuros.php';
+                ?>
+            </section>
+        </section>
 
-                <div class="evento-imagen">
-                    <img src="../../etc/assets/img/bloque.jpg" alt="ImagenEvento">
-                </div>
+        <section class="contenedor-principal">
+            <!--  Eventos pasados -->
+            <section class="contenedor proximos-eventos">
+                <h2 class="titulo-eventos">Eventos pasados</h2>
 
-                <!-- Texto y botón -->
-                <div class="evento-texto">
-                    <h2 class="titulo-evento">Próxima Junta de Propietarios</h2>
-                    <p class="detalle-evento">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quam
-                        consequuntur ipsa aspernatur fugit suscipit aliquam beatae, voluptatum praesentium maxime
-                        doloremque! Sint quia dolores soluta molestias sunt. Quos iste quia quo!.</p>
-                    <button class="boton-evento">Accede</button>
-                </div>
-            </div>
+                <?php
 
-            <!-- Evento 2 -->
-            <div class="evento">
+                include '../../../backend/src/eventos/eventos_pasados.php';
+                ?>
+            </section>
+        </section>
 
-                <div class="evento-imagen">
-                    <img src="../../etc/assets/img/reparar.jpg" alt="ImagenEvento">
-                </div>
-
-                <!-- Texto y botón -->
-                <div class="evento-texto">
-                    <h2 class="titulo-evento">Cambio de contadores</h2>
-                    <p class="detalle-evento">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quod,
-                        exercitationem vel! Perferendis minus aliquam rerum dolore quam sequi necessitatibus explicabo.
-                    </p>
-                    <button class="boton-evento">Accede</button>
-                </div>
-            </div>
-        </div>
-    </div>
-
-
-    <div class="contenedor-principal">
-
-        <!--  Eventos pasados -->
-        <div class="contenedor proximos-eventos">
-            <h2 class="titulo-eventos">Eventos pasados</h2>
-
-            <!-- Evento 1 -->
-            <div class="evento">
-                <div class="evento-imagen">
-                    <img src="../../etc/assets/img/bloque.jpg" alt="ImagenEvento">
-                </div>
-
-                <!-- Texto y botón -->
-                <div class="evento-texto">
-                    <h2 class="titulo-evento">Junta de Propietarios 10/12/2024</h2>
-                    <p class="detalle-evento">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quam
-                        consequuntur ipsa aspernatur fugit suscipit aliquam beatae, voluptatum praesentium maxime
-                        doloremque! Sint quia dolores soluta molestias sunt. Quos iste quia quo!.</p>
-                    <button class="boton-evento">Accede</button>
-                </div>
-            </div>
-
-            <!-- Evento 2  -->
-            <div class="evento">
-                <div class="evento-imagen">
-                    <img src="../../etc/assets/img/ayuda.jpg" alt="ImagenEvento">
-                </div>
-
-                <!-- Texto y botón -->
-                <div class="evento-texto">
-                    <h2 class="titulo-evento">La Comunidad con los afectados por la DANA</h2>
-                    <p class="detalle-evento">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quod,
-                        exercitationem vel! Perferendis minus aliquam rerum dolore quam sequi necessitatibus explicabo.
-                    </p>
-                    <button class="boton-evento">Accede</button>
-                </div>
-            </div>
-        </div>
-    </div>
-
+    </main>
     <!-- Aquí irá el footer -->
-     
+
 </body>
 
 </html>
