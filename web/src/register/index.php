@@ -10,13 +10,13 @@
     <link rel="icon" href="favicon.ico" type="image/x-icon">
 
     <title>Registro de usuario</title>
-    <link rel="stylesheet" href="../register/register.css">
+    <link rel="stylesheet" href="register.css">
 </head>
 <body>
     <main>
         <section class="register-container">
             <h1>Registro de Usuario</h1>
-            <form action="registro.php" method="POST">
+            <form action="../../../backend/src/register/register.php" method="POST">
                 <div class="mb-3">
                     <label for="nombre" class="form-label">Su nombre completo:</label>
                     <input type="text" class="form-control" name="nombre" placeholder="Ej: José Rodriguez" required aria-label="Nombre completo">

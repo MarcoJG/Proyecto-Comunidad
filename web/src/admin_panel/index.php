@@ -1,9 +1,20 @@
+<?php
+include '../../../backend/src/admin_panel/admin_panel.php';
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
+<meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Panel de Administración</title>
+    <meta name="description" content="Panel de administrador para la comunidad de vecinos.">
+
+    <meta name="keywords" content="comunidad de vecinos, panel, administrador, admin">
+    <meta name="author" content="Comunidad de vecinos">
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+
+    <title>Panel de administrador</title>
+    <link rel="stylesheet" href="admin_panel.css">
 </head>
 <body>
     <h1>Panel de Administración</h1>
@@ -35,11 +46,11 @@
                             <form action="update_user_role.php" method="POST">
                                 <input type="hidden" name="id_usuario" value="<?php echo $usuario['id_usuario']; ?>">
                                 <label for="nuevo_rol_<?php echo $usuario['id_usuario']; ?>">Nuevo rol:</label>
-                                <select name="nuevo_rol" id="nuevo_rol_<?php echo $usuario['id_usuario']; ?>"></select>
+                                <select name="nuevo_rol" id="nuevo_rol_<?php echo $usuario['id_usuario']; ?>">
                                     <?php if (isset($roles)): ?>
                                         <?php foreach($roles as $rol): ?>
-                                            <option value="<?php echo $rol['id_roles']; ?>" 
-                                               <?php if ($rol['nombre'] === $usuario['rol_nombre']) echo 'selected'; ?>>
+                                            <option value="<?php echo $rol['id_roles']; ?>"
+                                                <?php if ($rol['nombre'] === $usuario['rol_nombre']) echo 'selected'; ?>>
                                                 <?php echo $rol['nombre']; ?>
                                             </option>
                                         <?php endforeach; ?>
@@ -54,6 +65,6 @@
         </tbody>
     </table>
 
-    <p><a href="logout.php">Cerrar sesión</a></p>
+    <p><a href="../../../backend/src/admin_panel/logout.php">Cerrar sesión</a></p>
 </body>
 </html>

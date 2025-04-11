@@ -1,10 +1,10 @@
 <?php
 session_start();
 
-include 'conexion_db_pm.php';
+include '../../conexion_BBDD/conexion_db_pm.php';
 
 if (!isset($_SESSION["nombre_rol"]) || $_SESSION["nombre_rol"] !== "Admin") {
-    header("Location: login.html");
+    header("Location: ../../../web/src/login/index.php");
     exit();
 }
 
@@ -23,7 +23,4 @@ try {
 } catch (PDOException $e) {
     $error_message = "Error al obtener datos: " . $e->getMessage();
 }
-
-//Incluyendo html
-include 'admin_panel.template.php';
 ?>

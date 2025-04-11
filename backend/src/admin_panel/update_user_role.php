@@ -1,6 +1,6 @@
 <?php
 session_start();
-include 'conexion_db_pm.php';
+include '../conexion_BBDD/conexion_db_pm.php';
 
 //Verificar si es admin
 if (!isset($_SESSION["nombre_rol"]) || $_SESSION["nombre_rol"] !== "Admin") {
