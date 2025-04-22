@@ -14,7 +14,7 @@
 </head>
 <body>
     <header>
-        <img src="../../assets/LOGO 2.png" alt="Imagen de logo de la comunidad de vecinos.">
+        <img src="../../../assets/img/LOGO 2.png" alt="Imagen de logo de la comunidad de vecinos.">
     </header>
     <main>
         <section class="login-container">
