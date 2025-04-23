@@ -78,3 +78,17 @@
     font-size: 24px;
     margin-bottom: 10px;
 }
+
+.boton-crear {
+    display: inline-block;
+    padding: 10px 15px;
+    background-color: #243D51;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    font-weight: bold;
+}
+
+.boton-crear:hover {
+    background-color: #1c2f3d;
+}
