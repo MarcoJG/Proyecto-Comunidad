@@ -32,7 +32,11 @@ if ($result->num_rows > 0) {
         echo "<p class='detalle-evento'>" . $row['descripcion'] . "</p>";
 
         // Onclick para mostrar la alerta con el ID del evento
-        echo "<button type='button' class='boton-evento' onclick='mostrarIdEvento(" . $row['id_evento'] . ")'>Accede</button>";
+        //echo "<button type='button' class='boton-evento' onclick='mostrarIdEvento(" . $row['id_evento'] . ")'>Accede</button>";
+        
+       //Modificar para ir al detalle de evento
+        echo "<a href='detalle.php?id=" . $row['id_evento'] . "' class='boton-evento'>Accede</a>";
+
 
         echo "</div>";
         echo "</article>";
