@@ -33,7 +33,6 @@ if ($result->num_rows > 0) {
         //Modificar para ir al detalle de evento
         echo "<a href='detalle.php?id=" . $row['id_evento'] . "' class='boton-evento'>Accede</a>";
 
-
         echo "</div>";
         echo "</article>";
     }

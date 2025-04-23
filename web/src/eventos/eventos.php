@@ -12,7 +12,7 @@
     <main>
 
         <!-- Aquí irá la cabecera -->
-         
+
         <section class="contenedor-principal">
 
             <!-- Próximos Eventos -->
