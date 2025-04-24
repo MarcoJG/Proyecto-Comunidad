@@ -40,7 +40,8 @@ CREATE TABLE IF NOT EXISTS eventos (
     descripcion VARCHAR(255) NOT NULL,
     fecha DATE NOT NULL,
     id_usuario INT NOT NULL,
-    CONSTRAINT fk_eventos_usuarios FOREIGN KEY(id_usuario) REFERENCES usuarios(id_usuario)
+    CONSTRAINT fk_eventos_usuarios FOREIGN KEY (id_usuario) REFERENCES
+    usuarios(id_usuario)
 );
 
 -- Crear tabla de votación
@@ -50,7 +51,8 @@ CREATE TABLE IF NOT EXISTS votacion (
     fecha_inicio DATETIME,
     fecha_fin DATETIME,
     id_usuario INT NOT NULL,
-    CONSTRAINT fk_votacion_usuarios FOREIGN KEY(id_usuario) REFERENCES usuarios(id_usuario)
+    CONSTRAINT fk_votacion_usuarios FOREIGN KEY (id_usuario) REFERENCES
+    usuarios(id_usuario)
 );
 
 -- Crear tabla de votos
@@ -113,22 +115,58 @@ CREATE TABLE IF NOT EXISTS reserva_zona_comun (
     CONSTRAINT fk_reserva_zona_comun_usuarios FOREIGN KEY(id_usuario) REFERENCES usuarios(id_usuario)
 );
 
+CREATE TABLE IF NOT EXISTS incidencia (
+id_incidencia INT AUTO_INCREMENT PRIMARY KEY,
+descripcion VARCHAR(255) NOT NULL,
+id_usuario INT NOT NULL,
+fecha_reporte DATETIME NOT NULL,
+estado ENUM('Pendiente', 'En proceso', 'Resuelta') NOT NULL DEFAULT 'PENDIENTE',
+CONSTRAINT fk_incidencia_usuarios FOREIGN KEY(id_usuario) REFERENCES
+usuarios(id_usuario)
+);
+--NUEVO CONTENIDO!!! Actualizado 24/04/2025
+CREATE TABLE IF NOT EXISTS likes_hilo (
+    id_like INT AUTO_INCREMENT PRIMARY KEY,
+    id_hilo INT NOT NULL,
+    id_usuario INT NOT NULL,
+    fecha TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    UNIQUE KEY unique_like (id_hilo, id_usuario),
+    FOREIGN KEY (id_hilo) REFERENCES hilo(id_hilo),
+    FOREIGN KEY (id_usuario) REFERENCES usuarios(id_usuario)
+);
+
+CREATE TABLE IF NOT EXISTS dislikes_hilo (
+    id_dislike INT AUTO_INCREMENT PRIMARY KEY,
+    id_hilo INT NOT NULL,
+    id_usuario INT NOT NULL,
+    fecha TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    UNIQUE KEY unique_dislike (id_hilo, id_usuario),
+    FOREIGN KEY (id_hilo) REFERENCES hilo(id_hilo),
+    FOREIGN KEY (id_usuario) REFERENCES usuarios(id_usuario)
+);
+
+ALTER TABLE usuarios
+ADD COLUMN baneado BOOLEAN DEFAULT FALSE;
+
+ALTER TABLE usuarios
+ADD COLUMN fecha_fin_timeout DATETIME NULL;
+
 -- Insertar el rol 'VECINO' con id_roles = 1
-INSERT INTO roles (id_roles, nombre) 
+INSERT INTO roles (id_roles, nombre)
 VALUES (1, 'VECINO');
 
 
 -- Insertar un usuario llamado John Doe
-INSERT INTO usuarios (nombre, correo, usuario, contrasenya, id_roles) 
-VALUES 
+INSERT INTO usuarios (nombre, correo, usuario, contrasenya, id_roles)
+VALUES
 ('John Doe', 'johndoe@example.com', 'johndoe', 'password123', 1);
 
 -- Obtener el id_usuario del nuevo usuario para asignarlo a los eventos
--- Supongamos que el id_usuario del usuario John Doe es 1. 
+-- Supongamos que el id_usuario del usuario John Doe es 1.
 
 -- Insertar eventos asignados a John Doe (id_usuario = 1)
-INSERT INTO eventos (titulo, descripcion, fecha, id_usuario) 
-VALUES 
+INSERT INTO eventos (titulo, descripcion, fecha, id_usuario)
+VALUES
 ('Reunión General', 'Reunión general para discutir temas importantes de la comunidad.', '2024-05-10', 1),
 ('Mantenimiento de Ascensores', 'Mantenimiento programado de los ascensores en todo el edificio.', '2025-11-15', 1),
 ('Fiesta de Navidad', 'Celebra con nosotros la fiesta de Navidad de la comunidad.', '2026-12-20', 1),

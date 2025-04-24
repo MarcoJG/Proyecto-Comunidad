@@ -1,3 +1,9 @@
+¡Entendido! Quieres mantener los "incoming changes" de la rama develop, que son los que están entre ======= y >>>>>>> develop.
+
+Aquí tienes el contenido editado del archivo web/src/eventos/detalle.php manteniendo solo los "incoming changes":
+
+HTML
+
 <!DOCTYPE html>
 <html lang="es">
 
