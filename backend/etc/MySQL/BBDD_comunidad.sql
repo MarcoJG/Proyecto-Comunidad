@@ -104,3 +104,29 @@ estado ENUM('Pendiente', 'En proceso', 'Resuelta') NOT NULL DEFAULT 'PENDIENTE',
 CONSTRAINT fk_incidencia_usuarios FOREIGN KEY(id_usuario) REFERENCES
 usuarios(id_usuario)
 );
+ --NUEVO CONTENIDO!!! Actualizado 24/04/2025
+CREATE TABLE IF NOT EXISTS likes_hilo (
+    id_like INT AUTO_INCREMENT PRIMARY KEY,
+    id_hilo INT NOT NULL,
+    id_usuario INT NOT NULL,
+    fecha TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    UNIQUE KEY unique_like (id_hilo, id_usuario),
+    FOREIGN KEY (id_hilo) REFERENCES hilo(id_hilo),
+    FOREIGN KEY (id_usuario) REFERENCES usuarios(id_usuario)
+);
+
+CREATE TABLE IF NOT EXISTS dislikes_hilo (
+    id_dislike INT AUTO_INCREMENT PRIMARY KEY,
+    id_hilo INT NOT NULL,
+    id_usuario INT NOT NULL,
+    fecha TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    UNIQUE KEY unique_dislike (id_hilo, id_usuario),
+    FOREIGN KEY (id_hilo) REFERENCES hilo(id_hilo),
+    FOREIGN KEY (id_usuario) REFERENCES usuarios(id_usuario)
+);
+
+ALTER TABLE usuarios
+ADD COLUMN baneado BOOLEAN DEFAULT FALSE;
+
+ALTER TABLE usuarios
+ADD COLUMN fecha_fin_timeout DATETIME NULL;

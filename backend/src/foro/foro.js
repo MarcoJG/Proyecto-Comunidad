@@ -1,55 +1,69 @@
 document.addEventListener('DOMContentLoaded', function() {
+    console.log('DOM completamente cargado y parseado');
+
     const foroMensajes = document.getElementById('foro-mensajes');
     const enviarHiloBtn = document.getElementById('enviar-hilo');
     const nuevoHiloTituloInput = document.getElementById('nuevo-hilo-titulo');
     const nuevoHiloContenidoTextarea = document.getElementById('nuevo-hilo-contenido');
     const hiloTemplate = document.getElementById('hilo-template');
     const respuestaTemplate = document.getElementById('respuesta-template');
+    let hilos = [];
 
-    let hilos = [
-        {id: 1, titulo: 'Bienvenid@ al foro', contenido: 'Bienvenido todos al nuevo foro de la Comunidad!', autor: 'Admin',
-        fecha: '22/04/2025', likes: 5, dislikes: 0, respuestas: []},
-        {id: 2, titulo: 'Duda sobre la piscina', contenido: '¿Alguien sabe cuándo se abre la piscina este año?',
-        autor: 'Usuario1', fecha: '21/04/2025', likes: 2, dislikes: 1, 
-        respuestas: [{autor: 'Presidente', fecha: '21/04/2025', contenido: 'Se espera que abra el 1 de Junio.'}]}
-    ];
-
-    function mostrarHilos(){
+    function mostrarHilos() {
         foroMensajes.innerHTML = '';
-        hilos.forEach(hilo => {
-            const hiloDiv = crearHiloHTML(hilo);
-            foroMensajes.appendChild(hiloDiv);
-        });
-        establecerEventosHilos();
+        fetch('../../../backend/src/foro/obtener_hilos.php')
+            .then(response => response.json())
+            .then(data => {
+                if (data.error) {
+                    console.error('Error al obtener los hilos:', data.error);
+                    foroMensajes.innerHTML = '<p class="error-message">Error al cargar los hilos del foro.</p>';
+                    return;
+                }
+                hilos = data;
+                hilos.forEach(hilo => {
+                    const hiloDiv = crearHiloHTML(hilo);
+                    foroMensajes.appendChild(hiloDiv);
+                });
+                establecerEventosHilos();
+            })
+            .catch(error => {
+                console.error('Error de red al obtener los hilos:', error);
+                foroMensajes.innerHTML = '<p class="error-message">Error de red al cargar los hilos del foro.</p>';
+            });
     }
 
-    function crearHiloHTML(hilo){
-        const hiloDiv = hiloTemplate.contentEditable.cloneNode(true);
+    function crearHiloHTML(hilo) {
+        const hiloDiv = hiloTemplate.content.cloneNode(true);
         hiloDiv.querySelector('.hilo-foro').dataset.id = hilo.id;
         hiloDiv.querySelector('.hilo-titulo').textContent = hilo.titulo;
         hiloDiv.querySelector('.hilo-autor').textContent = hilo.autor;
-        hiloDiv.querySelector('.hilo-fecha').textContent = hilo.fecha;
-        hiloDiv.querySelector('.likes-count').textContent = hilo.likes;
-        hiloDiv.querySelector('.dislikes-count').textContent = hilo.dislikes;
+        hiloDiv.querySelector('.hilo-fecha').textContent = formatDate(hilo.fecha);
+        hiloDiv.querySelector('.likes-count').textContent = hilo.likes || 0;
+        hiloDiv.querySelector('.dislikes-count').textContent = hilo.dislikes || 0;
 
         const accionesAdmin = hiloDiv.querySelector('.acciones-admin');
-        if(obtenerRolUsuario() === 'Admin' || obtenerRolUsuario() === 'Presidente'){
-            accionesAdmin.style.display = 'flex';
-            accionesAdmin.style.querySelector('.borrar-hilo').dataset.id = hilo.id;
-            if (obtenerRolUsuario() === 'Admin') {
-                accionesAdmin.querySelector('.bannear-usuario').dataset.autor = hilo.autor;
-                accionesAdmin.querySelector('.timeout-duracion').dataset.autor = hilo.autor;
-                accionesAdmin.querySelector('.timeout-usuario').dataset.autor = hilo.autor;
-            } else {
-                const adminElements = accionesAdmin.querySelectorAll('.bannear-usuario, .timeout-duracion, .timeout-usuario');
-                adminElements.forEach(el => el.remove());
-            }
+        accionesAdmin.style.display = 'none'; // Ocultar por defecto
+        const borrarBtn = accionesAdmin.querySelector('.borrar-hilo');
+        if (borrarBtn) {
+            borrarBtn.dataset.id = hilo.id;
+            accionesAdmin.style.display = 'flex'; // Considerar lógica backend para mostrar condicionalmente
         }
+        const bannearBtn = accionesAdmin.querySelector('.bannear-usuario');
+        if (bannearBtn) {
+            bannearBtn.dataset.autor = hilo.autor;
+            accionesAdmin.style.display = 'flex'; // Considerar lógica backend para mostrar condicionalmente
+        }
+        const timeoutContainer = accionesAdmin.querySelector('.timeout-container');
+        if (timeoutContainer) {
+            timeoutContainer.dataset.autor = hilo.autor;
+            accionesAdmin.style.display = 'flex'; // Considerar lógica backend para mostrar condicionalmente
+        }
+
         const respuestasDiv = hiloDiv.querySelector('.hilo-respuestas');
         hilo.respuestas.forEach(respuesta => {
-            const respuestaDiv = respuestaTemplate.contentEditable.cloneNode(true);
+            const respuestaDiv = respuestaTemplate.content.cloneNode(true);
             respuestaDiv.querySelector('.autor-respuesta').textContent = `${respuesta.autor} respondió el`;
-            respuestaDiv.querySelector('.respuesta-fecha').textContent = respuesta.fecha;
+            respuestaDiv.querySelector('.respuesta-fecha').textContent = formatDate(respuesta.fecha);
             respuestaDiv.querySelector('.respuesta-contenido').textContent = respuesta.contenido;
             respuestasDiv.appendChild(respuestaDiv);
         });
@@ -62,89 +76,222 @@ document.addEventListener('DOMContentLoaded', function() {
         return hiloDiv;
     }
 
-    function establecerEventosHilos(){
+    function establecerEventosHilos() {
         document.querySelectorAll('#foro-mensajes .like-btn').forEach(btn => {
             btn.addEventListener('click', function() {
                 const hiloId = parseInt(this.dataset.id);
-                const hilo = hilos.find(h => h.id === hiloId);
-                if (hilo) hilo.dislikes++;
-                mostrarHilos();
+                gestionarLikeDislike(hiloId, 'like', 'add');
             });
         });
+
         document.querySelectorAll('#foro-mensajes .dislike-btn').forEach(btn => {
-            btn.addEventListener('click', function(){
-                const hiloId = parseInt(this.dataset.id);
-                const hilo = hilos.find(h => h.id === hiloId);
-                if (hilo) hilo.dislikes++;
-                mostrarHilos();
-            });
-        });
-        document.querySelectorAll('#foro-mensajes .responder-btn').forEach(btn => {
             btn.addEventListener('click', function() {
                 const hiloId = parseInt(this.dataset.id);
+                gestionarLikeDislike(hiloId, 'dislike', 'add');
+            });
+        });
+
+        document.querySelectorAll('#foro-mensajes .responder-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
                 const respuestasDiv = this.closest('.hilo-foro').querySelector('.hilo-respuestas');
                 respuestasDiv.style.display = respuestasDiv.style.display === 'none' ? 'block' : 'none';
             });
         });
+
         document.querySelectorAll('#foro-mensajes .enviar-respuesta').forEach(btn => {
             btn.addEventListener('click', function() {
                 const hiloId = parseInt(this.dataset.id);
                 const respuestaTexto = this.closest('.hilo-foro').querySelector('.respuesta-texto').value;
                 if (respuestaTexto.trim()) {
-                    const hilo = hilos.find(h => h.id === hiloId);
-                    if (hilo) {
-                        hilos.respuestas.push({autor: obtenerRolUsuario(), fecha: new Date().toLocaleDateString(),
-                                               contenido: respuestaTexto });
-                        this.closest('.nuevo-respuesta').querySelector('.respuesta-texto').value = '';
-                        mostrarHilos();
-                    }
+                    enviarRespuesta(hiloId, respuestaTexto);
+                    this.closest('.nuevo-respuesta').querySelector('.respuesta-texto').value = '';
                 }
             });
         });
+
         document.querySelectorAll('#foro-mensajes .borrar-hilo').forEach(btn => {
             btn.addEventListener('click', function() {
                 const hiloId = parseInt(this.dataset.id);
-                hilos = hilos.filter(h => h.id !== hiloId);
-                mostrarHilos();
+                borrarHilo(hiloId);
             });
         });
+
         document.querySelectorAll('#foro-mensajes .bannear-usuario').forEach(btn => {
             btn.addEventListener('click', function() {
                 const usuario = this.dataset.autor;
-                alert(`Usuario ${usuario} banneado.`);
+                fetch('../../../backend/src/foro/bannear_usuario.php', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/x-www-form-urlencoded',
+                    },
+                    body: `usuario=${encodeURIComponent(usuario)}`
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        alert(data.success);
+                        mostrarHilos();
+                    } else if (data.error) {
+                        alert(data.error);
+                    } else {
+                        alert('Error al intentar bannear al usuario.');
+                    }
+                })
+                .catch(error => {
+                    console.error('Error al bannear usuario:', error);
+                    alert('Error de comunicación con el servidor al bannear.');
+                });
             });
         });
+
         document.querySelectorAll('#foro-mensajes .timeout-usuario').forEach(btn => {
             btn.addEventListener('click', function() {
-                const usuario = this.dataset.autor;
-                const duracion = this.closest('.acciones-admin').querySelector('.timeout-duracion').value;
-                alert(`Timeout de ${duracion} minutos aplicado a ${usuario}.`);
+                const usuario = this.closest('.acciones-admin').dataset.autor;
+                const duracionInput = this.closest('.acciones-admin').querySelector('.timeout-duration');
+                const duracion = duracionInput ? duracionInput.value : '';
+
+                if (duracion.trim()) {
+                    fetch('../../../backend/src/foro/timeout_usuario.php', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/x-www-form-urlencoded',
+                        },
+                        body: `usuario=${encodeURIComponent(usuario)}&duracion=${encodeURIComponent(duracion)}`
+                    })
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.success) {
+                            alert(data.success);
+                            mostrarHilos();
+                        } else if (data.error) {
+                            alert(data.error);
+                        } else {
+                            alert('Error al aplicar timeout al usuario.');
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Error al aplicar timeout:', error);
+                        alert('Error de comunicación con el servidor al aplicar timeout.');
+                    });
+                } else {
+                    alert('Por favor, introduce una duración para el timeout (en minutos).');
+                }
             });
         });
     }
+
     enviarHiloBtn.addEventListener('click', function() {
+        console.log('Botón de enviar presionado');
         const titulo = nuevoHiloTituloInput.value;
         const contenido = nuevoHiloContenidoTextarea.value;
         if (titulo.trim() && contenido.trim()) {
-            const nuevoHilo = {
-                id: Date.now(),
-                titulo: titulo,
-                contenido: contenido,
-                autor: obtenerRolUsuario(),
-                fecha: new Date().toLocaleDateString(),
-                likes: 0,
-                dislikes: 0,
-                respuestas: []
-            };
-            hilos.unshift(nuevoHilo);
-            nuevoHiloTituloInput.value = '';
-            nuevoHiloContenidoTextarea.value = '';
-            mostrarHilos();
+            fetch('../../../backend/src/foro/crear_hilo.php', {
+                method: 'POST', // Asegúrate de que esta línea esté aquí
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded',
+                },
+                body: `titulo=${encodeURIComponent(titulo)}&contenido=${encodeURIComponent(contenido)}`
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    nuevoHiloTituloInput.value = '';
+                    nuevoHiloContenidoTextarea.value = '';
+                    mostrarHilos();
+                } else if (data.error) {
+                    alert(data.error);
+                } else {
+                    alert('Error al crear el hilo.');
+                }
+            })
+            .catch(error => {
+                console.error('Error al crear el hilo:', error);
+                alert('Error de comunicación con el servidor al crear el hilo.');
+            });
+        } else {
+            alert('Por favor, introduce un título y un contenido para el hilo.');
         }
     });
-    function obtenerRolUsuario(){
-        const roles = ["Usuario", "Admin", "Presidente"];
-        return roles[Math.floor(Math.random() * roles.length)];
+
+    function gestionarLikeDislike(hiloId, accion, tipo) {
+        fetch('../../../backend/src/foro/gestionar_like_dislike.php', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded',
+            },
+            body: `id_hilo=${encodeURIComponent(hiloId)}&accion=${encodeURIComponent(accion)}&tipo=${encodeURIComponent(tipo)}`
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success || data.info) {
+                mostrarHilos();
+            } else if (data.error) {
+                alert(data.error);
+            } else {
+                alert(`Error al ${accion}.`);
+            }
+        })
+        .catch(error => {
+            console.error(`Error al ${accion}:`, error);
+            alert(`Error de comunicación con el servidor al ${accion}.`);
+        });
     }
+
+    function enviarRespuesta(hiloId, contenido) {
+        fetch('../../../backend/src/foro/enviar_respuesta.php', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded',
+            },
+            body: `id_hilo=${encodeURIComponent(hiloId)}&contenido=${encodeURIComponent(contenido)}`
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                mostrarHilos();
+            } else if (data.error) {
+                alert(data.error);
+            } else {
+                alert('Error al enviar la respuesta.');
+            }
+        })
+        .catch(error => {
+            console.error('Error al enviar la respuesta:', error);
+            alert('Error de comunicación con el servidor al enviar la respuesta.');
+        });
+    }
+
+    function borrarHilo(hiloId) {
+        if (confirm('¿Estás seguro de que quieres borrar este hilo?')) {
+            fetch('../../../backend/src/foro/borrar_hilo.php', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded',
+                },
+                body: `id_hilo=${encodeURIComponent(hiloId)}`
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    mostrarHilos();
+                } else if (data.error) {
+                    alert(data.error);
+                } else {
+                    alert('Error al borrar el hilo.');
+                }
+            })
+            .catch(error => {
+                console.error('Error al borrar el hilo:', error);
+                alert('Error de comunicación con el servidor al borrar el hilo.');
+            });
+        }
+    }
+
+    function formatDate(dateString) {
+        const date = new Date(dateString);
+        const options = { year: 'numeric', month: 'long', day: 'numeric', hour: '2-digit', minute: '2-digit' };
+        return date.toLocaleDateString('es-ES', options);
+    }
+
     mostrarHilos();
 });

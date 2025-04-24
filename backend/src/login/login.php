@@ -12,7 +12,7 @@ function iniciarSesion($pdo) {
 
     try {
         // Buscar usuario por correo
-        $sql = "SELECT u.*, r.nombre AS nombre_rol FROM usuarios u
+        $sql = "SELECT u.id_usuario, u.usuario, r.nombre AS nombre_rol, u.contrasenya FROM usuarios u
                 INNER JOIN roles r ON u.id_roles = r.id_roles
                 WHERE u.correo = :correo";
         $stmt = $pdo->prepare($sql);
@@ -21,6 +21,7 @@ function iniciarSesion($pdo) {
 
         // Verificar contraseña
         if ($usuario && password_verify($contrasenya, $usuario['contrasenya'])) {
+            $_SESSION["id_usuario"] = $usuario["id_usuario"];
             $_SESSION["usuario"] = $usuario["usuario"];
             $_SESSION["nombre_rol"] = $usuario["nombre_rol"];
 
