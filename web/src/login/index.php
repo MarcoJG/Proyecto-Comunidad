@@ -14,7 +14,7 @@
 </head>
 <body>
     <header>
-        <img src="../../../assets/img/LOGO 2.png" alt="Imagen de logo de la comunidad de vecinos.">
+        <a class="logo" href="../home/index.php" target="_top"> <img src="../../../assets/img/LOGO_2.png" alt="Imagen de logo de la comunidad de vecinos."></a>
     </header>
     <main>
         <section class="login-container">
@@ -30,6 +30,7 @@
 
                 <button type="submit" class="btn btn-dark">Acceder</button>
             </form>
+            <p>¿No tienes cuenta? <a class="registro" href="../register/index.php">Regístrate aquí</a></p>
         </section>
     </main>
     <footer>

@@ -101,6 +101,13 @@ form button:hover {
     transform: scale(1.01);
 }
 
+.registro:visited {
+    color: #786247;
+}
+
+.registro:hover {
+    color: #786247;
+}
 /* Footer */
 footer {
     text-align: center;
