@@ -185,27 +185,42 @@ document.addEventListener('DOMContentLoaded', function() {
         const titulo = nuevoHiloTituloInput.value;
         const contenido = nuevoHiloContenidoTextarea.value;
         if (titulo.trim() && contenido.trim()) {
+            const data = `titulo=${encodeURIComponent(titulo)}&contenido=${encodeURIComponent(contenido)}`;
+            console.log('Datos a enviar (antes de fetch):', data);
             fetch('../../../backend/src/foro/crear_hilo.php', {
-                method: 'POST', // Asegúrate de que esta línea esté aquí
+                method: 'POST',
                 headers: {
                     'Content-Type': 'application/x-www-form-urlencoded',
                 },
-                body: `titulo=${encodeURIComponent(titulo)}&contenido=${encodeURIComponent(contenido)}`
+                body: data
             })
-            .then(response => response.json())
+            .then(response => {
+                console.log('Respuesta completa (antes de .json()):', response);
+                console.log('response.ok:', response.ok);
+                console.log('response.headers.get(\'Content-Type\'):', response.headers.get('Content-Type'));
+                if (!response.ok) {
+                    throw new Error('Error en la petición: ' + response.statusText);
+                }
+                return response.json();
+            })
             .then(data => {
+                console.log('Datos JSON recibidos:', data);
                 if (data.success) {
+                    console.log('Hilo creado con éxito');
                     nuevoHiloTituloInput.value = '';
                     nuevoHiloContenidoTextarea.value = '';
                     mostrarHilos();
                 } else if (data.error) {
+                    console.log('Error del servidor:', data.error);
                     alert(data.error);
                 } else {
+                    console.log('Error desconocido al crear el hilo');
                     alert('Error al crear el hilo.');
                 }
             })
             .catch(error => {
-                console.error('Error al crear el hilo:', error);
+                console.error('Error de fetch:', error);
+                console.error('Error detallado:', error.message);
                 alert('Error de comunicación con el servidor al crear el hilo.');
             });
         } else {

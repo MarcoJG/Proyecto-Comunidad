@@ -42,4 +42,3 @@ foreach ($hilos as &$hilo) {
 }
 
 echo json_encode($hilos);
-?>

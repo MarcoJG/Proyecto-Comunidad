@@ -35,4 +35,3 @@
     } else {
         echo json_encode(['error' => 'Método no permitido']);
     }
-?>
