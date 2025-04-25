@@ -10,7 +10,9 @@
 
 <body class="fondo-cuerpo">
 
-    <!-- Aquí irá la cabecera -->
+    <header>
+        <iframe src="../header/cabecera.html" frameborder="0" width="100%" height="100%"></iframe>
+    </header>
 
     <div class="contenedor-principal">
 
@@ -96,7 +98,9 @@
         </div>
     </div>
 
-    <!-- Aquí irá el footer -->
+    <footer> 
+        <iframe src="../footer/FOOTER.html" frameborder="0" width="100%" height="300px"></iframe> 
+    </footer>
      
 </body>
 

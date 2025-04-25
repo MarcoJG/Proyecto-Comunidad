@@ -18,6 +18,9 @@
     <meta name="twitter:card" content="summary_large_image">
 </head>
 <body>
+    <header>
+        <iframe src="../header/cabecera.html" frameborder="0" width="100%" height="100%"></iframe>
+    </header>
     <main>
         <section id="bloque-noticias">
             <div>
@@ -89,5 +92,8 @@
             </div>
         </section>
     </main>
+    <footer> 
+        <iframe src="../footer/FOOTER.html" frameborder="0" width="100%" height="300px"></iframe> 
+    </footer>
 </body>
 </html>

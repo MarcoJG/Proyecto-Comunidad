@@ -8,7 +8,7 @@
 
 /* Main container grid */
 body {
-    background-color: #dcdcdc;
+    background-color: #f5f5f5;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -74,7 +74,7 @@ form input::placeholder {
 /* Botón de registro personalizado */
 .boton-registro-dorado {
     padding: 12px;
-    background-color: #B8860B; /* Color dorado oscuro (Goldenrod) */
+    background-color: #786247; /* Cambio del color al dorado de nuestra paleta de colores definida */
     color: #FFFFFF; /* Texto blanco para mejor contraste */
     font-size: 1rem;
     border: none;
@@ -85,7 +85,7 @@ form input::placeholder {
 }
 
 .boton-registro-dorado:hover {
-    background-color: #DAA520; /* Un tono dorado más claro al pasar el ratón */
+    background-color: #9c7f5b; /* Un tono dorado más claro al pasar el ratón */
 }
 
 /* Clases adicionales para Bootstrap (manteniendo las definiciones base) */
