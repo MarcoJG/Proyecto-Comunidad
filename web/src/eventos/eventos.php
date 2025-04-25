@@ -29,13 +29,15 @@ if (!isset($_SESSION["nombre_rol"]) || $_SESSION["nombre_rol"] !== "Admin") {
     <header>
         <iframe src="../header/cabecera.html" frameborder="0" width="100%" height="100%"></iframe>
     </header>
+     <!-- Condicional comentado para que siempre se vea el botón hasta que funcione con el admin -->
 
+    <?php /* if ($usuarioEsAdmin): */?>  
         <div style="text-align: right; margin: 20px;">
             <a href="crear_evento.php" class="boton-evento" style="background-color: #243D51; color: white; padding: 10px 20px; text-decoration: none; border-radius: 5px;">
                 Crear evento
             </a>
         </div>
-
+        <?php /* endif; */?>
         <section class="contenedor-principal">
 
             <!-- Próximos Eventos -->
