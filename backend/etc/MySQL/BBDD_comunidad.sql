@@ -151,15 +151,6 @@ ADD COLUMN baneado BOOLEAN DEFAULT FALSE;
 ALTER TABLE usuarios
 ADD COLUMN fecha_fin_timeout DATETIME NULL;
 
-
--- Insertar un usuario llamado John Doe
-INSERT INTO usuarios (nombre, correo, usuario, contrasenya, id_roles)
-VALUES
-('John Doe', 'johndoe@example.com', 'johndoe', 'password123', 3);
-
--- Obtener el id_usuario del nuevo usuario para asignarlo a los eventos
--- Supongamos que el id_usuario del usuario John Doe es 1.
-
 -- Insertar eventos asignados a John Doe (id_usuario = 1)
 INSERT INTO eventos (titulo, descripcion, fecha, id_usuario)
 VALUES
