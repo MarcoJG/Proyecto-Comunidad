@@ -40,8 +40,7 @@ CREATE TABLE IF NOT EXISTS eventos (
     descripcion VARCHAR(255) NOT NULL,
     fecha DATE NOT NULL,
     id_usuario INT NOT NULL,
-    CONSTRAINT fk_eventos_usuarios FOREIGN KEY (id_usuario) REFERENCES
-    usuarios(id_usuario)
+    CONSTRAINT fk_eventos_usuarios FOREIGN KEY (id_usuario) REFERENCES usuarios(id_usuario)
 );
 
 -- Crear tabla de votación
@@ -51,8 +50,7 @@ CREATE TABLE IF NOT EXISTS votacion (
     fecha_inicio DATETIME,
     fecha_fin DATETIME,
     id_usuario INT NOT NULL,
-    CONSTRAINT fk_votacion_usuarios FOREIGN KEY (id_usuario) REFERENCES
-    usuarios(id_usuario)
+    CONSTRAINT fk_votacion_usuarios FOREIGN KEY (id_usuario) REFERENCES usuarios(id_usuario)
 );
 
 -- Crear tabla de votos
@@ -115,16 +113,18 @@ CREATE TABLE IF NOT EXISTS reserva_zona_comun (
     CONSTRAINT fk_reserva_zona_comun_usuarios FOREIGN KEY(id_usuario) REFERENCES usuarios(id_usuario)
 );
 
+-- Crear tabla de incidencias
 CREATE TABLE IF NOT EXISTS incidencia (
-id_incidencia INT AUTO_INCREMENT PRIMARY KEY,
-descripcion VARCHAR(255) NOT NULL,
-id_usuario INT NOT NULL,
-fecha_reporte DATETIME NOT NULL,
-estado ENUM('Pendiente', 'En proceso', 'Resuelta') NOT NULL DEFAULT 'PENDIENTE',
-CONSTRAINT fk_incidencia_usuarios FOREIGN KEY(id_usuario) REFERENCES
-usuarios(id_usuario)
+    id_incidencia INT AUTO_INCREMENT PRIMARY KEY,
+    descripcion VARCHAR(255) NOT NULL,
+    id_usuario INT NOT NULL,
+    fecha_reporte DATETIME NOT NULL,
+    estado ENUM('Pendiente', 'En proceso', 'Resuelta') NOT NULL DEFAULT 'PENDIENTE',
+    CONSTRAINT fk_incidencia_usuarios FOREIGN KEY(id_usuario) REFERENCES usuarios(id_usuario)
 );
---NUEVO CONTENIDO!!! Actualizado 24/04/2025
+
+-- NUEVO CONTENIDO!!! Actualizado 24/04/2025
+-- Crear tabla de likes en hilos
 CREATE TABLE IF NOT EXISTS likes_hilo (
     id_like INT AUTO_INCREMENT PRIMARY KEY,
     id_hilo INT NOT NULL,
@@ -135,6 +135,7 @@ CREATE TABLE IF NOT EXISTS likes_hilo (
     FOREIGN KEY (id_usuario) REFERENCES usuarios(id_usuario)
 );
 
+-- Crear tabla de dislikes en hilos
 CREATE TABLE IF NOT EXISTS dislikes_hilo (
     id_dislike INT AUTO_INCREMENT PRIMARY KEY,
     id_hilo INT NOT NULL,
@@ -145,12 +146,15 @@ CREATE TABLE IF NOT EXISTS dislikes_hilo (
     FOREIGN KEY (id_usuario) REFERENCES usuarios(id_usuario)
 );
 
+-- NUEVO CONTENIDO!!! Actualizado 24/04/2025
+-- Añadir columnas a la tabla usuarios: baneado y fecha_fin_timeout
 ALTER TABLE usuarios
 ADD COLUMN baneado BOOLEAN DEFAULT FALSE;
 
 ALTER TABLE usuarios
 ADD COLUMN fecha_fin_timeout DATETIME NULL;
 
+>>>>>>> a62f2da6c6ae4e5d6cab6396731a23289208b65e
 -- Insertar eventos asignados a John Doe (id_usuario = 1)
 INSERT INTO eventos (titulo, descripcion, fecha, id_usuario)
 VALUES
