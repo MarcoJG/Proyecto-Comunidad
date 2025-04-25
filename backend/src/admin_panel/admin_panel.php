@@ -1,6 +1,5 @@
 <?php
 session_start();
-
 include '../conexion_BBDD/conexion_db_pm.php';
 
 if (!isset($_SESSION["nombre_rol"]) || $_SESSION["nombre_rol"] !== "Admin") {
