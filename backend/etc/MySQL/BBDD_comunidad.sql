@@ -154,17 +154,7 @@ ADD COLUMN baneado BOOLEAN DEFAULT FALSE;
 ALTER TABLE usuarios
 ADD COLUMN fecha_fin_timeout DATETIME NULL;
 
--- Insertar roles (si aún no están insertados)
-INSERT INTO roles (id_roles , nombre) VALUES (1, 'Administrador'), (2, 'Presidente'), (3, 'Vecino'), (4, 'kk');
-
--- NUEVO CONTENIDO!!! Actualizado 24/04/2025
--- Insertar usuarios con contraseñas hasheadas
-INSERT INTO usuarios (nombre, correo, usuario, contrasenya, id_roles)
-VALUES
-('Admin Ejemplo', 'admin@comunidad.com', 'admin1', 'admin1', 1),  -- Administrador
-('Presidente Ejemplo', 'presidente@comunidad.com', 'presi1', 'presi1', 2),  -- Presidente
-('Vecino Ejemplo', 'vecino@comunidad.com', 'vecino1', 'vecino1', 3);  -- Vecino
-
+>>>>>>> a62f2da6c6ae4e5d6cab6396731a23289208b65e
 -- Insertar eventos asignados a John Doe (id_usuario = 1)
 INSERT INTO eventos (titulo, descripcion, fecha, id_usuario)
 VALUES
