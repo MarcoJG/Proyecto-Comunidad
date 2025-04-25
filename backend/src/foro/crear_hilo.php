@@ -14,8 +14,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $fecha = date('Y-m-d');
         $id_foro = 1;
 
-        $stmt = $pdo->prepare("INSERT INTO hilo (titulo, fecha, id_foro, id_usuario) VALUES (:titulo, :fecha, :id_foro, :id_usuario)");
+        $stmt = $pdo->prepare("INSERT INTO hilo (titulo, contenido, fecha, id_foro, id_usuario) VALUES (:titulo, :contenido, :fecha, :id_foro, :id_usuario)");
         $stmt->bindParam(':titulo', $titulo);
+        $stmt->bindParam(':contenido', $contenido);
         $stmt->bindParam(':fecha', $fecha);
         $stmt->bindParam(':id_foro', $id_foro);
         $stmt->bindParam(':id_usuario', $id_usuario);
@@ -35,4 +36,3 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 } else {
     echo json_encode(['error' => 'Método no permitido']);
 }
-?>

@@ -173,3 +173,6 @@ VALUES
 ('Fiesta de Navidad', 'Celebra con nosotros la fiesta de Navidad de la comunidad.', '2026-12-20', 3),
 ('Junta Extraordinaria', 'Junta extraordinaria para resolver problemas de la comunidad.', '2026-01-22', 3),
 ('Reparación de Fachada', 'Reparación de la fachada del edificio programada para este mes.', '2025-03-17', 3);
+
+ALTER TABLE hilo
+ADD COLUMN contenido VARCHAR(255) NOT NULL;

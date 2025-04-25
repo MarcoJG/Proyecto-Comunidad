@@ -34,45 +34,94 @@ document.addEventListener('DOMContentLoaded', function() {
 
     function crearHiloHTML(hilo) {
         const hiloDiv = hiloTemplate.content.cloneNode(true);
-        hiloDiv.querySelector('.hilo-foro').dataset.id = hilo.id;
-        hiloDiv.querySelector('.hilo-titulo').textContent = hilo.titulo;
-        hiloDiv.querySelector('.hilo-autor').textContent = hilo.autor;
-        hiloDiv.querySelector('.hilo-fecha').textContent = formatDate(hilo.fecha);
-        hiloDiv.querySelector('.likes-count').textContent = hilo.likes || 0;
-        hiloDiv.querySelector('.dislikes-count').textContent = hilo.dislikes || 0;
-
+        const hiloForo = hiloDiv.querySelector('.hilo-foro');
+        const hiloTitulo = hiloDiv.querySelector('.hilo-titulo');
+        const hiloAutor = hiloDiv.querySelector('.hilo-autor');
+        const hiloFecha = hiloDiv.querySelector('.hilo-fecha');
+        const likesCount = hiloDiv.querySelector('.likes-count');
+        const dislikesCount = hiloDiv.querySelector('.dislikes-count');
         const accionesAdmin = hiloDiv.querySelector('.acciones-admin');
-        accionesAdmin.style.display = 'none'; // Ocultar por defecto
         const borrarBtn = accionesAdmin.querySelector('.borrar-hilo');
+        const bannearBtn = accionesAdmin.querySelector('.bannear-usuario');
+        const timeoutContainer = accionesAdmin.querySelector('.timeout-container');
+        const respuestasDiv = hiloDiv.querySelector('.hilo-respuestas');
+        const responderBtn = hiloDiv.querySelector('.responder-btn');
+        const nuevoRespuestaEnviar = hiloDiv.querySelector('.nuevo-respuesta .enviar-respuesta');
+        const nuevoRespuestaTexto = hiloDiv.querySelector('.nuevo-respuesta .respuesta-texto');
+        const likeBtn = hiloDiv.querySelector('.like-btn');
+        const dislikeBtn = hiloDiv.querySelector('.dislike-btn');
+
+        console.log('hiloDiv clonado:', hiloDiv);
+        console.log('hiloForo:', hiloForo);
+        console.log('hiloTitulo:', hiloTitulo);
+        console.log('hiloAutor:', hiloAutor);
+        console.log('hiloFecha:', hiloFecha);
+        console.log('likesCount:', likesCount);
+        console.log('dislikesCount:', dislikesCount);
+        console.log('accionesAdmin:', accionesAdmin);
+        console.log('borrarBtn:', borrarBtn);
+        console.log('bannearBtn:', bannearBtn);
+        console.log('timeoutContainer:', timeoutContainer);
+        console.log('respuestasDiv:', respuestasDiv);
+        console.log('responderBtn:', responderBtn);
+        console.log('nuevoRespuestaEnviar:', nuevoRespuestaEnviar);
+        console.log('nuevoRespuestaTexto:', nuevoRespuestaTexto);
+        console.log('likeBtn:', likeBtn);
+        console.log('dislikeBtn:', dislikeBtn);
+
+        hiloForo.dataset.id = hilo.id;
+        hiloTitulo.textContent = hilo.titulo;
+        hiloAutor.textContent = hilo.autor;
+        hiloFecha.textContent = formatDate(hilo.fecha);
+        likesCount.textContent = hilo.likes || 0;
+        dislikesCount.textContent = hilo.dislikes || 0;
+
+        accionesAdmin.style.display = 'none';
         if (borrarBtn) {
             borrarBtn.dataset.id = hilo.id;
-            accionesAdmin.style.display = 'flex'; // Considerar lógica backend para mostrar condicionalmente
+            accionesAdmin.style.display = 'flex';
         }
-        const bannearBtn = accionesAdmin.querySelector('.bannear-usuario');
         if (bannearBtn) {
             bannearBtn.dataset.autor = hilo.autor;
-            accionesAdmin.style.display = 'flex'; // Considerar lógica backend para mostrar condicionalmente
+            accionesAdmin.style.display = 'flex';
         }
-        const timeoutContainer = accionesAdmin.querySelector('.timeout-container');
         if (timeoutContainer) {
             timeoutContainer.dataset.autor = hilo.autor;
-            accionesAdmin.style.display = 'flex'; // Considerar lógica backend para mostrar condicionalmente
+            accionesAdmin.style.display = 'flex';
         }
 
-        const respuestasDiv = hiloDiv.querySelector('.hilo-respuestas');
         hilo.respuestas.forEach(respuesta => {
             const respuestaDiv = respuestaTemplate.content.cloneNode(true);
-            respuestaDiv.querySelector('.autor-respuesta').textContent = `${respuesta.autor} respondió el`;
-            respuestaDiv.querySelector('.respuesta-fecha').textContent = formatDate(respuesta.fecha);
-            respuestaDiv.querySelector('.respuesta-contenido').textContent = respuesta.contenido;
-            respuestasDiv.appendChild(respuestaDiv);
-        });
-        hiloDiv.querySelector('.responder-btn').dataset.id = hilo.id;
-        hiloDiv.querySelector('.nuevo-respuesta .enviar-respuesta').dataset.id = hilo.id;
-        hiloDiv.querySelector('.nuevo-respuesta .respuesta-texto').id = `respuesta-texto-${hilo.id}`;
-        hiloDiv.querySelector('.like-btn').dataset.id = hilo.id;
-        hiloDiv.querySelector('.dislike-btn').dataset.id = hilo.id;
+            const autorRespuesta = respuestaDiv.querySelector('.autor-respuesta');
+            const respuestaFecha = respuestaDiv.querySelector('.respuesta-fecha');
+            const respuestaContenido = respuestaDiv.querySelector('.respuesta-contenido');
 
+            console.log('respuestaDiv clonado:', respuestaDiv);
+            console.log('autorRespuesta:', autorRespuesta);
+            console.log('respuestaFecha:', respuestaFecha);
+            console.log('respuestaContenido:', respuestaContenido);
+
+            if (autorRespuesta) {
+                autorRespuesta.textContent = `${respuesta.autor} respondió el`;
+            }
+            if (respuestaFecha) {
+                respuestaFecha.textContent = formatDate(respuesta.fecha);
+            }
+            if (respuestaContenido) {
+                respuestaContenido.textContent = respuesta.contenido;
+            }
+
+            respuestasDiv.appendChild(respuestaDiv);
+            console.log('respuestaDiv insertado en respuestasDiv:', respuestaDiv);
+        });
+
+        responderBtn.dataset.id = hilo.id;
+        nuevoRespuestaEnviar.dataset.id = hilo.id;
+        nuevoRespuestaTexto.id = `respuesta-texto-${hilo.id}`;
+        likeBtn.dataset.id = hilo.id;
+        dislikeBtn.dataset.id = hilo.id;
+
+        console.log('hiloDiv insertado en foroMensajes:', hiloDiv);
         return hiloDiv;
     }
 
@@ -185,27 +234,42 @@ document.addEventListener('DOMContentLoaded', function() {
         const titulo = nuevoHiloTituloInput.value;
         const contenido = nuevoHiloContenidoTextarea.value;
         if (titulo.trim() && contenido.trim()) {
+            const data = `titulo=${encodeURIComponent(titulo)}&contenido=${encodeURIComponent(contenido)}`;
+            console.log('Datos a enviar (antes de fetch):', data);
             fetch('../../../backend/src/foro/crear_hilo.php', {
-                method: 'POST', // Asegúrate de que esta línea esté aquí
+                method: 'POST',
                 headers: {
                     'Content-Type': 'application/x-www-form-urlencoded',
                 },
-                body: `titulo=${encodeURIComponent(titulo)}&contenido=${encodeURIComponent(contenido)}`
+                body: data
             })
-            .then(response => response.json())
+            .then(response => {
+                console.log('Respuesta completa (antes de .json()):', response);
+                console.log('response.ok:', response.ok);
+                console.log('response.headers.get(\'Content-Type\'):', response.headers.get('Content-Type'));
+                if (!response.ok) {
+                    throw new Error('Error en la petición: ' + response.statusText);
+                }
+                return response.json();
+            })
             .then(data => {
+                console.log('Datos JSON recibidos:', data);
                 if (data.success) {
+                    console.log('Hilo creado con éxito');
                     nuevoHiloTituloInput.value = '';
                     nuevoHiloContenidoTextarea.value = '';
                     mostrarHilos();
                 } else if (data.error) {
+                    console.log('Error del servidor:', data.error);
                     alert(data.error);
                 } else {
+                    console.log('Error desconocido al crear el hilo');
                     alert('Error al crear el hilo.');
                 }
             })
             .catch(error => {
-                console.error('Error al crear el hilo:', error);
+                console.error('Error de fetch:', error);
+                console.error('Error detallado:', error.message);
                 alert('Error de comunicación con el servidor al crear el hilo.');
             });
         } else {
