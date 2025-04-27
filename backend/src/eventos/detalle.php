@@ -1,24 +1,15 @@
 <?php
 
-
-$servername = "localhost";
-$username = "root";
-$password = "";
-$dbname = "proyecto_comunidad";
-
-$conn = new mysqli($servername, $username, $password, $dbname);
-if ($conn->connect_error) {
-    die("Conexión fallida: " . $conn->connect_error);
-}
+include __DIR__ . '/../conexion_BBDD/conexion_db_pm.php';
 
 if (isset($_GET['id'])) {
     $id_evento = intval($_GET['id']); // Evitar inyecciones
 
     $sql = "SELECT * FROM eventos WHERE id_evento = $id_evento";
-    $resultado = $conn->query($sql);
+    $resultado = $pdo->query($sql);
 
-    if ($resultado->num_rows > 0) {
-        $evento = $resultado->fetch_assoc();
+    if ($resultado->rowCount() > 0) {
+        $evento = $resultado->fetch();
         echo 
             "<div class='evento-header'>
                 <div class='evento-imagen'>
@@ -38,6 +29,4 @@ if (isset($_GET['id'])) {
 } else {
     echo "<p>ID del evento no proporcionado.</p>";
 }
-
-$conn->close();
 ?>
