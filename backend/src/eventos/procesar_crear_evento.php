@@ -1,17 +1,7 @@
 <?php
 session_start();
 
-$servername = "localhost";
-$username = "root";
-$password = "";
-$dbname = "proyecto_comunidad";
-
-
-$conexion = new mysqli($servername, $username, $password, $dbname);
-
-if ($conexion->connect_error) {
-    die("Conexión fallida: " . $conexion->connect_error);
-}
+include __DIR__ . '/../conexion_BBDD/conexion_db_pm.php';
 
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
@@ -24,7 +14,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $descripcion = trim($_POST['descripcion']);
     $fecha = $_POST['fecha'];
     // $id_usuario = $_SESSION['id_usuario'];
-    $id_usuario = 1;
+    $id_usuario = 1; //TODO: Cambiar por el ID del usuario logueado
 
     // Validaciones
     if (empty($titulo) || empty($descripcion) || empty($fecha)) {
@@ -57,20 +47,25 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         exit();
     }
 
-    // Insertar en la BBDD
-    $sql = "INSERT INTO eventos (titulo, descripcion, fecha, id_usuario) VALUES (?, ?, ?, ?)";
-    $stmt = $conexion->prepare($sql);
-    $stmt->bind_param("sssi", $titulo, $descripcion, $fecha, $id_usuario);
-
-    if ($stmt->execute()) {
+    try {
+        // Insertar en la BBDD
+        $sql = "INSERT INTO eventos (titulo, descripcion, fecha, id_usuario) VALUES (:titulo, :descripcion, :fecha, :id_usuario)";
+        $stmt = $pdo->prepare($sql);
+        $stmt->bindValue(':titulo', $titulo, PDO::PARAM_STR);
+        $stmt->bindValue(':descripcion', $descripcion, PDO::PARAM_STR);
+        $stmt->bindValue(':fecha', $fecha, PDO::PARAM_STR);
+        $stmt->bindValue(':id_usuario', $id_usuario, PDO::PARAM_INT);
+        
+        $stmt->execute();
         // header("Location: ../../../web/eventos.php?mensaje=Evento+creado+correctamente");
         header("Location: ../../../web/src/eventos/eventos.php");
         exit();
-    } else {
-        echo "Error al crear el evento: " . $stmt->error;
+        
+        $stmt->close();
+        $conexion->close();
+    } catch (PDOException $e) {
+        // Si ocurre un error, lo capturamos y mostramos
+        echo "Error al crear el evento: " . $e->getMessage();
     }
-
-    $stmt->close();
-    $conexion->close();
 }
 ?>

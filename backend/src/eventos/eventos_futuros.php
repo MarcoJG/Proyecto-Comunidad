@@ -1,27 +1,17 @@
 <?php
 
-$servername = "localhost";
-$username = "root";
-$password = "";
-$dbname = "proyecto_comunidad";
-
-
-$conn = new mysqli($servername, $username, $password, $dbname);
-
-
-if ($conn->connect_error) {
-    die("Conexión fallida: " . $conn->connect_error);
-}
+session_start();
+include __DIR__ . '/../conexion_BBDD/conexion_db_pm.php';
 
 // Obtener la fecha actual y consulta SQL eventos futuros
 $hoy = date('Y-m-d');
 $sql = "SELECT id_evento, titulo, descripcion, fecha FROM eventos WHERE fecha >= '$hoy' ORDER BY fecha ASC";
 
 // Ejecutar la consulta y verificar si hay resultados
-$result = $conn->query($sql);
+$result = $pdo->query($sql);
 
-if ($result->num_rows > 0) {
-    while ($row = $result->fetch_assoc()) {
+if ($result->rowCount() > 0) {
+    while ($row = $result->fetch()) {
         $fecha_formateada = date('d/m/Y', strtotime($row['fecha']));
 
 
@@ -44,8 +34,6 @@ if ($result->num_rows > 0) {
 } else {
     echo "<p>No hay eventos futuros.</p>";
 }
-
-$conn->close();
 ?>
 
 <script>

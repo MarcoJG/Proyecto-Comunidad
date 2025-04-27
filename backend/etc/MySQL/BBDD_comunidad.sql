@@ -154,15 +154,24 @@ ADD COLUMN baneado BOOLEAN DEFAULT FALSE;
 ALTER TABLE usuarios
 ADD COLUMN fecha_fin_timeout DATETIME NULL;
 
->>>>>>> a62f2da6c6ae4e5d6cab6396731a23289208b65e
+-- Insertar roles (si aún no están insertados)
+INSERT INTO roles (id_roles , nombre) VALUES (1, 'Admin'), (2, 'Presidente'), (3, 'Vecino');
+
+-- Insertar usuarios con contraseñas hasheadas
+INSERT INTO usuarios (nombre, correo, usuario, contrasenya, id_roles)
+VALUES
+('Admin Ejemplo', 'admin@comunidad.com', 'admin1', 'admin1', 1),  -- Administrador
+('Presidente Ejemplo', 'presidente@comunidad.com', 'presi1', 'presi1', 2),  -- Presidente
+('Vecino Ejemplo', 'vecino@comunidad.com', 'vecino1', 'vecino1', 3);  -- Vecino
+
 -- Insertar eventos asignados a John Doe (id_usuario = 1)
 INSERT INTO eventos (titulo, descripcion, fecha, id_usuario)
 VALUES
-('Reunión General', 'Reunión general para discutir temas importantes de la comunidad.', '2024-05-10', 3),
-('Mantenimiento de Ascensores', 'Mantenimiento programado de los ascensores en todo el edificio.', '2025-11-15', 3),
-('Fiesta de Navidad', 'Celebra con nosotros la fiesta de Navidad de la comunidad.', '2026-12-20', 3),
-('Junta Extraordinaria', 'Junta extraordinaria para resolver problemas de la comunidad.', '2026-01-22', 3),
-('Reparación de Fachada', 'Reparación de la fachada del edificio programada para este mes.', '2025-03-17', 3);
+('Reunión General', 'Reunión general para discutir temas importantes de la comunidad.', '2024-05-10', 1),
+('Mantenimiento de Ascensores', 'Mantenimiento programado de los ascensores en todo el edificio.', '2025-11-15', 1),
+('Fiesta de Navidad', 'Celebra con nosotros la fiesta de Navidad de la comunidad.', '2026-12-20', 1),
+('Junta Extraordinaria', 'Junta extraordinaria para resolver problemas de la comunidad.', '2026-01-22', 1),
+('Reparación de Fachada', 'Reparación de la fachada del edificio programada para este mes.', '2025-03-17', 1);
 
 ALTER TABLE hilo
 ADD COLUMN contenido VARCHAR(255) NOT NULL;

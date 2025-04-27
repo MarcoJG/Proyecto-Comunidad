@@ -1,6 +1,5 @@
 <!-- lógica para rol admin -->
 <?php
-session_start();
 
 // Comprobamos si el usuario tiene el rol de Admin
 if (!isset($_SESSION["nombre_rol"]) || $_SESSION["nombre_rol"] !== "Admin") {
@@ -31,13 +30,13 @@ if (!isset($_SESSION["nombre_rol"]) || $_SESSION["nombre_rol"] !== "Admin") {
     </header>
      <!-- Condicional comentado para que siempre se vea el botón hasta que funcione con el admin -->
 
-    <?php /* if ($usuarioEsAdmin): */?>  
+    <?php if ($usuarioEsAdmin): ?>  
         <div style="text-align: right; margin: 20px;">
             <a href="crear_evento.php" class="boton-evento" style="background-color: #243D51; color: white; padding: 10px 20px; text-decoration: none; border-radius: 5px;">
                 Crear evento
             </a>
         </div>
-        <?php /* endif; */?>
+        <?php endif;?>
         <section class="contenedor-principal">
 
             <!-- Próximos Eventos -->
