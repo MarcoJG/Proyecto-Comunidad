@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="cabecera.css">
+    <link rel="stylesheet" href="style.css">
     <title>Document</title>
 </head>
 
@@ -24,11 +24,11 @@
                 <a href="../contacto/Contacto.html" class="nav-link" target="_top">SOPORTE</a>
             </nav>
 
-            <div class="login-button-container">
+            <div class="buttons-container">
                 <button onclick="navToLogin()" id="boton-login" class="boton-login">Iniciar Sesion</button>
             </div>
 
-            <div class="user-info-container" style="display: none;"> 
+            <div class="user-info-container" style="display: none;">
                 <span id="welcome-message" class="welcome-message"></span>
                 <div class="user-dropdown">
                     <button class="user-dropdown-btn">&#9660;</button>

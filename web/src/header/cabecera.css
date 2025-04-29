@@ -1,19 +1,19 @@
-body{
+body {
     font-family: sans-serif;
     margin: 0px;
 }
 
-header{
+header {
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     background-color: #f5f5f5;
     z-index: 100;
-    
 }
 
-.header-container{
+/* Estilos para el contenedor principal del header */
+.header-container {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -21,60 +21,102 @@ header{
     box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
 }
 
-.logo{
+/* Estilos para el logo */
+.logo {
     display: flex;
 }
 
-.logo:hover{
+.logo:hover {
     cursor: pointer;
     transform: scale(1.02);
 }
-.logo img{
+
+.logo img {
     height: 150px;
     width: 250px;
 }
 
-a{
-    text-decoration: none;
-}
-
+/* Estilos para los enlaces de navegación */
 .nav-container {
     display: flex;
 }
 
-a.nav-link{
+.nav-container a.nav-link { /* Especificidad aumentada */
     color: #243d51;
     margin: 40px;
 }
-a.nav-link:hover{
+
+.nav-container a.nav-link:hover { /* Especificidad aumentada */
     color: #786247;
 }
 
-
-    
-
-
+/* Estilos para el contenedor de botones */
 .buttons-container {
     display: flex;
     align-items: center;
     margin-right: 5%;
-    
 }
 
-/*.idioma{
-    background-color: white;
-    color:#243d51 ;
-    padding: 7px 20px;
-    margin-left: 10px;
-}
-*/
-
-.boton-login{
-    background-color:#243d51;
+/* Estilos para el botón de inicio de sesión */
+.boton-login {
+    background-color: #243d51;
     border: #243d51;
     color: white;
-    padding: 7px ;
+    padding: 7px;
     margin-left: 10px;
     cursor: pointer;
     font-family: sans-serif;
+}
+
+/* Estilos para el contenedor de información del usuario */
+.user-info-container {
+    display: flex;
+    align-items: center;
+    position: relative;
+    margin-left: auto;
+    margin-right: 20px;
+}
+
+/* Estilos para el mensaje de bienvenida */
+.welcome-message {
+    margin-right: 10px;
+    font-weight: bold;
+}
+
+/* Estilos para el desplegable del usuario */
+.user-dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.user-dropdown-btn {
+    background-color: #4CAF50;
+    color: white;
+    padding: 8px;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+    font-size: 1em;
+}
+
+/* Estilos para el contenido del desplegable */
+.user-dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+    right: 0;
+}
+
+.user-dropdown-content p, .user-dropdown-content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+}
+
+.user-dropdown-content a:hover {
+    background-color: #ddd;
 }
