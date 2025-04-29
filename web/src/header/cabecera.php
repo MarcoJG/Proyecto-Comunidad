@@ -1,5 +1,5 @@
 <?php
-    $basePath = '/Proyecto-Comunidad/'; // Cambia esto si el proyecto está en otra raíz
+    $basePath = '/Proyecto-Comunidad/';
 ?>
 
 <!DOCTYPE html>

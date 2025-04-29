@@ -11,7 +11,7 @@
 <body class="fondo-cuerpo">
 
     <?php
-        define('BASE_PATH', '../header/'); // Relativa desde index.php hacia cabecera.php
+        define('BASE_PATH', '../header/');
         include(BASE_PATH . 'cabecera.php');
     ?>
 

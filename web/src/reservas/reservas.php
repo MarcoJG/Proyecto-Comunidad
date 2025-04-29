@@ -20,9 +20,12 @@ $usuarioEsAdmin = isset($_SESSION["nombre_rol"]) && $_SESSION["nombre_rol"] === 
 <?php endif; ?>
 
 <main>
-    <header>
-        <iframe src="../header/cabecera.html" frameborder="0" width="100%" height="100%"></iframe>
-    </header>
+<header>
+    <?php
+        define('BASE_PATH', '../header/');
+        include(BASE_PATH . 'cabecera.php');
+    ?>
+</header>
 
     <section class="contenedor-principal">
         <h2 class="titulo-eventos">Reserva de Zonas Comunes</h2><br>
