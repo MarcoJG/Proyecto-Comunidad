@@ -8,7 +8,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const logoutLink = document.getElementById('logout-link');
     const dropdownBtn = document.querySelector('.user-dropdown-btn');
     const dropdownContent = document.querySelector('.user-dropdown-content');
-    const loginButtonContainer = document.querySelector('.login-button-container');
+    const loginButtonContainer = document.querySelector('.buttons-container');
     const userInfoContainer = document.querySelector('.user-info-container');
 
     // Función para obtener la información del usuario
