@@ -10,9 +10,10 @@
 
 <body class="fondo-cuerpo">
 
-    <header>
-        <iframe src="../header/cabecera.html" frameborder="0" width="100%" height="100%"></iframe>
-    </header>
+    <?php
+        define('BASE_PATH', '../header/'); // Relativa desde index.php hacia cabecera.php
+        include(BASE_PATH . 'cabecera.php');
+    ?>
 
     <div class="contenedor-principal">
 

@@ -12,9 +12,10 @@
     <script src="foro.js"></script>
 </head>
 <body>
-    <header>
-        <iframe src="../header/cabecera.html" frameborder="0" width="100%" height="100%"></iframe>
-    </header>
+    <?php
+        define('BASE_PATH', '../header/'); // Relativa desde index.php hacia cabecera.php
+        include(BASE_PATH . 'cabecera.php');
+    ?>
     <main id="foro-content">
         <h2>Foro de la Comunidad</h2>
         <div id="foro-mensajes">

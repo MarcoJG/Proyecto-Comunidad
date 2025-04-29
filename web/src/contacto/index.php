@@ -9,7 +9,10 @@
 </head>
 <body>
     <header>
-        <iframe src="../header/cabecera.html" frameborder="0" width="100%" height="100%"></iframe>
+        <?php
+            define('BASE_PATH', '../header/');
+            include(BASE_PATH . 'cabecera.php');
+        ?>
     </header>
     <div class="container">
         <div class="contact-info">

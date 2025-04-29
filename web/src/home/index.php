@@ -14,8 +14,6 @@ session_start();
     <meta name="author" content="Equipo Proyecto Comunidad">
     <link rel="icon" type="" href="">
     <link rel="stylesheet" href="home.css">
-    <link rel="stylesheet" href="../header/cabecera.css">
-    <script src="../header/cabecera.js" defer></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap">
@@ -26,7 +24,10 @@ session_start();
 
 <body>
     <header>
-        <?php include('../header/cabecera.php'); ?>
+    <?php
+        define('BASE_PATH', '../header/'); // Relativa desde index.php hacia cabecera.php
+        include(BASE_PATH . 'cabecera.php');
+    ?>
     </header>
     <main>
         <section id="bloque-noticias">
