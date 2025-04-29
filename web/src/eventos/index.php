@@ -1,3 +1,6 @@
+<?php
+    require_once __DIR__ . '/../../../config.php';
+?>
 <!DOCTYPE html>
 <html lang="es">
 
@@ -9,12 +12,12 @@
 </head>
 
 <body class="fondo-cuerpo">
-
+<header>
     <?php
-        define('BASE_PATH', '../header/');
-        include(BASE_PATH . 'cabecera.php');
+        include $_SERVER['DOCUMENT_ROOT'] . $basePath . 'web/src/header/cabecera.php';
     ?>
-
+</header>
+<main>
     <div class="contenedor-principal">
 
         <!-- Próximos Eventos -->
@@ -98,7 +101,7 @@
             </div>
         </div>
     </div>
-
+    </main>
     <footer> 
         <iframe src="../footer/FOOTER.html" frameborder="0" width="100%" height="300px"></iframe> 
     </footer>

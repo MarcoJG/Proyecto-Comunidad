@@ -1,3 +1,6 @@
+<?php
+    require_once __DIR__ . '/../../../config.php';
+?>
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -7,13 +10,13 @@
     <link rel="stylesheet" href="generico.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
+<header>
+    <?php
+        include $_SERVER['DOCUMENT_ROOT'] . $basePath . 'web/src/header/cabecera.php';
+    ?>
+</header>
 <body>
-    <header>
-        <?php
-            define('BASE_PATH', '../header/');
-            include(BASE_PATH . 'cabecera.php');
-        ?>
-    </header>
+    <main>
     <div class="container">
         <div class="contact-info">
             <h2>Contacta con nosotros</h2>
@@ -53,7 +56,7 @@
         </div>
         
     </div>
-
+    </main>
     <script src="index.js" ></script>
     
     <footer> 

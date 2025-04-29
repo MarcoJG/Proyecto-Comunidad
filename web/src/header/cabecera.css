@@ -1,9 +1,11 @@
 body {
     font-family: sans-serif;
-    margin: 0px;
+    margin: 0; /* Asegúrate de que el margen del body sea 0 */
+    padding: 0; /* Asegúrate de que el padding del body sea 0 */
 }
 
 header {
+    position: fixed;
     top: 0;
     left: 0;
     width: 100%;
@@ -40,12 +42,12 @@ header {
     display: flex;
 }
 
-.nav-container a.nav-link { /* Especificidad aumentada */
+.nav-container a.nav-link {
     color: #243d51;
     margin: 40px;
 }
 
-.nav-container a.nav-link:hover { /* Especificidad aumentada */
+.nav-container a.nav-link:hover {
     color: #786247;
 }
 

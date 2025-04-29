@@ -38,6 +38,7 @@ main {
     width: 90%;
     max-width: 1200px;
     margin: 40px auto;
+    padding-top: 180px;
 }
 
 /* Estilos generales para los bloques */

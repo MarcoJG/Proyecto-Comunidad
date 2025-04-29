@@ -1,25 +1,28 @@
+<?php
+    require_once __DIR__ . '/../../../config.php';
+?>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Foro de la Comunidad</title>
-    <link rel="stylesheet" href="../home/home.css">
-    <link rel="stylesheet" href="foro.css">
+    <link rel="stylesheet" href="<?= $basePath ?>web/src/home/home.css">
+    <link rel="stylesheet" href="<?= $basePath ?>web/src/foro/foro.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap">
-    <script src="foro.js"></script>
+    <script src="<?= $basePath ?>web/src/foro/foro.js"></script>
 </head>
 <body>
-    <?php
-        define('BASE_PATH', '../header/'); // Relativa desde index.php hacia cabecera.php
-        include(BASE_PATH . 'cabecera.php');
-    ?>
+    <header>
+        <?php
+            include $_SERVER['DOCUMENT_ROOT'] . $basePath . 'web/src/header/cabecera.php';
+        ?>
+    </header>
     <main id="foro-content">
         <h2>Foro de la Comunidad</h2>
-        <div id="foro-mensajes">
-            </div>
+        <div id="foro-mensajes"></div>
         <div id="foro-nuevo-hilo">
             <h3>Crear un nuevo hilo</h3>
             <input type="text" id="nuevo-hilo-titulo" placeholder="Título del hilo">
@@ -27,11 +30,13 @@
             <button id="enviar-hilo">Enviar</button>
         </div>
     </main>
+
+    <!-- Templates -->
     <template id="hilo-template">
         <div class="hilo-foro">
             <div class="hilo-cabecera">
                 <h3 class="hilo-titulo"></h3>
-                <span class="autor">Publicado por <span class="hilo-autor"></span>el <span class="hilo-fecha"></span></span>
+                <span class="autor">Publicado por <span class="hilo-autor"></span> el <span class="hilo-fecha"></span></span>
                 <div class="acciones-admin" style="display: none; gap: 10px; align-items: center;">
                     <button class="borrar-hilo" data-id="">Borrar</button>
                     <button class="bannear-usuario" data-autor="">Bannear</button>
@@ -57,6 +62,7 @@
             </div>
         </div>
     </template>
+
     <template id="respuesta-template">
         <div class="respuesta">
             <span class="autor-respuesta"> respondió el <span class="respuesta-fecha"></span>:</span>
@@ -64,8 +70,8 @@
             <div class="respuesta-interacciones">
                 <button class="like-respuesta-btn"><i class="fa fa-thumbs-up"></i>
                 <span class="likes-count">0</span></button>
-                <button class="dislike-respuesta-btn"><i class="fa fa-thumbs-down">
-                <span class="dislikes-count">0</span></i></button>
+                <button class="dislike-respuesta-btn"><i class="fa fa-thumbs-down"></i>
+                <span class="dislikes-count">0</span></button>
             </div>
         </div>
     </template>
