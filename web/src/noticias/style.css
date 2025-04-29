@@ -25,10 +25,10 @@ header{
 }
 
 .titulo-principal,
-.titulo-evento,
-.titulo-evento2,
+.titulo-noticia,
+.titulo-noticia2,
 .subtitulo,
-.titulo-evento2 {
+.titulo-noticia2 {
     color: #243D51;
     text-align: left;
 }
