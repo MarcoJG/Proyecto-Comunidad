@@ -1,0 +1,174 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f9f9f9;
+    padding: 0;
+    margin: 0;
+}
+
+
+.fondo-cuerpo {
+    background-color: #f9f9f9;
+}
+
+
+header {
+    position: sticky;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background-color: #f5f5f5;
+    z-index: 100;
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+/* Página de reserva */
+.formulario-reserva {
+    max-width: 500px;
+    width: 100%;
+    background-color: #fff;
+    padding: 30px;
+    margin: 50px auto;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+h2 {
+    text-align: center;
+    color: #243D51;
+    margin-bottom: 20px;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+label {
+    font-size: 14px;
+    color: #333;
+}
+
+input[type="date"],
+select,
+button {
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    width: 100%;
+}
+
+button {
+    background-color: #243D51;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #1c2f3d;
+}
+
+
+.contenedor-principal {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 10px;
+}
+
+.titulo-eventos,
+.subtitulo {
+    text-align: center;
+}
+
+.titulo-eventos {
+    font-size: 24px;
+    color: #243D51;
+}
+
+.subtitulo {
+    color: #9c907d;
+    margin-bottom: 20px;
+}
+
+.contenedor-eventos {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 25px;
+    justify-items: center;
+}
+
+.evento {
+    width: 100%;
+    max-width: 400px;
+    background-color: #fff;
+    padding: 15px;
+    border: 1px solid #ddd;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    display: block;
+}
+
+.evento-imagen {
+    width: 100%;
+    height: 200px;
+    overflow: hidden;
+    margin-bottom: 20px;
+}
+
+.evento-imagen img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 0px;
+}
+
+.evento-texto {
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+.titulo-evento {
+    font-size: 18px;
+    margin-bottom: 5px;
+    color: #243D51;
+    line-height: 1.2;
+}
+
+.detalle-evento {
+    color: #9c907d;
+    margin-bottom: 10px;
+    line-height: 1.2;
+}
+
+.boton-evento {
+    background-color: #243D51;
+    color: #fff;
+    padding: 10px 0;
+    border: none;
+    cursor: pointer;
+    text-align: center;
+    text-decoration: none;
+    width: 100%;
+    display: block;
+    border-radius: 4px;
+    margin-top: 10px;
+}
+
+.boton-evento:hover {
+    background-color: #1c2f3d;
+}
+
+/* Footer */
+footer {
+    display: block;
+    width: 100%;
+    background-color: #f5f5f5;
+    padding: 20px 0;
+}
