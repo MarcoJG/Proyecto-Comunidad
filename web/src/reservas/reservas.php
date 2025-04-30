@@ -43,11 +43,11 @@ $usuarioEsAdmin = isset($_SESSION["nombre_rol"]) && $_SESSION["nombre_rol"] === 
 
             // Mensajes por zona
             $mensajes = [
-                'Piscina' => 'Reserva tu turno en nuestra piscina y date un chapuzón refrescante.',
-                'Pista de Tenis' => 'Disfruta de un partido en la pista de tenis, reserva ya tu turno.',
-                'Gimnasio' => 'Mantente en forma reservando tu sesión en el gimnasio.',
-                'Sala de Reuniones' => 'Planifica tu próxima reunión con comodidad y privacidad.',
-                'Barbacoa' => 'Comparte una comida al aire libre reservando la zona de barbacoa.',
+                'Piscina'            => 'Reserva tu turno en nuestra piscina y date un chapuzón refrescante.',
+                'Pista de Tenis'     => 'Disfruta de un partido en la pista de tenis, reserva ya tu turno.',
+                'Gimnasio'           => 'Mantente en forma reservando tu sesión en el gimnasio.',
+                'Sala de Reuniones'  => 'Planifica tu próxima reunión con comodidad y privacidad.',
+                'Barbacoa'           => 'Comparte una comida al aire libre reservando la zona de barbacoa.',
             ];
 
             foreach ($zonas as $zona) {
