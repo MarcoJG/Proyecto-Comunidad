@@ -166,4 +166,9 @@ VALUES
 ALTER TABLE hilo
 ADD COLUMN contenido VARCHAR(255) NOT NULL;
 
+ALTER TABLE usuarios
+ADD COLUMN email_verificado BOOLEAN DEFAULT FALSE;
 
+INSERT INTO foro (nombre) VALUES ('General');
+INSERT INTO usuarios (nombre, correo, usuario, contrasenya, id_roles) 
+VALUES ('Usuario de prueba', 'prueba@example.com', 'prueba', 'contrasena_hasheada', 1);
