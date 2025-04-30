@@ -34,6 +34,10 @@ body {
   background-color:var(--blanco); /* Color de fondo claro */
 }
 
+main {
+  padding-top: 180px;
+}
+
 h1, h2, h3, h4, h5, h6 {
   font-family: 'Playfair Display', sans-serif; /* Fuente para encabezados */
   font-weight: 700;
@@ -308,6 +312,3 @@ label {
 textarea {
   width: 100%; /* Asegura que el textarea ocupe todo el ancho */
 }
-
-
-

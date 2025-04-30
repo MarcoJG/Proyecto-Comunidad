@@ -1,6 +1,6 @@
 <!-- lógica para rol admin -->
 <?php
-
+require_once __DIR__ . '/../../../config.php';
 // Comprobamos si el usuario tiene el rol de Admin
 if (!isset($_SESSION["nombre_rol"]) || $_SESSION["nombre_rol"] !== "Admin") {
     // Si no es Admin, redirigimos o mostramos un mensaje
@@ -26,7 +26,7 @@ if (!isset($_SESSION["nombre_rol"]) || $_SESSION["nombre_rol"] !== "Admin") {
     <main>
         
     <header>
-        <iframe src="../header/cabecera.html" frameborder="0" width="100%" height="100%"></iframe>
+        <?php include $_SERVER['DOCUMENT_ROOT'] . $basePath . 'web/src/header/cabecera.php'; ?>
     </header>
      <!-- Condicional comentado para que siempre se vea el botón hasta que funcione con el admin -->
 

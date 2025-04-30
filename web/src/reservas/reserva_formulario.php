@@ -18,7 +18,10 @@ $zona = isset($_GET['zona']) ? htmlspecialchars($_GET['zona']) : 'Zona desconoci
 <body class="fondo-cuerpo">
 
 <header>
-    <iframe src="../header/cabecera.html" frameborder="0" width="100%" height="120"></iframe>
+    <?php
+        define('BASE_PATH', '../header/');
+        include(BASE_PATH . 'cabecera.php');
+    ?>
 </header>
 
 <main class="formulario-reserva">
