@@ -167,7 +167,8 @@ ALTER TABLE hilo
 ADD COLUMN contenido VARCHAR(255) NOT NULL;
 
 ALTER TABLE usuarios
-ADD COLUMN email_verificado BOOLEAN DEFAULT FALSE;
+ADD COLUMN email_verificado TINYINT(1) DEFAULT 0,
+ADD COLUMN verification_token VARCHAR(255) DEFAULT NULL;
 
 INSERT INTO foro (nombre) VALUES ('General');
 INSERT INTO usuarios (nombre, correo, usuario, contrasenya, id_roles) 
