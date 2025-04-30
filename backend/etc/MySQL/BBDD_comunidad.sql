@@ -168,10 +168,10 @@ ADD COLUMN verification_token VARCHAR(255) DEFAULT NULL;
 INSERT INTO foro (id_foro, nombre) VALUES (1, 'General');
 INSERT INTO usuarios (id_usuario, nombre, correo, usuario, contrasenya, id_roles) 
 VALUES
-(1, 'Admin Ejemplo', 'admin@comunidad.com', 'admin1', 'admin1', 1),  -- Administrador
-(2, 'Presidente Ejemplo', 'presidente@comunidad.com', 'presi1', 'presi1', 2),  -- Presidente
-(3, 'Vecino Ejemplo', 'vecino@comunidad.com', 'vecino1', 'vecino1', 3);  -- Vecino
-
+(1, 'Admin Ejemplo', 'admin@comunidad.com', 'admin1', '$2y$10$w3C.OpqLs.I5ESk1b9CjdeiHB8dMe.ERlg875kR1.nSuNhBY4RUs.', 1),  -- Administrador
+(2, 'Presidente Ejemplo', 'presidente@comunidad.com', 'presi1', '$2y$10$w3C.OpqLs.I5ESk1b9CjdeiHB8dMe.ERlg875kR1.nSuNhBY4RUs.', 2),  -- Presidente
+(3, 'Vecino Ejemplo', 'vecino@comunidad.com', 'vecino1', '$2y$10$w3C.OpqLs.I5ESk1b9CjdeiHB8dMe.ERlg875kR1.nSuNhBY4RUs.', 3);  -- Vecino
+--LA CONTRASEÑA PARA TODOS ES: 1234
 CREATE TABLE likes_respuesta (
     id_like INT AUTO_INCREMENT PRIMARY KEY,
     id_respuesta INT NOT NULL,
