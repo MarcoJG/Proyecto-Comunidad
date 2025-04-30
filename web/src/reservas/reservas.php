@@ -18,14 +18,14 @@ $usuarioEsAdmin = isset($_SESSION["nombre_rol"]) && $_SESSION["nombre_rol"] === 
         ✅ ¡Reserva realizada con éxito!
     </div>
 <?php endif; ?>
-
-<main>
 <header>
     <?php
         define('BASE_PATH', '../header/');
         include(BASE_PATH . 'cabecera.php');
     ?>
 </header>
+<main>
+
 
     <section class="contenedor-principal">
         <h2 class="titulo-eventos">Reserva de Zonas Comunes</h2><br>
@@ -65,7 +65,7 @@ $usuarioEsAdmin = isset($_SESSION["nombre_rol"]) && $_SESSION["nombre_rol"] === 
 </main>
 
 <footer>
-    <iframe src="../footer/FOOTER.html" frameborder="0" width="100%" height="100%"></iframe>
+    <iframe src="../footer/FOOTER.html" frameborder="0" width="100%" height="300px"></iframe>
 </footer>
 </body>
 </html>
