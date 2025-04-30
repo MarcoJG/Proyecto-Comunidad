@@ -11,7 +11,7 @@
 <body class="fondo-cuerpo">
 
     <header>
-        <iframe src="../header/cabecera.html" frameborder="0" width="100%" height="100%"></iframe>
+        <?php include('../header/cabecera.php'); ?>
     </header>
 
     <div class="contenedor-principal">

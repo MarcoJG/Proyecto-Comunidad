@@ -18,7 +18,7 @@
             <nav class="nav-container">
                 <a href="../home/index.php" class="nav-link" target="_top">INICIO</a>
                 <a href="../eventos/index.php" class="nav-link" target="_top">EVENTOS</a>
-                <a href="#" class="nav-link">NOTICIAS</a>
+                <a href="../noticias/index.php" class="nav-link" target="_top">NOTICIAS</a>
                 <a href="../foro/index.php" class="nav-link" target="_top">FORO</a>
                 <a href="#" class="nav-link">VOTACIONES</a>
                 <a href="../contacto/Contacto.html" class="nav-link" target="_top">SOPORTE</a>
