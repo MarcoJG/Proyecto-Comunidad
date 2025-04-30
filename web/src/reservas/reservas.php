@@ -18,14 +18,14 @@ $usuarioEsAdmin = isset($_SESSION["nombre_rol"]) && $_SESSION["nombre_rol"] === 
         ✅ ¡Reserva realizada con éxito!
     </div>
 <?php endif; ?>
-
-<main>
 <header>
     <?php
         define('BASE_PATH', '../header/');
         include(BASE_PATH . 'cabecera.php');
     ?>
 </header>
+<main>
+
 
     <section class="contenedor-principal">
         <h2 class="titulo-eventos">Reserva de Zonas Comunes</h2><br>
@@ -43,11 +43,11 @@ $usuarioEsAdmin = isset($_SESSION["nombre_rol"]) && $_SESSION["nombre_rol"] === 
 
             // Mensajes por zona
             $mensajes = [
-                'Piscina' => 'Reserva tu turno en nuestra piscina y date un chapuzón refrescante.',
-                'Pista de Tenis' => 'Disfruta de un partido en la pista de tenis, reserva ya tu turno.',
-                'Gimnasio' => 'Mantente en forma reservando tu sesión en el gimnasio.',
-                'Sala de Reuniones' => 'Planifica tu próxima reunión con comodidad y privacidad.',
-                'Barbacoa' => 'Comparte una comida al aire libre reservando la zona de barbacoa.',
+                'Piscina'            => 'Reserva tu turno en nuestra piscina y date un chapuzón refrescante.',
+                'Pista de Tenis'     => 'Disfruta de un partido en la pista de tenis, reserva ya tu turno.',
+                'Gimnasio'           => 'Mantente en forma reservando tu sesión en el gimnasio.',
+                'Sala de Reuniones'  => 'Planifica tu próxima reunión con comodidad y privacidad.',
+                'Barbacoa'           => 'Comparte una comida al aire libre reservando la zona de barbacoa.',
             ];
 
             foreach ($zonas as $zona) {
@@ -65,7 +65,7 @@ $usuarioEsAdmin = isset($_SESSION["nombre_rol"]) && $_SESSION["nombre_rol"] === 
 </main>
 
 <footer>
-    <iframe src="../footer/FOOTER.html" frameborder="0" width="100%" height="100%"></iframe>
+    <iframe src="../footer/FOOTER.html" frameborder="0" width="100%" height="300px"></iframe>
 </footer>
 </body>
 </html>

@@ -155,22 +155,8 @@ ALTER TABLE usuarios
 ADD COLUMN fecha_fin_timeout DATETIME NULL;
 
 INSERT INTO roles (id_roles , nombre) VALUES (1, 'Admin'), (2, 'Presidente'), (3, 'Vecino');
- 
- -- Insertar usuarios con contraseñas hasheadas
- INSERT INTO usuarios (nombre, correo, usuario, contrasenya, id_roles)
- VALUES
- ('Admin Ejemplo', 'admin@comunidad.com', 'admin1', 'admin1', 1),  -- Administrador
- ('Presidente Ejemplo', 'presidente@comunidad.com', 'presi1', 'presi1', 2),  -- Presidente
- ('Vecino Ejemplo', 'vecino@comunidad.com', 'vecino1', 'vecino1', 3);  -- Vecino
- 
 -- Insertar eventos asignados a John Doe (id_usuario = 1)
-INSERT INTO eventos (titulo, descripcion, fecha, id_usuario)
-VALUES
-('Reunión General', 'Reunión general para discutir temas importantes de la comunidad.', '2024-05-10', 3),
-('Mantenimiento de Ascensores', 'Mantenimiento programado de los ascensores en todo el edificio.', '2025-11-15', 3),
-('Fiesta de Navidad', 'Celebra con nosotros la fiesta de Navidad de la comunidad.', '2026-12-20', 3),
-('Junta Extraordinaria', 'Junta extraordinaria para resolver problemas de la comunidad.', '2026-01-22', 3),
-('Reparación de Fachada', 'Reparación de la fachada del edificio programada para este mes.', '2025-03-17', 3);
+
 
 ALTER TABLE hilo
 ADD COLUMN contenido VARCHAR(255) NOT NULL;
@@ -179,9 +165,12 @@ ALTER TABLE usuarios
 ADD COLUMN email_verificado TINYINT(1) DEFAULT 0,
 ADD COLUMN verification_token VARCHAR(255) DEFAULT NULL;
 
-INSERT INTO foro (nombre) VALUES ('General');
-INSERT INTO usuarios (nombre, correo, usuario, contrasenya, id_roles) 
-VALUES ('Usuario de prueba', 'prueba@example.com', 'prueba', 'contrasena_hasheada', 1);
+INSERT INTO foro (id_foro, nombre) VALUES (1, 'General');
+INSERT INTO usuarios (id_usuario, nombre, correo, usuario, contrasenya, id_roles) 
+VALUES
+(1, 'Admin Ejemplo', 'admin@comunidad.com', 'admin1', 'admin1', 1),  -- Administrador
+(2, 'Presidente Ejemplo', 'presidente@comunidad.com', 'presi1', 'presi1', 2),  -- Presidente
+(3, 'Vecino Ejemplo', 'vecino@comunidad.com', 'vecino1', 'vecino1', 3);  -- Vecino
 
 CREATE TABLE likes_respuesta (
     id_like INT AUTO_INCREMENT PRIMARY KEY,
@@ -196,3 +185,11 @@ CREATE TABLE dislikes_respuesta (
     id_usuario INT NOT NULL,
     UNIQUE (id_respuesta, id_usuario)
 );
+
+INSERT INTO eventos (titulo, descripcion, fecha, id_usuario)
+VALUES
+('Reunión General', 'Reunión general para discutir temas importantes de la comunidad.', '2024-05-10', 3),
+('Mantenimiento de Ascensores', 'Mantenimiento programado de los ascensores en todo el edificio.', '2025-11-15', 3),
+('Fiesta de Navidad', 'Celebra con nosotros la fiesta de Navidad de la comunidad.', '2026-12-20', 3),
+('Junta Extraordinaria', 'Junta extraordinaria para resolver problemas de la comunidad.', '2026-01-22', 3),
+('Reparación de Fachada', 'Reparación de la fachada del edificio programada para este mes.', '2025-03-17', 3);
