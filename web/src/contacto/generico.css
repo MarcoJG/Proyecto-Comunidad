@@ -284,7 +284,7 @@ section:nth-child(even) {
 }
 
 /* Animación simple para un hover de botones */
-button:hover {
+.boton_secundario:hover {
   transform: scale(1.01);
 }
 .contact-form {
