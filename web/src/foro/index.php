@@ -1,6 +1,8 @@
 <?php
-        require_once __DIR__ . '/../../../config.php';
-    ?>
+    require_once __DIR__ . '/../../../config.php';
+?>
+<!DOCTYPE html>
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,11 +12,10 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap">
-    <script src="<?= $basePath ?>web/src/foro/foro.js"></script>
+    <script src="<?= $basePath ?>web/src/foro/foro.js" defer></script>
 </head>
 <body>
     <header>
-    
         <?php
             include $_SERVER['DOCUMENT_ROOT'] . $basePath . 'web/src/header/cabecera.php';
         ?>
@@ -29,7 +30,7 @@
             <button id="enviar-hilo">Enviar</button>
         </div>
     </main>
-    
+
     <!-- Templates -->
     <template id="hilo-template">
         <div class="hilo-foro">
@@ -64,13 +65,17 @@
 
     <template id="respuesta-template">
         <div class="respuesta">
-            <span class="autor-respuesta"> respondió el <span class="respuesta-fecha"></span>:</span>
+            <span class="autor-respuesta"></span> respondió el <span class="respuesta-fecha"></span>:
             <p class="respuesta-contenido"></p>
             <div class="respuesta-interacciones">
-                <button class="like-respuesta-btn"><i class="fa fa-thumbs-up"></i>
-                <span class="likes-count">0</span></button>
-                <button class="dislike-respuesta-btn"><i class="fa fa-thumbs-down"></i>
-                <span class="dislikes-count">0</span></button>
+                <button class="like-respuesta-btn" data-id-respuesta="">
+                    <i class="fa fa-thumbs-up"></i>
+                    <span class="likes-respuesta-count">0</span>
+                </button>
+                <button class="dislike-respuesta-btn" data-id-respuesta="">
+                    <i class="fa fa-thumbs-down"></i>
+                    <span class="dislikes-respuesta-count">0</span>
+                </button>
             </div>
         </div>
     </template>

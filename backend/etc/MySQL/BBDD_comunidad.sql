@@ -172,3 +172,17 @@ ADD COLUMN email_verificado BOOLEAN DEFAULT FALSE;
 INSERT INTO foro (nombre) VALUES ('General');
 INSERT INTO usuarios (nombre, correo, usuario, contrasenya, id_roles) 
 VALUES ('Usuario de prueba', 'prueba@example.com', 'prueba', 'contrasena_hasheada', 1);
+
+CREATE TABLE likes_respuesta (
+    id_like INT AUTO_INCREMENT PRIMARY KEY,
+    id_respuesta INT NOT NULL,
+    id_usuario INT NOT NULL,
+    UNIQUE (id_respuesta, id_usuario)
+);
+
+CREATE TABLE dislikes_respuesta (
+    id_dislike INT AUTO_INCREMENT PRIMARY KEY,
+    id_respuesta INT NOT NULL,
+    id_usuario INT NOT NULL,
+    UNIQUE (id_respuesta, id_usuario)
+);

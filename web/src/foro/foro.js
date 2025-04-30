@@ -85,6 +85,20 @@ document.addEventListener('DOMContentLoaded', function () {
                 respuestaContenido.textContent = respuesta.contenido;
             }
 
+            // NUEVO: Like/dislike en respuestas
+            const respuestaId = respuesta.id;
+            const likeRespuestaBtn = respuestaDiv.querySelector('.like-respuesta-btn');
+            const dislikeRespuestaBtn = respuestaDiv.querySelector('.dislike-respuesta-btn');
+            const likesRespuestaCount = respuestaDiv.querySelector('.likes-respuesta-count');
+            const dislikesRespuestaCount = respuestaDiv.querySelector('.dislikes-respuesta-count');
+
+            if (likeRespuestaBtn && dislikeRespuestaBtn) {
+                likeRespuestaBtn.dataset.id = respuestaId;
+                dislikeRespuestaBtn.dataset.id = respuestaId;
+            }
+            if (likesRespuestaCount) likesRespuestaCount.textContent = respuesta.likes || 0;
+            if (dislikesRespuestaCount) dislikesRespuestaCount.textContent = respuesta.dislikes || 0;
+
             respuestasDiv.appendChild(respuestaDiv);
         });
 
@@ -183,6 +197,21 @@ document.addEventListener('DOMContentLoaded', function () {
                 }
             });
         });
+
+        // NUEVO: eventos like/dislike en respuestas
+        document.querySelectorAll('#foro-mensajes .like-respuesta-btn').forEach(btn => {
+            btn.addEventListener('click', function () {
+                const respuestaId = parseInt(this.dataset.id);
+                gestionarLikeDislikeRespuesta(respuestaId, 'like', 'add');
+            });
+        });
+
+        document.querySelectorAll('#foro-mensajes .dislike-respuesta-btn').forEach(btn => {
+            btn.addEventListener('click', function () {
+                const respuestaId = parseInt(this.dataset.id);
+                gestionarLikeDislikeRespuesta(respuestaId, 'dislike', 'add');
+            });
+        });
     }
 
     enviarHiloBtn.addEventListener('click', function () {
@@ -226,6 +255,24 @@ document.addEventListener('DOMContentLoaded', function () {
                 }
             })
             .catch(() => alert(`Error de comunicación con el servidor al ${accion}.`));
+    }
+
+    // NUEVO: función para likes/dislikes en respuestas
+    function gestionarLikeDislikeRespuesta(respuestaId, accion, tipo) {
+        fetch('../../../backend/src/foro/gestionar_like_dislike_respuesta.php', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+            body: `id_respuesta=${encodeURIComponent(respuestaId)}&accion=${encodeURIComponent(accion)}&tipo=${encodeURIComponent(tipo)}`
+        })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success || data.info) {
+                    mostrarHilos();
+                } else {
+                    alert(data.error || `Error al ${accion} en respuesta.`);
+                }
+            })
+            .catch(() => alert(`Error de comunicación con el servidor al ${accion} en respuesta.`));
     }
 
     function enviarRespuesta(hiloId, contenido) {
