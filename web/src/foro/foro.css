@@ -1,4 +1,8 @@
 /* foro/foro.css */
+main {
+    
+    padding-top: 180px;
+}
 
 #foro-content {
     background-color: #fff;
@@ -8,6 +12,7 @@
     width: 90%;
     max-width: 1200px;
     margin: 40px auto;
+    padding-top: 180px;
 }
 
 #foro-content h2 {

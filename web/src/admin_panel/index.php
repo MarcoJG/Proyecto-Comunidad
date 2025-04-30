@@ -1,5 +1,5 @@
 <?php
-include '../../../backend/src/admin_panel/admin_panel.php';
+    require_once __DIR__ . '/../../../config.php';
 ?>
 
 <!DOCTYPE html>
@@ -16,6 +16,11 @@ include '../../../backend/src/admin_panel/admin_panel.php';
     <title>Panel de administrador</title>
     <link rel="stylesheet" href="admin_panel.css">
 </head>
+<header>
+    <?php
+        include $_SERVER['DOCUMENT_ROOT'] . $basePath . 'web/src/header/cabecera.php';
+    ?>
+</header>
 <body>
     <h1>Panel de Administración</h1>
     <p>Bienvenido, <?php echo $_SESSION["usuario"]; ?> (<?php echo $_SESSION["nombre_rol"]; ?>)</p>

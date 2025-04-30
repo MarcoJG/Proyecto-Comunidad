@@ -1,31 +1,38 @@
-<!DOCTYPE html>
-<html lang="en">
+<?php
+    $basePath = '/Proyecto-Comunidad/';
+?>
 
+<!DOCTYPE html>
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="cabecera.css">
-    <title>Document</title>
+    <title>Comunidad de Vecinos</title>
+
+    <!-- Estilos -->
+    <link rel="stylesheet" href="<?= $basePath ?>web/src/header/cabecera.css">
 </head>
 
 <body>
     <header>
         <div class="header-container">
-            <a class="logo" href="../home/index.php" target="_top">
-                <img src="../../../assets/img/LOGO_2.png" alt="logo comunidad">
+            <a class="logo" href="<?= $basePath ?>web/src/home/index.php" target="_top">
+                <img src="<?= $basePath ?>assets/img/LOGO_2.png" alt="logo comunidad">
             </a>
 
             <nav class="nav-container">
-                <a href="../home/index.php" class="nav-link" target="_top">INICIO</a>
-                <a href="../eventos/index.php" class="nav-link" target="_top">EVENTOS</a>
-                <a href="../noticias/index.php" class="nav-link" target="_top">NOTICIAS</a>
-                <a href="../foro/index.php" class="nav-link" target="_top">FORO</a>
+                <a href="<?= $basePath ?>web/src/home/index.php" class="nav-link" target="_top">INICIO</a>
+                <a href="<?= $basePath ?>web/src/eventos/index.php" class="nav-link" target="_top">EVENTOS</a>
+                <a href="<?= $basePath ?>web/src/noticias/index.php" class="nav-link" target="_top">NOTICIAS</a>
+                <a href="<?= $basePath ?>web/src/foro/index.php" class="nav-link" target="_top">FORO</a>
                 <a href="#" class="nav-link">VOTACIONES</a>
-                <a href="../contacto/Contacto.html" class="nav-link" target="_top">SOPORTE</a>
+                <a href="<?= $basePath ?>web/src/reservas/reservas.php" class="nav-link" target="_top">RESERVAS</a>
+                <a href="<?= $basePath ?>web/src/contacto/index.php" class="nav-link" target="_top">SOPORTE</a>
+                
             </nav>
 
             <div class="buttons-container">
-                <button onclick="navToLogin()" id="boton-login" class="boton-login">Iniciar Sesion</button>
+                <button onclick="navToLogin()" id="boton-login" class="boton-login">Iniciar Sesión</button>
             </div>
 
             <div class="user-info-container" style="display: none;">
@@ -34,13 +41,14 @@
                     <button class="user-dropdown-btn">&#9660;</button>
                     <div class="user-dropdown-content">
                         <p id="user-email" class="user-email"></p>
-                        <a href="../../../backend/src/login/logout.php" id="logout-link" class="logout-link">Cerrar sesión</a>
+                        <a href="<?= $basePath ?>backend/src/login/logout.php" id="logout-link" class="logout-link">Cerrar sesión</a>
                     </div>
                 </div>
             </div>
         </div>
     </header>
-    <script src="cabecera.js"></script>
-</body>
 
+    <!-- JavaScript -->
+    <script src="<?= $basePath ?>web/src/header/cabecera.js"></script>
+</body>
 </html>
