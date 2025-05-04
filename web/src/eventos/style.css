@@ -1,25 +1,43 @@
 * {
     font-family: Arial, sans-serif;
+    box-sizing: border-box;
 }
-  
-.fondo-cuerpo {
-    background-color: #f5f5f5;
+
+body, html {
     margin: 0;
     padding: 0;
+}
+
+body {
+    padding-top: 120px; /* Para dejar espacio al header si está fijo */
+    background-color: #f5f5f5;
+}
+
+header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background-color: white;
+    z-index: 1000;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+main {
+    padding: 20px;
 }
 
 .contenedor-principal {
     max-width: 1200px;
     margin: 0 auto;
     padding: 20px;
-    padding-top: 180px;
 }
 
 .titulo-principal,
 .titulo-evento,
 .titulo-evento2,
 .subtitulo,
-.titulo-evento2 {
+.titulo-eventos {
     color: #243D51;
     text-align: left;
 }
@@ -69,34 +87,13 @@
     background-color: #243D51;
     color: #fff;
     padding: 10px 20px;
-    border: none;
-    border-radius: 0px;
-    cursor: pointer;
-}
-
-
-.contenedor-eventos h2 {
-    font-size: 24px;
-    margin-bottom: 10px;
-}
-
-.boton-crear {
-    display: inline-block;
-    padding: 10px 15px;
-    background-color: #243D51;
-    color: white;
     text-decoration: none;
-    border-radius: 0px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
     font-weight: bold;
 }
 
-.boton-crear:hover {
+.boton-evento:hover {
     background-color: #1c2f3d;
-}
-
-footer {
-    display: block;
-    width: 100%;
-    background-color: #f5f5f5;
-    padding: 20px 0;
 }

@@ -1,6 +1,6 @@
 <?php
 
-session_start();
+
 include __DIR__ . '/../conexion_BBDD/conexion_db_pm.php';
 
 // Obtener la fecha actual y consulta SQL para obtener solo los eventos pasados
@@ -18,8 +18,7 @@ if ($result->rowCount() > 0) {
         echo "<h2 class='titulo-evento'>" . $row['titulo'] . " " . $fecha_formateada . "</h2>";  // Mostrar título y fecha
         echo "<p class='detalle-evento'>" . $row['descripcion'] . "</p>";
 
-        // Onclick para mostrar la alerta con el ID del evento
-        //echo "<button type='button' class='boton-evento' onclick='mostrarIdEvento(" . $row['id_evento'] . ")'>Accede</button>";
+
         
         //Modificar para ir al detalle de evento
         echo "<a href='detalle.php?id=" . $row['id_evento'] . "' class='boton-evento'>Accede</a>";
