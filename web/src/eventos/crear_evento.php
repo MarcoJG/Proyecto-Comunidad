@@ -1,6 +1,12 @@
 <?php
 session_start();
 
+if (!isset($_SESSION['nombre_rol']) || $_SESSION['nombre_rol'] !== 'Admin') {
+    header("Location: ../../../web/src/eventos/acceso_denegado.php");
+    exit();
+}
+
+
 // Recuperar datos del formulario en caso de error
 $titulo_guardado = $_SESSION['form_data']['titulo'] ?? '';
 $descripcion_guardado = $_SESSION['form_data']['descripcion'] ?? '';

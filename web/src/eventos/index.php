@@ -1,6 +1,13 @@
 <?php
-    require_once __DIR__ . '/../../../config.php';
+session_start();
+require_once __DIR__ . '/../../../config.php';
 ?>
+
+<?php
+// Verificación de sesión y rol
+$usuarioEsAdmin = (isset($_SESSION["nombre_rol"]) && $_SESSION["nombre_rol"] === "Admin");
+?>
+
 <!DOCTYPE html>
 <html lang="es">
 
@@ -12,100 +19,37 @@
 </head>
 
 <body class="fondo-cuerpo">
-<header>
-    <?php
-        include $_SERVER['DOCUMENT_ROOT'] . $basePath . 'web/src/header/cabecera.php';
-    ?>
-</header>
-<main>
-    <div class="contenedor-principal">
 
-        <!-- Próximos Eventos -->
-        <div class="contenedor proximos-eventos">
-            <h2 class="titulo-eventos">Próximos eventos</h2>
-            <p class="subtitulo">Consulta todos los eventos de nuestra comunidad aquí</p>
+    <header>
+        <?php include $_SERVER['DOCUMENT_ROOT'] . $basePath . 'web/src/header/cabecera.php'; ?>
+    </header>
 
-            <!--Evento 1 -->
-            <div class="evento">
-
-                <div class="evento-imagen">
-                    <img src="../../etc/assets/img/bloque.jpg" alt="ImagenEvento">
+    <main>
+        <section class="contenedor-principal">
+            <?php if ($usuarioEsAdmin): ?>  
+                <div style="text-align: right; margin: 20px;">
+                    <a href="crear_evento.php" class="boton-evento">
+                        Crear evento
+                    </a>
                 </div>
+            <?php endif; ?>
 
-                <!-- Texto y botón -->
-                <div class="evento-texto">
-                    <h2 class="titulo-evento">Próxima Junta de Propietarios</h2>
-                    <p class="detalle-evento">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quam
-                        consequuntur ipsa aspernatur fugit suscipit aliquam beatae, voluptatum praesentium maxime
-                        doloremque! Sint quia dolores soluta molestias sunt. Quos iste quia quo!.</p>
-                    <button class="boton-evento">Accede</button>
-                </div>
-            </div>
+            <!-- Próximos Eventos -->
+            <section class="contenedor proximos-eventos">
+                <h2 class="titulo-eventos">Próximos eventos</h2>
+                <p class="subtitulo">Consulta todos los eventos de nuestra comunidad aquí</p>
+                <?php include '../../../backend/src/eventos/eventos_futuros.php'; ?>
+            </section>
+        </section>
 
-            <!-- Evento 2 -->
-            <div class="evento">
-
-                <div class="evento-imagen">
-                    <img src="../../etc/assets/img/reparar.jpg" alt="ImagenEvento">
-                </div>
-
-                <!-- Texto y botón -->
-                <div class="evento-texto">
-                    <h2 class="titulo-evento">Cambio de contadores</h2>
-                    <p class="detalle-evento">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quod,
-                        exercitationem vel! Perferendis minus aliquam rerum dolore quam sequi necessitatibus explicabo.
-                    </p>
-                    <button class="boton-evento">Accede</button>
-                </div>
-            </div>
-        </div>
-    </div>
-
-
-    <div class="contenedor-principal">
-
-        <!--  Eventos pasados -->
-        <div class="contenedor proximos-eventos">
-            <h2 class="titulo-eventos">Eventos pasados</h2>
-
-            <!-- Evento 1 -->
-            <div class="evento">
-                <div class="evento-imagen">
-                    <img src="../../etc/assets/img/bloque.jpg" alt="ImagenEvento">
-                </div>
-
-                <!-- Texto y botón -->
-                <div class="evento-texto">
-                    <h2 class="titulo-evento">Junta de Propietarios 10/12/2024</h2>
-                    <p class="detalle-evento">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quam
-                        consequuntur ipsa aspernatur fugit suscipit aliquam beatae, voluptatum praesentium maxime
-                        doloremque! Sint quia dolores soluta molestias sunt. Quos iste quia quo!.</p>
-                    <button class="boton-evento">Accede</button>
-                </div>
-            </div>
-
-            <!-- Evento 2  -->
-            <div class="evento">
-                <div class="evento-imagen">
-                    <img src="../../etc/assets/img/ayuda.jpg" alt="ImagenEvento">
-                </div>
-
-                <!-- Texto y botón -->
-                <div class="evento-texto">
-                    <h2 class="titulo-evento">La Comunidad con los afectados por la DANA</h2>
-                    <p class="detalle-evento">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quod,
-                        exercitationem vel! Perferendis minus aliquam rerum dolore quam sequi necessitatibus explicabo.
-                    </p>
-                    <button class="boton-evento">Accede</button>
-                </div>
-            </div>
-        </div>
-    </div>
+        <section class="contenedor-principal">
+            <!-- Eventos pasados -->
+            <section class="contenedor proximos-eventos">
+                <h2 class="titulo-eventos">Eventos pasados</h2>
+                <?php include '../../../backend/src/eventos/eventos_pasados.php'; ?>
+            </section>
+        </section>
     </main>
-    <footer> 
-        <iframe src="../footer/FOOTER.html" frameborder="0" width="100%" height="300px"></iframe> 
-    </footer>
-     
-</body>
 
+</body>
 </html>

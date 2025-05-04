@@ -6,15 +6,15 @@ include __DIR__ . '/../conexion_BBDD/conexion_db_pm.php';
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
     // Verificar usuario Admin
-    // if (!isset($_SESSION['id_usuario']) || !isset($_SESSION["nombre_rol"]) || $_SESSION["nombre_rol"] !== "Admin") {
-    //     die("No autorizado.");
-    // }
+    if (!isset($_SESSION['id_usuario']) || !isset($_SESSION["nombre_rol"]) || $_SESSION["nombre_rol"] !== "Admin") {
+        die("No autorizado.");
+     }
 
     $titulo = trim($_POST['titulo']);
     $descripcion = trim($_POST['descripcion']);
     $fecha = $_POST['fecha'];
-    // $id_usuario = $_SESSION['id_usuario'];
-    $id_usuario = 1; //TODO: Cambiar por el ID del usuario logueado
+    $id_usuario = $_SESSION['id_usuario'];
+   
 
     // Validaciones
     if (empty($titulo) || empty($descripcion) || empty($fecha)) {
@@ -58,7 +58,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         
         $stmt->execute();
         // header("Location: ../../../web/eventos.php?mensaje=Evento+creado+correctamente");
-        header("Location: ../../../web/src/eventos/eventos.php");
+        header("Location: ../../../web/src/eventos/index.php");
         exit();
         
         $stmt->close();
