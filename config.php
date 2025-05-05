@@ -1,0 +1,3 @@
+<?php
+    $basePath = '/Proyecto-Comunidad/';
+?>
