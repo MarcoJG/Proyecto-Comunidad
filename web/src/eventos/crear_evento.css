@@ -1,16 +1,15 @@
-/* Estilo general para la fuente */
 * {
     font-family: Arial, sans-serif;
 }
 
-/* Fondo de la página */
+
 .fondo-cuerpo {
     background-color: #f3f3ec;
     margin: 0;
     padding: 0;
 }
 
-/* Contenedor principal para centrar el formulario */
+
 .contenedor-principal {
     max-width: 800px;
     margin: 50px auto;
@@ -19,7 +18,7 @@
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-/* Estilo para los títulos */
+
 .titulo-evento {
     color: #243D51;
     font-size: 24px;
@@ -27,7 +26,7 @@
     margin-bottom: 20px;
 }
 
-/* Estilo para las etiquetas */
+
 .formulario-evento label {
     font-size: 16px;
     color: #243D51;
@@ -35,8 +34,8 @@
     display: block;
 }
 
-/* Estilo para los campos de entrada */
-.formulario-evento input, 
+
+.formulario-evento input,
 .formulario-evento textarea {
     width: 100%;
     padding: 10px;
@@ -46,12 +45,12 @@
     font-size: 16px;
 }
 
-/* Estilo para los campos de fecha y texto */
+
 .formulario-evento input[type="date"] {
     background-color: #f9f9f9;
 }
 
-/* Estilo para el botón de enviar */
+
 .formulario-evento button {
     background-color: #243D51;
     color: #fff;
@@ -63,27 +62,27 @@
     transition: background-color 0.3s ease;
 }
 
-/* Hover effect para el botón */
+
 .formulario-evento button:hover {
     background-color: #1c2f3d;
 }
 
-/* Estilo para el texto de ayuda (opcional) */
+
 .formulario-evento .detalle-evento {
     color: #9c907d;
     font-size: 14px;
     margin-top: 5px;
 }
 
-/* Fondo del formulario */
+
 .formulario-evento {
     display: flex;
     flex-direction: column;
     gap: 15px;
 }
 
-/* Estilo de los campos cuando están en focus */
-.formulario-evento input:focus, 
+
+.formulario-evento input:focus,
 .formulario-evento textarea:focus {
     border-color: #243D51;
     outline: none;
