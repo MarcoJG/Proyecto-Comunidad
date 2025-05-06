@@ -15,38 +15,38 @@ body.fondo-cuerpo {
     padding: 60px 20px;
 }
 
-.evento-header {
+.noticia-header {
     display: flex;
     align-items: center;
     gap: 20px;
     margin-bottom: 30px;
 }
 
-.evento-imagen img {
+.noticia-imagen img {
     width: 100px;
     height: 100px;
     object-fit: cover;
     border-radius: 0px;
 }
 
-.evento-info {
+.noticia-info {
     flex: 1;
 }
 
-.titulo-evento {
+.titulo-noticia {
     color: #243D51;
     font-size: 20px;
     margin: 0 0 5px 0;
     text-align: left;
 }
 
-.detalle-evento {
+.detalle-noticia {
     color: #9c907d;
     margin: 0;
     text-align: left;
 }
 
-.descripcion-evento {
+.descripcion-noticia {
     background-color: #ffffff;
     padding: 20px;
     border-radius: 0px;
@@ -55,7 +55,7 @@ body.fondo-cuerpo {
     line-height: 1.6;
 }
 
-.descripcion-evento h3 {
+.descripcion-noticia h3 {
     margin-top: 0;
     color: #243D51;
     font-size: 18px;

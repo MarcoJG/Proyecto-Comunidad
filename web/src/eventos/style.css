@@ -25,6 +25,7 @@ header {
 
 main {
     padding: 20px;
+    padding-top: 160px;
 }
 
 .contenedor-principal {
@@ -89,9 +90,9 @@ main {
     padding: 10px 20px;
     text-decoration: none;
     border: none;
-    border-radius: 5px;
+    border-radius: 0px;
     cursor: pointer;
-    font-weight: bold;
+    font-size: 13px;
 }
 
 .boton-evento:hover {
