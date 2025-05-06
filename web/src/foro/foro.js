@@ -55,6 +55,10 @@ document.addEventListener('DOMContentLoaded', function () {
         likesCount.textContent = hilo.likes || 0;
         dislikesCount.textContent = hilo.dislikes || 0;
 
+        // LÍNEA AÑADIDA: mostrar contenido del hilo
+        const contenidoElemento = hiloDiv.querySelector('.hilo-contenido-texto');
+        if (contenidoElemento) contenidoElemento.innerHTML = hilo.contenido;
+
         accionesAdmin.style.display = 'none';
         if (borrarBtn) {
             borrarBtn.dataset.id = hilo.id;
@@ -87,6 +91,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
             // NUEVO: Like/dislike en respuestas
             const respuestaId = respuesta.id;
+            const respuestaContainer = respuestaDiv.querySelector('.respuesta');
             const likeRespuestaBtn = respuestaDiv.querySelector('.like-respuesta-btn');
             const dislikeRespuestaBtn = respuestaDiv.querySelector('.dislike-respuesta-btn');
             const likesRespuestaCount = respuestaDiv.querySelector('.likes-respuesta-count');
@@ -198,18 +203,18 @@ document.addEventListener('DOMContentLoaded', function () {
             });
         });
 
-        // NUEVO: eventos like/dislike en respuestas
+        // MODIFICADO: eventos like/dislike en respuestas
         document.querySelectorAll('#foro-mensajes .like-respuesta-btn').forEach(btn => {
             btn.addEventListener('click', function () {
                 const respuestaId = parseInt(this.dataset.id);
-                gestionarLikeDislikeRespuesta(respuestaId, 'like', 'add');
+                gestionarLikeDislikeRespuesta(this, respuestaId, 'like', 'add');
             });
         });
 
         document.querySelectorAll('#foro-mensajes .dislike-respuesta-btn').forEach(btn => {
             btn.addEventListener('click', function () {
                 const respuestaId = parseInt(this.dataset.id);
-                gestionarLikeDislikeRespuesta(respuestaId, 'dislike', 'add');
+                gestionarLikeDislikeRespuesta(this, respuestaId, 'dislike', 'add');
             });
         });
     }
@@ -257,7 +262,6 @@ document.addEventListener('DOMContentLoaded', function () {
             .catch(() => alert(`Error de comunicación con el servidor al ${accion}.`));
     }
 
-    // NUEVO: función para likes/dislikes en respuestas
     function gestionarLikeDislikeRespuesta(respuestaId, accion, tipo) {
         fetch('../../../backend/src/foro/gestionar_like_dislike_respuesta.php', {
             method: 'POST',
@@ -266,8 +270,16 @@ document.addEventListener('DOMContentLoaded', function () {
         })
             .then(response => response.json())
             .then(data => {
-                if (data.success || data.info) {
-                    mostrarHilos();
+                if (data.success) {
+                    const respuestaElement = document.querySelector(`.like-respuesta-btn[data-id="${respuestaId}"]`)?.closest('.respuesta');
+                    if (respuestaElement) {
+                        const likesSpan = respuestaElement.querySelector('.likes-respuesta-count');
+                        const dislikesSpan = respuestaElement.querySelector('.dislikes-respuesta-count');
+                        if (likesSpan) likesSpan.textContent = data.likes;
+                        if (dislikesSpan) dislikesSpan.textContent = data.dislikes;
+                    }
+                } else if (data.info) {
+                    alert(data.info);
                 } else {
                     alert(data.error || `Error al ${accion} en respuesta.`);
                 }
