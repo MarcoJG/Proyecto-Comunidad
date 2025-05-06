@@ -57,6 +57,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
         // LÍNEA AÑADIDA: mostrar contenido del hilo
         const contenidoElemento = hiloDiv.querySelector('.hilo-contenido-texto');
+        console.log(contenidoElemento);
         if (contenidoElemento) contenidoElemento.innerHTML = hilo.contenido;
 
         accionesAdmin.style.display = 'none';
