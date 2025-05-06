@@ -57,9 +57,9 @@ document.addEventListener('DOMContentLoaded', function () {
 
         // LÍNEA AÑADIDA: mostrar contenido del hilo
         const contenidoElemento = hiloDiv.querySelector('.hilo-contenido-texto');
-        console.log(contenidoElemento);
         if (contenidoElemento) contenidoElemento.innerHTML = hilo.contenido;
-
+        console.log("Contenido recibido:", hilo.contenido);
+        console.log("Objeto hilo completo:", hilo);
         accionesAdmin.style.display = 'none';
         if (borrarBtn) {
             borrarBtn.dataset.id = hilo.id;
@@ -331,6 +331,6 @@ document.addEventListener('DOMContentLoaded', function () {
             hour: '2-digit', minute: '2-digit'
         });
     }
-
+    
     mostrarHilos();
 });
