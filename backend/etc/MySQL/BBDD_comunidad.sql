@@ -172,18 +172,15 @@ VALUES
 (2, 'Presidente Ejemplo', 'presidente@comunidad.com', 'presi1', '$2y$10$w3C.OpqLs.I5ESk1b9CjdeiHB8dMe.ERlg875kR1.nSuNhBY4RUs.', 2),  -- Presidente
 (3, 'Vecino Ejemplo', 'vecino@comunidad.com', 'vecino1', '$2y$10$w3C.OpqLs.I5ESk1b9CjdeiHB8dMe.ERlg875kR1.nSuNhBY4RUs.', 3);  -- Vecino
 --LA CONTRASEÑA PARA TODOS ES: 1234
-CREATE TABLE likes_respuesta (
-    id_like INT AUTO_INCREMENT PRIMARY KEY,
+CREATE TABLE likes_respuestas (
+    id INT AUTO_INCREMENT PRIMARY KEY,
     id_respuesta INT NOT NULL,
     id_usuario INT NOT NULL,
-    UNIQUE (id_respuesta, id_usuario)
-);
-
-CREATE TABLE dislikes_respuesta (
-    id_dislike INT AUTO_INCREMENT PRIMARY KEY,
-    id_respuesta INT NOT NULL,
-    id_usuario INT NOT NULL,
-    UNIQUE (id_respuesta, id_usuario)
+    tipo ENUM('like', 'dislike') NOT NULL,
+    fecha TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    UNIQUE (id_respuesta, id_usuario),
+    FOREIGN KEY (id_respuesta) REFERENCES respuesta(id_respuesta) ON DELETE CASCADE,
+    FOREIGN KEY (id_usuario) REFERENCES usuarios(id_usuario) ON DELETE CASCADE
 );
 
 INSERT INTO eventos (titulo, descripcion, fecha, id_usuario)
