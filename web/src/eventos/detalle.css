@@ -13,6 +13,7 @@ body.fondo-cuerpo {
     max-width: 900px;
     margin: 0 auto;
     padding: 60px 20px;
+    padding-top: 220px; /* Para dejar espacio al header si está fijo */
 }
 
 .evento-header {

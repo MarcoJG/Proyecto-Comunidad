@@ -41,7 +41,7 @@ if (!isset($_SESSION["nombre_rol"]) || $_SESSION["nombre_rol"] !== "Admin") {
 
             <!-- Noticias Actuales -->
             <section class="contenedor proximos-noticia">
-                <h2 class="titulo-noticia">
+                <h2 class="titulo-noticias">
                     Noticias Actuales
                 </h2>
                 <p class="subtitulo">Consulta todos las noticias de nuestra comunidad aquí</p>
@@ -59,7 +59,7 @@ if (!isset($_SESSION["nombre_rol"]) || $_SESSION["nombre_rol"] !== "Admin") {
         <section class="contenedor-principal">
             <!--  Noticias Pasadas -->
             <section class="contenedor proximos-noticia">
-                <h2 class="titulo-noticia">Noticias Pasadas</h2>
+                <h2 class="titulo-noticias">Noticias Pasadas</h2>
 
                 <?php
 
@@ -69,7 +69,9 @@ if (!isset($_SESSION["nombre_rol"]) || $_SESSION["nombre_rol"] !== "Admin") {
         </section>
 
     </main>
-    <!-- Aquí irá el footer -->
+    <footer> 
+        <iframe src="../footer/FOOTER.html" frameborder="0" width="100%" height="300px"></iframe> 
+    </footer>
 
 </body>
 

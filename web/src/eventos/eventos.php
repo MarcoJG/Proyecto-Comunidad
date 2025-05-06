@@ -69,8 +69,10 @@ if (!isset($_SESSION["nombre_rol"]) || $_SESSION["nombre_rol"] !== "Admin") {
         </section>
 
     </main>
-    <!-- Aquí irá el footer -->
-
+    
+    <footer> 
+        <iframe src="../footer/FOOTER.html" frameborder="0" width="100%" height="300px"></iframe> 
+    </footer>
 </body>
 
 </html>

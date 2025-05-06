@@ -36,7 +36,7 @@ $usuarioEsAdmin = (isset($_SESSION["nombre_rol"]) && $_SESSION["nombre_rol"] ===
 
             <!-- Próximas Noticias -->
             <section class="contenedor proximos-noticias">
-                <h2 class="titulo-noticia">Noticias Actuales</h2>
+                <h2 class="titulo-noticias">Noticias actuales</h2>
                 <p class="subtitulo">Consulta todos las noticias de nuestra comunidad aquí</p>
                 <?php include '../../../backend/src/noticias/noticias_actuales.php'; ?>
             </section>
@@ -45,11 +45,13 @@ $usuarioEsAdmin = (isset($_SESSION["nombre_rol"]) && $_SESSION["nombre_rol"] ===
         <section class="contenedor-principal">
             <!-- Noticias pasadas -->
             <section class="contenedor proximos-noticias">
-                <h2 class="titulo-noticia">Noticias pasadas</h2>
+                <h2 class="titulo-noticias">Noticias pasadas</h2>
                 <?php include '../../../backend/src/noticias/noticias_pasadas.php'; ?>
             </section>
         </section>
     </main>
-
+    <footer> 
+        <iframe src="../footer/FOOTER.html" frameborder="0" width="100%" height="300px"></iframe> 
+    </footer>
 </body>
 </html>
