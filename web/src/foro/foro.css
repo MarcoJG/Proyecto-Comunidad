@@ -70,9 +70,10 @@ main {
     background-color: #c9302c;
 }
 
-.hilo-contenido p {
+.hilo-contenido-texto {
     color: #333;
     line-height: 1.6;
+    font-size: 1em;
 }
 
 .hilo-interacciones {

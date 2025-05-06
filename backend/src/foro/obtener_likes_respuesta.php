@@ -1,21 +1,18 @@
 <?php
-require_once '../config.php';
-require_once '../utils/sesion.php';
-require_once '../db/conexion.php';
+require_once '../conexion_BBDD/conexion_db_pm.php';
 
-if (!isset($_GET['id_respuesta'])) {
-    echo json_encode(['error' => 'ID de respuesta no proporcionado']);
-    exit;
+$sql = "SELECT id, likes, dislikes FROM respuestas";
+$stmt = $conn->prepare($sql);
+$stmt->execute();
+$resultado = $stmt->get_result();
+
+$respuestas = [];
+while ($row = $resultado->fetch_assoc()) {
+    $respuestas[$row['id']] = [
+        'likes' => (int)$row['likes'],
+        'dislikes' => (int)$row['dislikes']
+    ];
 }
 
-$id_respuesta = intval($_GET['id_respuesta']);
-
-try {
-    $stmt = $pdo->prepare("SELECT COUNT(*) AS likes FROM likes_respuestas WHERE id_respuesta = ? AND tipo = 'like'");
-    $stmt->execute([$id_respuesta]);
-    $likes = $stmt->fetch(PDO::FETCH_ASSOC)['likes'];
-
-    echo json_encode(['likes' => intval($likes)]);
-} catch (PDOException $e) {
-    echo json_encode(['error' => 'Error al obtener likes de la respuesta.']);
-}
+header('Content-Type: application/json');
+echo json_encode($respuestas);
