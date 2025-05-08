@@ -20,17 +20,24 @@
             include $_SERVER['DOCUMENT_ROOT'] . $basePath . 'web/src/header/cabecera.php';
         ?>
     </header>
-    <main id="foro-content">
-        <h2>Foro de la Comunidad</h2>
-        <div id="foro-mensajes"></div>
-        <div id="foro-nuevo-hilo">
-            <h3>Crear un nuevo hilo</h3>
-            <input type="text" id="nuevo-hilo-titulo" placeholder="Título del hilo">
-            <textarea id="nuevo-hilo-contenido" placeholder="Escribe tu mensaje"></textarea>
-            <button id="enviar-hilo">Enviar</button>
+    
+<main class="foro-main">
+    <div class="foro-principal">
+            
+        <div class="foro-header">
+            <h2>Foro de la Comunidad</h2>
+            <p>Bienvenido al foro de la comunidad. Aquí puedes discutir, hacer preguntas y compartir información con otros miembros.</p>
         </div>
-    </main>
-
+        <div id="foro-content">
+            <div id="foro-nuevo-hilo">
+                <h3>Crear un nuevo hilo</h3>
+                <input type="text" id="nuevo-hilo-titulo" placeholder="Título del hilo">
+                <textarea id="nuevo-hilo-contenido" placeholder="Escribe tu mensaje"></textarea>
+                <button id="enviar-hilo">Enviar</button>
+            </div>
+            <div id="foro-mensajes"></div>
+        </div>
+    </div>
     <!-- Templates -->
     <template id="hilo-template">
         <div class="hilo-foro">
@@ -79,6 +86,7 @@
             </div>
         </div>
     </template>
+</main>    
     <footer> 
         <iframe src="../footer/FOOTER.html" frameborder="0" width="100%" height="300px"></iframe> 
     </footer>
