@@ -32,47 +32,47 @@ if (!isset($_SESSION["nombre_rol"]) || $_SESSION["nombre_rol"] !== "Admin") {
 
     <?php if ($usuarioEsAdmin): ?>  
         <div style="text-align: right; margin: 20px;">
-            <a href="crear_evento.php" class="boton-evento" style="background-color: #243D51; color: white; padding: 10px 20px; text-decoration: none; border-radius: 5px;">
-                Crear evento
+            <a href="crear_noticia.php" class="boton-noticia" style="background-color: #243D51; color: white; padding: 10px 20px; text-decoration: none; border-radius: 5px;">
+                Crear noticia
             </a>
         </div>
         <?php endif;?>
         <section class="contenedor-principal">
 
-            <!-- Próximos Eventos -->
-            <section class="contenedor proximos-eventos">
-                <h2 class="titulo-eventos">
-                    Próximos eventos
+            <!-- Noticias Actuales -->
+            <section class="contenedor proximos-noticia">
+                <h2 class="titulo-noticias">
+                    Noticias Actuales
                 </h2>
-                <p class="subtitulo">Consulta todos los eventos de nuestra comunidad aquí</p>
+                <p class="subtitulo">Consulta todos las noticias de nuestra comunidad aquí</p>
 
                 <?php
-                /* Incluimos la lógica específica para eventos futuros desde un archivo concreto (eventos_futuros.php)
+                /* Incluimos la lógica específica para noticias actuales desde un archivo concreto (noticias_actuales.php)
                  Esto responde al principio de responsabilidad única (SRP) del modelo SOLID,
-                 manteniendo separada la lógica de eventos futuros y pasados para facilitar el mantenimiento,
-                 pruebas unitarias e independencia de cambios. Lo mismo hacemos para eventos_pasados.php */
-                include '../../../backend/src/eventos/eventos_futuros.php';
+                 manteniendo separada la lógica de noticias actuales y pasados para facilitar el mantenimiento,
+                 pruebas unitarias e independencia de cambios. Lo mismo hacemos para noticias_pasadas.php */
+                include '../../../backend/src/noticias/noticias_actuales.php';
                 ?>
             </section>
         </section>
 
         <section class="contenedor-principal">
-            <!--  Eventos pasados -->
-            <section class="contenedor proximos-eventos">
-                <h2 class="titulo-eventos">Eventos pasados</h2>
+            <!--  Noticias Pasadas -->
+            <section class="contenedor proximos-noticia">
+                <h2 class="titulo-noticias">Noticias Pasadas</h2>
 
                 <?php
 
-                include '../../../backend/src/eventos/eventos_pasados.php';
+                include '../../../backend/src/noticias/noticias_pasadas.php';
                 ?>
             </section>
         </section>
 
     </main>
-    
     <footer> 
         <iframe src="../footer/FOOTER.html" frameborder="0" width="100%" height="300px"></iframe> 
     </footer>
+
 </body>
 
 </html>
