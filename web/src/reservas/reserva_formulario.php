@@ -1,9 +1,10 @@
 <?php
-// session_start();
-// if (!isset($_SESSION['usuario'])) {
-//     header('Location: login.php');
-//     exit;
-// }
+session_start();
+
+if (!isset($_SESSION['usuario'])) {
+    header('Location: login.php');
+    exit;
+}
 
 $zona = isset($_GET['zona']) ? htmlspecialchars($_GET['zona']) : 'Zona desconocida';
 ?> 

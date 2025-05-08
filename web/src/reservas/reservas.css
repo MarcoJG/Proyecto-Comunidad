@@ -30,8 +30,6 @@ main {
 }
 
 
-
-
 /* Página de reserva */
 .formulario-reserva {
     max-width: 500px;
@@ -65,7 +63,6 @@ input[type="date"],
 select,
 button {
     padding: 10px;
-    /* Elimino el tamaño de fuente que era lo que generaba un cambio en el boton del login */
     border: 1px solid #ddd;
     border-radius: 0px;
     width: 100%;

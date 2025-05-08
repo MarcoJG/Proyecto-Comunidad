@@ -45,7 +45,7 @@
                 </div>
             </div>
             <div class="hilo-contenido">
-                <p class="hilo-contenido-texto"></p>
+                <div class="hilo-contenido-texto"></div>
             </div>
             <div class="hilo-interacciones">
                 <button class="like-btn" data-id=""><i class="fa fa-thumbs-up"></i>

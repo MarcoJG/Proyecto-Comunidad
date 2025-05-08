@@ -1,7 +1,5 @@
 <?php
-require_once '../config.php';
-require_once '../utils/sesion.php';
-require_once '../db/conexion.php';
+require_once '../conexion_BBDD/conexion_db_pm.php';
 
 if (!isset($_GET['id_respuesta'])) {
     echo json_encode(['error' => 'ID de respuesta no proporcionado']);
