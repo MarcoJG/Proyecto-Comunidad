@@ -55,11 +55,9 @@ document.addEventListener('DOMContentLoaded', function () {
         likesCount.textContent = hilo.likes || 0;
         dislikesCount.textContent = hilo.dislikes || 0;
 
-        // LÍNEA AÑADIDA: mostrar contenido del hilo
         const contenidoElemento = hiloDiv.querySelector('.hilo-contenido-texto');
         if (contenidoElemento) contenidoElemento.innerHTML = hilo.contenido;
-        console.log("Contenido recibido:", hilo.contenido);
-        console.log("Objeto hilo completo:", hilo);
+
         accionesAdmin.style.display = 'none';
         if (borrarBtn) {
             borrarBtn.dataset.id = hilo.id;
@@ -90,7 +88,6 @@ document.addEventListener('DOMContentLoaded', function () {
                 respuestaContenido.textContent = respuesta.contenido;
             }
 
-            // NUEVO: Like/dislike en respuestas
             const respuestaId = respuesta.id;
             const respuestaContainer = respuestaDiv.querySelector('.respuesta');
             const likeRespuestaBtn = respuestaDiv.querySelector('.like-respuesta-btn');
@@ -204,18 +201,16 @@ document.addEventListener('DOMContentLoaded', function () {
             });
         });
 
-        // MODIFICADO: eventos like/dislike en respuestas
+        // ACTUALIZADO: pasar `this` al gestor
         document.querySelectorAll('#foro-mensajes .like-respuesta-btn').forEach(btn => {
             btn.addEventListener('click', function () {
-                const respuestaId = parseInt(this.dataset.id);
-                gestionarLikeDislikeRespuesta(this, respuestaId, 'like', 'add');
+                gestionarLikeDislikeRespuesta(this, 'like', 'add');
             });
         });
 
         document.querySelectorAll('#foro-mensajes .dislike-respuesta-btn').forEach(btn => {
             btn.addEventListener('click', function () {
-                const respuestaId = parseInt(this.dataset.id);
-                gestionarLikeDislikeRespuesta(this, respuestaId, 'dislike', 'add');
+                gestionarLikeDislikeRespuesta(this, 'dislike', 'add');
             });
         });
     }
@@ -263,7 +258,8 @@ document.addEventListener('DOMContentLoaded', function () {
             .catch(() => alert(`Error de comunicación con el servidor al ${accion}.`));
     }
 
-    function gestionarLikeDislikeRespuesta(respuestaId, accion, tipo) {
+    function gestionarLikeDislikeRespuesta(boton, accion, tipo) {
+        const respuestaId = boton.getAttribute("data-id");
         fetch('../../../backend/src/foro/gestionar_like_dislike_respuesta.php', {
             method: 'POST',
             headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
@@ -272,7 +268,7 @@ document.addEventListener('DOMContentLoaded', function () {
             .then(response => response.json())
             .then(data => {
                 if (data.success) {
-                    const respuestaElement = document.querySelector(`.like-respuesta-btn[data-id="${respuestaId}"]`)?.closest('.respuesta');
+                    const respuestaElement = boton.closest('.respuesta');
                     if (respuestaElement) {
                         const likesSpan = respuestaElement.querySelector('.likes-respuesta-count');
                         const dislikesSpan = respuestaElement.querySelector('.dislikes-respuesta-count');
@@ -331,6 +327,6 @@ document.addEventListener('DOMContentLoaded', function () {
             hour: '2-digit', minute: '2-digit'
         });
     }
-    
+
     mostrarHilos();
 });

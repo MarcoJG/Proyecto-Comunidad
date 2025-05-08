@@ -1,16 +1,11 @@
--- Crear base de datos si no existe
 CREATE DATABASE IF NOT EXISTS proyecto_comunidad;
-
--- Usar la base de datos
 USE proyecto_comunidad;
 
--- Crear tabla de roles
 CREATE TABLE IF NOT EXISTS roles (
     id_roles INT AUTO_INCREMENT PRIMARY KEY,
     nombre VARCHAR(100) NOT NULL
 );
 
--- Crear tabla de usuarios
 CREATE TABLE IF NOT EXISTS usuarios (
     id_usuario INT AUTO_INCREMENT PRIMARY KEY,
     nombre VARCHAR(100) NOT NULL,
@@ -21,7 +16,6 @@ CREATE TABLE IF NOT EXISTS usuarios (
     CONSTRAINT fk_usuarios_roles FOREIGN KEY(id_roles) REFERENCES roles(id_roles)
 );
 
--- Crear tabla de noticias
 CREATE TABLE IF NOT EXISTS noticias (
     id_noticias INT AUTO_INCREMENT PRIMARY KEY,
     nombre_noticia VARCHAR(100) NOT NULL,
@@ -33,7 +27,6 @@ CREATE TABLE IF NOT EXISTS noticias (
     CONSTRAINT fk_noticias_usuario FOREIGN KEY(id_usuario) REFERENCES usuarios(id_usuario)
 );
 
--- Crear tabla de eventos
 CREATE TABLE IF NOT EXISTS eventos (
     id_evento INT AUTO_INCREMENT PRIMARY KEY,
     titulo VARCHAR(100) NOT NULL,
@@ -43,7 +36,6 @@ CREATE TABLE IF NOT EXISTS eventos (
     CONSTRAINT fk_eventos_usuarios FOREIGN KEY (id_usuario) REFERENCES usuarios(id_usuario)
 );
 
--- Crear tabla de votación
 CREATE TABLE IF NOT EXISTS votacion (
     id_votacion INT AUTO_INCREMENT PRIMARY KEY,
     descripcion VARCHAR(255) NOT NULL,
@@ -53,7 +45,6 @@ CREATE TABLE IF NOT EXISTS votacion (
     CONSTRAINT fk_votacion_usuarios FOREIGN KEY (id_usuario) REFERENCES usuarios(id_usuario)
 );
 
--- Crear tabla de votos
 CREATE TABLE IF NOT EXISTS voto (
     id_voto INT AUTO_INCREMENT PRIMARY KEY,
     id_usuario INT NOT NULL,
@@ -63,7 +54,6 @@ CREATE TABLE IF NOT EXISTS voto (
     CONSTRAINT fk_voto_votacion FOREIGN KEY(id_votacion) REFERENCES votacion(id_votacion)
 );
 
--- Crear tabla de baneos
 CREATE TABLE IF NOT EXISTS baneo (
     id_baneo INT AUTO_INCREMENT PRIMARY KEY,
     motivo VARCHAR(255) NOT NULL,
@@ -73,7 +63,6 @@ CREATE TABLE IF NOT EXISTS baneo (
     CONSTRAINT fk_baneo_usuarios FOREIGN KEY(id_usuario) REFERENCES usuarios(id_usuario)
 );
 
--- Crear tabla de hilos
 CREATE TABLE IF NOT EXISTS hilo (
     id_hilo INT AUTO_INCREMENT PRIMARY KEY,
     titulo VARCHAR(100) NOT NULL,
@@ -83,7 +72,6 @@ CREATE TABLE IF NOT EXISTS hilo (
     CONSTRAINT fk_hilo_usuarios FOREIGN KEY(id_usuario) REFERENCES usuarios(id_usuario)
 );
 
--- Crear tabla de respuestas
 CREATE TABLE IF NOT EXISTS respuesta (
     id_respuesta INT AUTO_INCREMENT PRIMARY KEY,
     contenido VARCHAR(255) NOT NULL,
@@ -93,18 +81,15 @@ CREATE TABLE IF NOT EXISTS respuesta (
     CONSTRAINT fk_respuesta_usuarios FOREIGN KEY(id_usuario) REFERENCES usuarios(id_usuario)
 );
 
--- Crear tabla de foro
 CREATE TABLE foro (
     id_foro INT AUTO_INCREMENT PRIMARY KEY,
     nombre VARCHAR(100)
 );
 
--- Relacionar hilos con foros
 ALTER TABLE hilo
     ADD CONSTRAINT fk_hilo_foro
     FOREIGN KEY (id_foro) REFERENCES foro(id_foro);
 
--- Crear tabla de reservas de zonas comunes
 CREATE TABLE IF NOT EXISTS reserva_zona_comun (
     id_reserva INT AUTO_INCREMENT PRIMARY KEY,
     fecha_reserva DATETIME NOT NULL,
@@ -113,7 +98,6 @@ CREATE TABLE IF NOT EXISTS reserva_zona_comun (
     CONSTRAINT fk_reserva_zona_comun_usuarios FOREIGN KEY(id_usuario) REFERENCES usuarios(id_usuario)
 );
 
--- Crear tabla de incidencias
 CREATE TABLE IF NOT EXISTS incidencia (
     id_incidencia INT AUTO_INCREMENT PRIMARY KEY,
     descripcion VARCHAR(255) NOT NULL,
@@ -123,8 +107,6 @@ CREATE TABLE IF NOT EXISTS incidencia (
     CONSTRAINT fk_incidencia_usuarios FOREIGN KEY(id_usuario) REFERENCES usuarios(id_usuario)
 );
 
--- NUEVO CONTENIDO!!! Actualizado 24/04/2025
--- Crear tabla de likes en hilos
 CREATE TABLE IF NOT EXISTS likes_hilo (
     id_like INT AUTO_INCREMENT PRIMARY KEY,
     id_hilo INT NOT NULL,
@@ -135,7 +117,6 @@ CREATE TABLE IF NOT EXISTS likes_hilo (
     FOREIGN KEY (id_usuario) REFERENCES usuarios(id_usuario)
 );
 
--- Crear tabla de dislikes en hilos
 CREATE TABLE IF NOT EXISTS dislikes_hilo (
     id_dislike INT AUTO_INCREMENT PRIMARY KEY,
     id_hilo INT NOT NULL,
@@ -145,9 +126,6 @@ CREATE TABLE IF NOT EXISTS dislikes_hilo (
     FOREIGN KEY (id_hilo) REFERENCES hilo(id_hilo),
     FOREIGN KEY (id_usuario) REFERENCES usuarios(id_usuario)
 );
-
--- NUEVO CONTENIDO!!! Actualizado 24/04/2025
--- Añadir columnas a la tabla usuarios: baneado y fecha_fin_timeout
 ALTER TABLE usuarios
 ADD COLUMN baneado BOOLEAN DEFAULT FALSE;
 
@@ -155,8 +133,6 @@ ALTER TABLE usuarios
 ADD COLUMN fecha_fin_timeout DATETIME NULL;
 
 INSERT INTO roles (id_roles , nombre) VALUES (1, 'Admin'), (2, 'Presidente'), (3, 'Vecino');
--- Insertar eventos asignados a John Doe (id_usuario = 1)
-
 
 ALTER TABLE hilo
 ADD COLUMN contenido VARCHAR(255) NOT NULL;
@@ -171,7 +147,7 @@ VALUES
 (1, 'Admin Ejemplo', 'admin@comunidad.com', 'admin1', '$2y$10$w3C.OpqLs.I5ESk1b9CjdeiHB8dMe.ERlg875kR1.nSuNhBY4RUs.', 1),  -- Administrador
 (2, 'Presidente Ejemplo', 'presidente@comunidad.com', 'presi1', '$2y$10$w3C.OpqLs.I5ESk1b9CjdeiHB8dMe.ERlg875kR1.nSuNhBY4RUs.', 2),  -- Presidente
 (3, 'Vecino Ejemplo', 'vecino@comunidad.com', 'vecino1', '$2y$10$w3C.OpqLs.I5ESk1b9CjdeiHB8dMe.ERlg875kR1.nSuNhBY4RUs.', 3);  -- Vecino
---LA CONTRASEÑA PARA TODOS ES: 1234
+
 CREATE TABLE likes_respuestas (
     id INT AUTO_INCREMENT PRIMARY KEY,
     id_respuesta INT NOT NULL,
