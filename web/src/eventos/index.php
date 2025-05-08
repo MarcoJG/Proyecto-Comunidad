@@ -54,6 +54,8 @@ $usuarioEsAdmin = (isset($_SESSION["nombre_rol"]) && $_SESSION["nombre_rol"] ===
         </section>
     </section>
     </main>
-
+    <footer> 
+        <iframe src="../footer/FOOTER.html" frameborder="0" width="100%" height="300px"></iframe> 
+    </footer>
 </body>
 </html>

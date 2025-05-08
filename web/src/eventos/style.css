@@ -21,7 +21,11 @@ header {
 
 main {
     padding: 20px;
+<<<<<<< HEAD
+    padding-top: 160px;
+=======
     padding-top: 180px;  
+>>>>>>> da055e5bd1ae5e8869e2180e15120a7b45729fd1
 }
 
 .contenedor-principal {
@@ -96,3 +100,20 @@ main {
     margin-top: 5px;
 }
 
+<<<<<<< HEAD
+.boton-evento {
+    background-color: #243D51;
+    color: #fff;
+    padding: 10px 20px;
+    text-decoration: none;
+    border: none;
+    border-radius: 0px;
+    cursor: pointer;
+    font-size: 13px;
+}
+
+.boton-evento:hover {
+    background-color: #1c2f3d;
+}
+=======
+>>>>>>> da055e5bd1ae5e8869e2180e15120a7b45729fd1
