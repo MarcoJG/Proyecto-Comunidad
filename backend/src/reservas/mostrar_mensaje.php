@@ -11,7 +11,7 @@ $fecha = $_SESSION['mensaje_reserva']['fecha'];
 $turno = $_SESSION['mensaje_reserva']['turno'];
 $error = $_SESSION['mensaje_reserva']['error'] ?? null;
 
-// Convertir la fecha a formato día/mes/año
+// Formato día/mes/año
 $fecha_formateada = date('d/m/Y', strtotime($fecha));
 
 // Limpiar sesión
@@ -55,7 +55,7 @@ unset($_SESSION['mensaje_reserva']);
 <body>
     <main>
         <div class="mensaje-contenedor" id="mensaje">
-            <!-- Mensaje se inyecta aquí con JavaScript -->
+           
         </div>
     </main>
 </body>

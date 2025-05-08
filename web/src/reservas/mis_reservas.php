@@ -3,14 +3,13 @@ session_start();
 require_once __DIR__ . '/../../../backend/src/conexion_BBDD/conexion_db_pm.php';
 
 
-// Verifica si el usuario está autenticado
 if (!isset($_SESSION['usuario'])) {
-    header("Location: /Proyecto-Comunidad/web/public/login.php"); // Redirige si no está logueado
+    header("Location: /Proyecto-Comunidad/web/public/login.php"); 
     exit;
 }
 
 $usuario = $_SESSION['usuario'];
-$id_usuario = $_SESSION['id_usuario'];  // Usamos el ID del usuario para obtener las reservas
+$id_usuario = $_SESSION['id_usuario'];  
 
 // Consultar las reservas del usuario
 try {
@@ -25,7 +24,7 @@ try {
     die("Error al obtener las reservas: " . $e->getMessage());
 }
 
-// Mostrar mensaje de éxito si la reserva se ha cancelado
+// Mensaje de éxito si la reserva se ha cancelado
 if (isset($_GET['success']) && $_GET['success'] == 2) {
     echo '<p>Reserva cancelada exitosamente.</p>';
 }
@@ -67,13 +66,12 @@ if (isset($_GET['success']) && $_GET['success'] == 2) {
                         <td><?php echo htmlspecialchars($reserva['zona']); ?></td>
                         <td>
                             <?php 
-                            // Reorganizamos la fecha como día, mes y año
+                            // Fecha como día, mes y año
                             $fechaReserva = new DateTime($reserva['fecha_reserva']);
                             echo $fechaReserva->format('d-m-Y H:i');
                             ?>
                         </td>
                         <td>
-                            <!-- Estilos para el enlace "Cancelar Reserva" -->
                             <a href="/Proyecto-Comunidad/web/src/reservas/cancelar_reserva.php?id=<?php echo $reserva['id_reserva']; ?>" class="cancelar-reserva">Cancelar reserva</a>
                         </td>
                     </tr>
@@ -82,7 +80,6 @@ if (isset($_GET['success']) && $_GET['success'] == 2) {
         </table>
     <?php endif; ?>
 
-    <!-- Contenedor para centrar el botón "Volver a Reservas" -->
     <div class="volver-centro">
         <a href="/Proyecto-Comunidad/web/src/reservas/reservas.php">
             <button class="btn-volver">Volver a Reservas</button>

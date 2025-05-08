@@ -23,7 +23,6 @@ main {
     padding: 0;
 }
 
-
 .mensaje-contenedor {
     max-width: 500px;
     width: 100%;
@@ -39,7 +38,6 @@ main {
     align-items: center; 
 }
 
-
 .mensaje-contenedor strong {
     color: #243D51;
     font-weight: bold;
@@ -50,7 +48,6 @@ main {
     font-size: 18px;
     line-height: 1.5;
 }
-
 
 .mensaje-contenedor button {
     padding: 10px 20px;

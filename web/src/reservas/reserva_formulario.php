@@ -16,7 +16,7 @@ $zona = isset($_GET['zona']) ? htmlspecialchars($_GET['zona']) : 'Zona desconoci
     <title>Reservar <?php echo $zona; ?></title>
     <link rel="stylesheet" href="reservas.css">
 
-    <!-- Flatpickr para calendario -->
+    <!-- Flatpickr calendario -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
     <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
     <script src="https://cdn.jsdelivr.net/npm/flatpickr/dist/l10n/es.js"></script>
@@ -54,7 +54,7 @@ $zona = isset($_GET['zona']) ? htmlspecialchars($_GET['zona']) : 'Zona desconoci
 document.addEventListener("DOMContentLoaded", function () {
     const zona = "<?php echo $zona; ?>";
 
-    // Cargar fechas deshabilitadas
+    // Fechas deshabilitadas
     fetch(`../../../backend/src/reservas/obtener_fechas_completas.php?zona=${encodeURIComponent(zona)}`)
         .then(response => response.json())
         .then(fechasCompletas => {

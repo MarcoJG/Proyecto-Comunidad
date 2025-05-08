@@ -11,7 +11,7 @@ $turnos = ['09:00:00', '16:00:00'];
 $fechasCompletas = [];
 
 try {
-    // Obtener aforo máximo
+    // Aforo máximo
     $stmt_aforo = $pdo->prepare("SELECT aforo_maximo FROM aforo_zona WHERE zona = ?");
     $stmt_aforo->execute([$zona]);
     $aforo = $stmt_aforo->fetchColumn();
