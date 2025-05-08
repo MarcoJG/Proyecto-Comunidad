@@ -11,6 +11,7 @@ $stmt = $pdo->query("
     SELECT
         h.id_hilo AS id,
         h.titulo,
+        h.contenido,
         h.fecha,
         u.usuario AS autor,
         (SELECT COUNT(*) FROM respuesta WHERE id_hilo = h.id_hilo) AS respuestas_count,
@@ -26,16 +27,26 @@ $hilos = $stmt->fetchAll();
 // Para cada hilo, obtener sus respuestas
 foreach ($hilos as &$hilo) {
     $stmtRespuestas = $pdo->prepare("
-        SELECT
-            r.id_respuesta AS id,
-            r.contenido,
-            r.fecha,
-            u.usuario AS autor
-        FROM respuesta r
-        JOIN usuarios u ON r.id_usuario = u.id_usuario
-        WHERE r.id_hilo = :id_hilo
-        ORDER BY r.fecha ASC
-    ");
+    SELECT
+        r.id_respuesta AS id,
+        r.contenido,
+        r.fecha,
+        u.usuario AS autor,
+        (
+            SELECT COUNT(*) 
+            FROM likes_respuestas 
+            WHERE id_respuesta = r.id_respuesta AND tipo = 'LIKE'
+        ) AS likes,
+        (
+            SELECT COUNT(*) 
+            FROM likes_respuestas 
+            WHERE id_respuesta = r.id_respuesta AND tipo = 'DISLIKE'
+        ) AS dislikes
+    FROM respuesta r
+    JOIN usuarios u ON r.id_usuario = u.id_usuario
+    WHERE r.id_hilo = :id_hilo
+    ORDER BY r.fecha ASC
+");
     $stmtRespuestas->bindParam(':id_hilo', $hilo['id']);
     $stmtRespuestas->execute();
     $hilo['respuestas'] = $stmtRespuestas->fetchAll();
