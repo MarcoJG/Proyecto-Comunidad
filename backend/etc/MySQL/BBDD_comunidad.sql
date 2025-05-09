@@ -33,6 +33,7 @@ CREATE TABLE IF NOT EXISTS eventos (
     descripcion VARCHAR(255) NOT NULL,
     fecha DATE NOT NULL,
     id_usuario INT NOT NULL,
+    es_destacada TINYINT(1) DEFAULT 0,
     CONSTRAINT fk_eventos_usuarios FOREIGN KEY (id_usuario) REFERENCES usuarios(id_usuario)
 );
 
@@ -179,3 +180,5 @@ INSERT INTO aforo_zona (zona, aforo_maximo) VALUES
 ('Gimnasio', 10),
 ('Sala de reuniones', 1),
 ('Barbacoa', 2);
+
+ALTER TABLE eventos ADD COLUMN es_destacada TINYINT(1) DEFAULT 0;
