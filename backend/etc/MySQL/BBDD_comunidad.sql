@@ -142,6 +142,7 @@ ADD COLUMN email_verificado TINYINT(1) DEFAULT 0,
 ADD COLUMN verification_token VARCHAR(255) DEFAULT NULL;
 
 INSERT INTO foro (id_foro, nombre) VALUES (1, 'General');
+
 INSERT INTO usuarios (id_usuario, nombre, correo, usuario, contrasenya, id_roles) 
 VALUES
 (1, 'Admin Ejemplo', 'admin@comunidad.com', 'admin1', '$2y$10$w3C.OpqLs.I5ESk1b9CjdeiHB8dMe.ERlg875kR1.nSuNhBY4RUs.', 1),  -- Administrador
@@ -166,3 +167,15 @@ VALUES
 ('Fiesta de Navidad', 'Celebra con nosotros la fiesta de Navidad de la comunidad.', '2026-12-20', 3),
 ('Junta Extraordinaria', 'Junta extraordinaria para resolver problemas de la comunidad.', '2026-01-22', 3),
 ('Reparación de Fachada', 'Reparación de la fachada del edificio programada para este mes.', '2025-03-17', 3);
+
+CREATE TABLE IF NOT EXISTS aforo_zona (
+    zona VARCHAR(100) PRIMARY KEY,
+    aforo_maximo INT NOT NULL
+);
+
+INSERT INTO aforo_zona (zona, aforo_maximo) VALUES
+('Piscina', 20),
+('Pista de tenis', 1),
+('Gimnasio', 10),
+('Sala de reuniones', 1),
+('Barbacoa', 2);

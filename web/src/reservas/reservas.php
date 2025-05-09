@@ -1,6 +1,5 @@
 <?php
-session_start(); // Solo una vez, al inicio
-
+session_start();
 $usuarioEsAdmin = isset($_SESSION["nombre_rol"]) && $_SESSION["nombre_rol"] === "Admin";
 ?>
 
@@ -15,13 +14,11 @@ $usuarioEsAdmin = isset($_SESSION["nombre_rol"]) && $_SESSION["nombre_rol"] === 
 <body class="fondo-cuerpo">
 
 <?php
-// Mostrar mensaje de éxito si existe en sesión
 if (isset($_SESSION['reserva_success']) && $_SESSION['reserva_success']) {
     echo '<div style="background-color: #d4edda; color: #155724; padding: 15px; margin: 20px auto; border: 1px solid #c3e6cb; border-radius: 5px; width: 80%; text-align: center;">';
     echo '✅ ¡Reserva realizada con éxito!';
     echo '</div>';
 
-    // Eliminar mensaje tras mostrarlo (solo una vez)
     unset($_SESSION['reserva_success']);
 }
 ?>
