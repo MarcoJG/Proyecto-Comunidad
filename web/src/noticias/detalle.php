@@ -18,7 +18,7 @@
 </header>
     <div class="contenedor-principal">
         <?php
-        include '../../../backend/src/eventos/detalle.php';
+        include '../../../backend/src/noticias/detalle.php';
         ?>
     </div>
     <footer> 

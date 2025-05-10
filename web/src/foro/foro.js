@@ -57,9 +57,9 @@ document.addEventListener('DOMContentLoaded', function () {
 
         // LÍNEA AÑADIDA: mostrar contenido del hilo
         const contenidoElemento = hiloDiv.querySelector('.hilo-contenido-texto');
-        console.log(contenidoElemento);
         if (contenidoElemento) contenidoElemento.innerHTML = hilo.contenido;
-
+        console.log("Contenido recibido:", hilo.contenido);
+        console.log("Objeto hilo completo:", hilo);
         accionesAdmin.style.display = 'none';
         if (borrarBtn) {
             borrarBtn.dataset.id = hilo.id;
@@ -208,14 +208,14 @@ document.addEventListener('DOMContentLoaded', function () {
         document.querySelectorAll('#foro-mensajes .like-respuesta-btn').forEach(btn => {
             btn.addEventListener('click', function () {
                 const respuestaId = parseInt(this.dataset.id);
-                gestionarLikeDislikeRespuesta(this, respuestaId, 'like', 'add');
+                gestionarLikeDislikeRespuesta(respuestaId, 'like', 'add');
             });
         });
 
         document.querySelectorAll('#foro-mensajes .dislike-respuesta-btn').forEach(btn => {
             btn.addEventListener('click', function () {
                 const respuestaId = parseInt(this.dataset.id);
-                gestionarLikeDislikeRespuesta(this, respuestaId, 'dislike', 'add');
+                gestionarLikeDislikeRespuesta(respuestaId, 'dislike', 'add');
             });
         });
     }
@@ -331,6 +331,6 @@ document.addEventListener('DOMContentLoaded', function () {
             hour: '2-digit', minute: '2-digit'
         });
     }
-
+    
     mostrarHilos();
 });
