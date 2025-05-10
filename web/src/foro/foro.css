@@ -1,7 +1,7 @@
 /* foro/foro.css */
 main {
     
-    padding-top: 180px;
+    padding-top: 110px;
 }
 
 #foro-content {
@@ -9,10 +9,43 @@ main {
     padding: 25px;
     box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
     border-radius: 0px;
-    width: 90%;
+    width: 100%;
     max-width: 1200px;
-    margin: 40px auto;
-    padding-top: 180px;
+    
+    
+}
+
+.foro-main{
+    align-items: center;
+    display: flex;
+
+}
+
+.foro-principal {
+    display: flex;
+    flex-direction: column; /* Apila los elementos verticalmente */
+    align-items: center; /* Centra los elementos horizontalmente */
+    width: 100%;
+    max-width: 1200px;
+    margin: 20px auto; /* Centra el contenedor en la página */
+    padding: 20px;
+}
+.foro-header {
+    text-align: center; /* Centra el texto dentro del header */
+    margin-bottom: 20px; /* Espacio entre el header y el contenido principal */
+}
+
+.foro-header h2 {
+    color: #243D51;
+    font-weight: 700;
+    margin-bottom: 10px;
+    
+}
+
+.foro-header p {
+    color: #9c907d;
+    margin-bottom: 20px;
+    line-height: 1.6;
 }
 
 #foro-content h2 {
@@ -20,6 +53,7 @@ main {
     font-weight: 700;
     margin-bottom: 20px;
     font-size: 22px;
+    align-items: center;
 }
 
 #foro-mensajes {
@@ -57,7 +91,7 @@ main {
 }
 
 .acciones-admin button {
-    background-color: #d9534f; /* Rojo para acciones administrativas */
+    background-color: #243D51; /* Rojo para acciones administrativas */
     color: white;
     border: none;
     padding: 8px 12px;
@@ -67,7 +101,7 @@ main {
 }
 
 .acciones-admin button:hover {
-    background-color: #c9302c;
+    background-color: #1c2f3d;
 }
 
 .hilo-contenido-texto {
@@ -150,9 +184,11 @@ main {
 
 #foro-nuevo-hilo {
     padding: 15px;
-    background-color: #f9f9f9;
+    background-color: #f8f8f8;
     border-radius: 0px;
     border: 1px solid #e0e0e0;
+    margin-bottom: 20px;
+    box-shadow: 0px 3px 7px rgba(36, 61, 81, 0.712);
 }
 
 #foro-nuevo-hilo h3 {
