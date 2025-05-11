@@ -1,11 +1,9 @@
 <?php
 require_once __DIR__ . '/../../../config.php';
-session_start(); // Asegúrate de que la sesión esté iniciada
+session_start(); 
 
-// Comprobamos si el usuario tiene el rol de Admin
 $usuarioEsAdmin = isset($_SESSION["nombre_rol"]) && $_SESSION["nombre_rol"] === "Admin";
 
-// Mostrar mensaje de éxito si el evento fue eliminado
 if (isset($_GET['mensaje']) && $_GET['mensaje'] === 'eliminado') {
     echo "<p style='color: green; text-align:center; margin-top: 20px;'>Evento eliminado correctamente.</p>";
 }
