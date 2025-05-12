@@ -16,11 +16,21 @@ document.addEventListener('DOMContentLoaded', function () {
                     foroMensajes.innerHTML = '<p class="error-message">Error al cargar los hilos del foro.</p>';
                     return;
                 }
-                hilos = data;
+
+                const { hilos: hilosData, usuario_actual } = data;
+                const idUsuarioActual = usuario_actual.id_usuario;
+                const nombreRol = usuario_actual.nombre_rol;
+
+                const esAdmin = nombreRol === 'Admin' || nombreRol === 'Presidente';
+                const esAutor = (hilo) => hilo.autor_id === idUsuarioActual;
+
+                hilos = hilosData;
+
                 hilos.forEach(hilo => {
-                    const hiloDiv = crearHiloHTML(hilo);
+                    const hiloDiv = crearHiloHTML(hilo, esAdmin, esAutor(hilo));
                     foroMensajes.appendChild(hiloDiv);
                 });
+
                 establecerEventosHilos();
             })
             .catch(() => {
@@ -28,7 +38,7 @@ document.addEventListener('DOMContentLoaded', function () {
             });
     }
 
-    function crearHiloHTML(hilo) {
+    function crearHiloHTML(hilo, esAdmin, esAutor) {
         const hiloDiv = hiloTemplate.content.cloneNode(true);
         const hiloForo = hiloDiv.querySelector('.hilo-foro');
         const hiloTitulo = hiloDiv.querySelector('.hilo-titulo');
@@ -47,7 +57,7 @@ document.addEventListener('DOMContentLoaded', function () {
         const nuevoRespuestaTexto = nuevoRespuestaDiv.querySelector('.respuesta-texto');
         const likeBtn = hiloDiv.querySelector('.like-btn');
         const dislikeBtn = hiloDiv.querySelector('.dislike-btn');
-
+        
         hiloForo.dataset.id = hilo.id;
         hiloTitulo.textContent = hilo.titulo;
         hiloAutor.textContent = hilo.autor;
@@ -58,20 +68,18 @@ document.addEventListener('DOMContentLoaded', function () {
         // LÍNEA AÑADIDA: mostrar contenido del hilo
         const contenidoElemento = hiloDiv.querySelector('.hilo-contenido-texto');
         if (contenidoElemento) contenidoElemento.innerHTML = hilo.contenido;
-        console.log("Contenido recibido:", hilo.contenido);
-        console.log("Objeto hilo completo:", hilo);
-        accionesAdmin.style.display = 'none';
+        accionesAdmin.style.display = esAdmin ? 'flex' : 'none';
         if (borrarBtn) {
             borrarBtn.dataset.id = hilo.id;
-            accionesAdmin.style.display = 'flex';
+            borrarBtn.style.display = (esAdmin || esAutor) ? 'inline-block' : 'none';
         }
         if (bannearBtn) {
             bannearBtn.dataset.autor = hilo.autor;
-            accionesAdmin.style.display = 'flex';
+            bannearBtn.style.display = esAdmin ? 'inline-block' : 'none';
         }
         if (timeoutContainer) {
             timeoutContainer.dataset.autor = hilo.autor;
-            accionesAdmin.style.display = 'flex';
+            timeoutContainer.style.display = esAdmin ? 'inline-block' : 'none';
         }
 
         hilo.respuestas.forEach(respuesta => {

@@ -7,6 +7,9 @@ header('Content-Type: application/json');
 session_start();
 require_once '../conexion_BBDD/conexion_db_pm.php';
 
+$id_usuario_actual = $_SESSION['id_usuario'] ?? null;
+$nombre_rol_actual = $_SESSION['nombre_rol'] ?? null;
+
 $stmt = $pdo->query("
     SELECT
         h.id_hilo AS id,
@@ -14,6 +17,7 @@ $stmt = $pdo->query("
         h.contenido,
         h.fecha,
         u.usuario AS autor,
+        u.id_usuario AS autor_id,
         (SELECT COUNT(*) FROM respuesta WHERE id_hilo = h.id_hilo) AS respuestas_count,
         (SELECT COUNT(*) FROM likes_hilo WHERE id_hilo = h.id_hilo) AS likes,
         (SELECT COUNT(*) FROM dislikes_hilo WHERE id_hilo = h.id_hilo) AS dislikes
@@ -32,6 +36,7 @@ foreach ($hilos as &$hilo) {
         r.contenido,
         r.fecha,
         u.usuario AS autor,
+        u.id_usuario AS autor_id,
         (
             SELECT COUNT(*) 
             FROM likes_respuestas 
@@ -52,4 +57,10 @@ foreach ($hilos as &$hilo) {
     $hilo['respuestas'] = $stmtRespuestas->fetchAll();
 }
 
-echo json_encode($hilos);
+echo json_encode([
+    'hilos' => $hilos,
+    'usuario_actual' => [
+        'id_usuario' => $id_usuario_actual,
+        'nombre_rol' => $nombre_rol_actual
+    ]
+]);
