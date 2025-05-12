@@ -44,11 +44,13 @@
             <div class="hilo-cabecera">
                 <h3 class="hilo-titulo"></h3>
                 <span class="autor">Publicado por <span class="hilo-autor"></span> el <span class="hilo-fecha"></span></span>
-                <div class="acciones-admin" style="display: none; gap: 10px; align-items: center;">
+                <div class="acciones-admin">
                     <button class="borrar-hilo" data-id="">Borrar</button>
                     <button class="bannear-usuario" data-autor="">Bannear</button>
-                    <input type="number" placeholder="Timeout (min)" class="timeout-duration" data-autor="">
-                    <button class="timeout-usuario" data-autor="">Timeout</button>
+                    <div class="timeout-container">
+                        <input type="number" placeholder="Timeout (min)" class="timeout-duration" data-autor="">
+                        <button class="timeout-usuario" data-autor="">Timeout</button>
+                    </div>
                 </div>
             </div>
             <div class="hilo-contenido">

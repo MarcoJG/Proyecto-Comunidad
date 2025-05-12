@@ -1,11 +1,10 @@
 <?php
-ini_set('display_errors', 1);
-ini_set('display_startup_errors', 1);
-error_reporting(E_ALL);
-
 header('Content-Type: application/json');
 session_start();
 require_once '../conexion_BBDD/conexion_db_pm.php';
+
+$id_usuario_actual = $_SESSION['id_usuario'] ?? null;
+$nombre_rol_actual = $_SESSION['nombre_rol'] ?? null;
 
 $stmt = $pdo->query("
     SELECT
@@ -14,6 +13,7 @@ $stmt = $pdo->query("
         h.contenido,
         h.fecha,
         u.usuario AS autor,
+        u.id_usuario AS autor_id,
         (SELECT COUNT(*) FROM respuesta WHERE id_hilo = h.id_hilo) AS respuestas_count,
         (SELECT COUNT(*) FROM likes_hilo WHERE id_hilo = h.id_hilo) AS likes,
         (SELECT COUNT(*) FROM dislikes_hilo WHERE id_hilo = h.id_hilo) AS dislikes
@@ -26,12 +26,14 @@ $hilos = $stmt->fetchAll();
 
 // Para cada hilo, obtener sus respuestas
 foreach ($hilos as &$hilo) {
+    $hilo['es_autor'] = ($hilo['autor_id'] == $id_usuario_actual);
     $stmtRespuestas = $pdo->prepare("
     SELECT
         r.id_respuesta AS id,
         r.contenido,
         r.fecha,
         u.usuario AS autor,
+        u.id_usuario AS autor_id,
         (
             SELECT COUNT(*) 
             FROM likes_respuestas 
@@ -52,4 +54,10 @@ foreach ($hilos as &$hilo) {
     $hilo['respuestas'] = $stmtRespuestas->fetchAll();
 }
 
-echo json_encode($hilos);
+echo json_encode([
+    'hilos' => $hilos,
+    'usuario_actual' => [
+        'id_usuario' => $id_usuario_actual,
+        'nombre_rol' => $nombre_rol_actual
+    ]
+]);
