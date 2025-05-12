@@ -68,10 +68,11 @@ document.addEventListener('DOMContentLoaded', function () {
         // LÍNEA AÑADIDA: mostrar contenido del hilo
         const contenidoElemento = hiloDiv.querySelector('.hilo-contenido-texto');
         if (contenidoElemento) contenidoElemento.innerHTML = hilo.contenido;
-        accionesAdmin.style.display = esAdmin ? 'flex' : 'none';
+        accionesAdmin.style.display = (esAdmin ||esAutor) ? 'flex' : 'none';
         if (borrarBtn) {
             borrarBtn.dataset.id = hilo.id;
-            borrarBtn.style.display = (esAdmin || esAutor) ? 'inline-block' : 'none';
+            console.log('esAutor (para borrar):', esAutor);
+            borrarBtn.style.display = (esAdmin || esAutor) ? 'flex' : 'none';
         }
         if (bannearBtn) {
             bannearBtn.dataset.autor = hilo.autor;

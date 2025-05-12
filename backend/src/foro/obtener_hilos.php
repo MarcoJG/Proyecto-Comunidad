@@ -1,8 +1,4 @@
 <?php
-ini_set('display_errors', 1);
-ini_set('display_startup_errors', 1);
-error_reporting(E_ALL);
-
 header('Content-Type: application/json');
 session_start();
 require_once '../conexion_BBDD/conexion_db_pm.php';
@@ -30,6 +26,7 @@ $hilos = $stmt->fetchAll();
 
 // Para cada hilo, obtener sus respuestas
 foreach ($hilos as &$hilo) {
+    $hilo['es_autor'] = ($hilo['autor_id'] == $id_usuario_actual);
     $stmtRespuestas = $pdo->prepare("
     SELECT
         r.id_respuesta AS id,
