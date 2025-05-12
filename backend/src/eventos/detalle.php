@@ -22,11 +22,45 @@ if (isset($_GET['id'])) {
             </div>
             <div class='descripcion-evento'>
                 <p>" . $evento['descripcion'] . "</p>
-            </div>
-            <form method='POST' action='../../../backend/src/eventos/eliminar_evento.php' onsubmit='return confirm(\"¿Estás seguro de que quieres borrar este evento?\");'>
-                <input type='hidden' name='id_evento' value='$id_evento'>
-                <button type='submit' style='margin-top:20px; background-color:red; color:white; padding:10px 20px; border:none; cursor:pointer;'>Borrar evento</button>
-            </form>";
+
+                    <style>
+                            .btn-borrar img {
+                                width: 20px;
+                                height: 20px;
+                                margin-right: 8px;
+                            }
+                            .btn-borrar .icon-abierto {
+                                display: none;
+                            }
+                            .btn-borrar:hover .icon-cerrado {
+                                display: none;
+                            }
+                            .btn-borrar:hover .icon-abierto {
+                                display: inline;
+                                scale : 1.2;
+                            }
+                            .contenedor-boton {
+                                text-align: right;
+                                margin-top: 10px;
+                            }
+                            .contenedor-boton form {
+                                display: inline-block;
+                            }
+                    </style>
+                <div class='contenedor-boton'>        
+                    <form method='POST' action='../../../backend/src/eventos/eliminar_evento.php' onsubmit='return confirm(\"¿Estás seguro de que quieres borrar este evento?\");'>
+                        <input type='hidden' name='id_evento' value='$id_evento'>
+                        <button type='submit' class='btn-borrar' title='Eliminar evento'
+                            style='margin-top:20px; background-color: #ffffff; color:white; padding:10px 20px; border:none; cursor:pointer; display: flex; align-items: center;'>
+                        
+                            <img src='../../../web/etc/assets/img/basura_cerrada.png' class='icon-cerrado' alt='Papelera cerrada'>
+                                
+                            <img src='../../../web/etc/assets/img/basura_abierta.png' class='icon-abierto' alt='Papelera abierta'>
+                        
+                        </button>
+                    </form>
+                </div>    
+            </div>";
     } else {
         echo "<p>Evento no encontrado.</p>";
     }
