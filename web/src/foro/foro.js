@@ -71,7 +71,6 @@ document.addEventListener('DOMContentLoaded', function () {
         accionesAdmin.style.display = (esAdmin ||esAutor) ? 'flex' : 'none';
         if (borrarBtn) {
             borrarBtn.dataset.id = hilo.id;
-            console.log('esAutor (para borrar):', esAutor);
             borrarBtn.style.display = (esAdmin || esAutor) ? 'flex' : 'none';
         }
         if (bannearBtn) {
