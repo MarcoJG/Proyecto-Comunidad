@@ -13,10 +13,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (!empty($id_respuesta) && !empty($accion) && !empty($tipo) && $id_usuario !== null) {
         $tabla = 'likes_respuestas';
 
-        file_put_contents("log_likes.txt", json_encode([
-            'id_usuario' => $_SESSION["id_usuario"] ?? null
-        ]) . PHP_EOL, FILE_APPEND);
-        
         // Eliminar cualquier voto previo del usuario
         $stmtDeletePrev = $pdo->prepare("DELETE FROM $tabla WHERE id_respuesta = :id_respuesta AND id_usuario = :id_usuario");
         $stmtDeletePrev->bindParam(':id_respuesta', $id_respuesta);
