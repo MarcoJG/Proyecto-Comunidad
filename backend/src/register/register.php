@@ -8,6 +8,15 @@ require '../../../lib/phpmailer/Exception.php';
 include '../conexion_BBDD/conexion_db_pm.php';
 session_start();
 
+function redirigir($url, $mensaje = null) {
+    if ($mensaje !== null) {
+        $url .= '?mensaje=' . urlencode($mensaje);
+    }
+    header("Location: $url");
+    exit();
+    }
+    
+
 function sendVerificationEmail($correo, $token) {
     $mail = new PHPMailer(true);
 
@@ -63,6 +72,20 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                 echo "Error: El nombre de usuario ya está en uso.";
             } elseif ($stmt_correo->fetchColumn() > 0) {
                 echo "Error: El correo ya está registrado.";
+                //Llamada a función para redirigir
+                //redirigir('registerError.php', 'Correo vacío');
+                 //header("Location: error.php");
+                 //exit();
+                    
+
+
+                //header("Location: registerError.php?mensaje=" . urlencode("El correo ya está registrado."));
+                //exit();
+
+                //echo "<script>window.location.href = 'registerError.php?mensaje=" . urlencode("El correo ya está registrado.") . "';</script>";
+                //<p>¿No tienes cuenta? <a class="registro" href="../register/iregisterError.php">Regístrate aquí</a></p>
+                //header("Location: backend\src\register\registerError.php?mensaje=" . urlencode("Error: El correo ya está registrado."));
+                //exit();
             } else {
                 $hashedContrasenya = password_hash($contrasenya, PASSWORD_DEFAULT);
                 $verification_token = bin2hex(random_bytes(32));  // Generate a unique token
@@ -93,4 +116,5 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         }
     }
 }
+
 ?>

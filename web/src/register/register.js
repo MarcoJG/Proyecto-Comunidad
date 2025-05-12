@@ -21,6 +21,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 // Opcional: window.location.href = 'pagina_de_exito.php'; // Redirigir a otra página
             } else {
                 // Hubo un error, el mensaje ya se muestra
+                window.top.location.href = './registerError.php';
             }
         })
         .catch(error => {
