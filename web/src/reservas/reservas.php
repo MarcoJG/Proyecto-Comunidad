@@ -13,20 +13,23 @@ $usuarioEsAdmin = isset($_SESSION["nombre_rol"]) && $_SESSION["nombre_rol"] === 
 </head>
 <body class="fondo-cuerpo">
 
-<?php if (isset($_GET['success']) && $_GET['success'] == 1): ?>
-    <div style="background-color: #d4edda; color: #155724; padding: 15px; margin: 20px auto; border: 1px solid #c3e6cb; border-radius: 5px; width: 80%; text-align: center;">
-        ✅ ¡Reserva realizada con éxito!
-    </div>
-<?php endif; ?>
+<?php
+if (isset($_SESSION['reserva_success']) && $_SESSION['reserva_success']) {
+    echo '<div style="background-color: #d4edda; color: #155724; padding: 15px; margin: 20px auto; border: 1px solid #c3e6cb; border-radius: 5px; width: 80%; text-align: center;">';
+    echo '✅ ¡Reserva realizada con éxito!';
+    echo '</div>';
+
+    unset($_SESSION['reserva_success']);
+}
+?>
+
+
 <header>
-    <?php
-        define('BASE_PATH', '../header/');
-        include(BASE_PATH . 'cabecera.php');
-    ?>
-</header>
+        <?php include('../header/cabecera.php'); ?>
+    </header>
+
+
 <main>
-
-
     <section class="contenedor-principal">
         <h2 class="titulo-eventos">Reserva de Zonas Comunes</h2><br>
         <p class="subtitulo">Consulta las zonas disponibles para reservar</p>
@@ -41,7 +44,6 @@ $usuarioEsAdmin = isset($_SESSION["nombre_rol"]) && $_SESSION["nombre_rol"] === 
                 ['nombre' => 'Barbacoa', 'imagen' => '../../etc/assets/img/barbacoa.jpg'],
             ];
 
-            // Mensajes por zona
             $mensajes = [
                 'Piscina'            => 'Reserva tu turno en nuestra piscina y date un chapuzón refrescante.',
                 'Pista de Tenis'     => 'Disfruta de un partido en la pista de tenis, reserva ya tu turno.',

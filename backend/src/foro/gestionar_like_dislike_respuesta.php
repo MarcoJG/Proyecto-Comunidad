@@ -3,6 +3,7 @@ header('Content-Type: application/json');
 session_start();
 require_once '../conexion_BBDD/conexion_db_pm.php';
 
+
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $id_respuesta = $_POST['id_respuesta'] ?? '';
     $accion = $_POST['accion'] ?? ''; // 'like' o 'dislike'

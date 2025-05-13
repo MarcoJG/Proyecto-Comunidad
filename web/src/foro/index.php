@@ -20,28 +20,37 @@
             include $_SERVER['DOCUMENT_ROOT'] . $basePath . 'web/src/header/cabecera.php';
         ?>
     </header>
-    <main id="foro-content">
-        <h2>Foro de la Comunidad</h2>
-        <div id="foro-mensajes"></div>
-        <div id="foro-nuevo-hilo">
-            <h3>Crear un nuevo hilo</h3>
-            <input type="text" id="nuevo-hilo-titulo" placeholder="Título del hilo">
-            <textarea id="nuevo-hilo-contenido" placeholder="Escribe tu mensaje"></textarea>
-            <button id="enviar-hilo">Enviar</button>
+    
+<main class="foro-main">
+    <div class="foro-principal">
+            
+        <div class="foro-header">
+            <h2>Foro de la Comunidad</h2>
+            <p>Bienvenido al foro de la comunidad. Aquí puedes discutir, hacer preguntas y compartir información con otros miembros.</p>
         </div>
-    </main>
-
+        <div id="foro-content">
+            <div id="foro-nuevo-hilo">
+                <h3>Crear un nuevo hilo</h3>
+                <input type="text" id="nuevo-hilo-titulo" placeholder="Título del hilo">
+                <textarea id="nuevo-hilo-contenido" placeholder="Escribe tu mensaje"></textarea>
+                <button id="enviar-hilo">Enviar</button>
+            </div>
+            <div id="foro-mensajes"></div>
+        </div>
+    </div>
     <!-- Templates -->
     <template id="hilo-template">
         <div class="hilo-foro">
             <div class="hilo-cabecera">
                 <h3 class="hilo-titulo"></h3>
                 <span class="autor">Publicado por <span class="hilo-autor"></span> el <span class="hilo-fecha"></span></span>
-                <div class="acciones-admin" style="display: none; gap: 10px; align-items: center;">
+                <div class="acciones-admin">
                     <button class="borrar-hilo" data-id="">Borrar</button>
                     <button class="bannear-usuario" data-autor="">Bannear</button>
-                    <input type="number" placeholder="Timeout (min)" class="timeout-duration" data-autor="">
-                    <button class="timeout-usuario" data-autor="">Timeout</button>
+                    <div class="timeout-container">
+                        <input type="number" placeholder="Timeout (min)" class="timeout-duration" data-autor="">
+                        <button class="timeout-usuario" data-autor="">Timeout</button>
+                    </div>
                 </div>
             </div>
             <div class="hilo-contenido">
@@ -79,6 +88,7 @@
             </div>
         </div>
     </template>
+</main>    
     <footer> 
         <iframe src="../footer/FOOTER.html" frameborder="0" width="100%" height="300px"></iframe> 
     </footer>

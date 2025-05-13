@@ -11,6 +11,7 @@ function esAdmin() {
 
 if (!esAdmin()) {
     echo json_encode(['error' => 'No tienes permisos para aplicar timeouts a usuarios.']);
+    
     exit();
 }
 
