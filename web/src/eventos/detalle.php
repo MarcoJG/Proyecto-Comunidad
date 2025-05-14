@@ -8,6 +8,7 @@
     <meta charset="UTF-8">
     <title>Evento</title>
     <link rel="stylesheet" href="detalle.css">
+
 </head>
 
 <body class="fondo-cuerpo">

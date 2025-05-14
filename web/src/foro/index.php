@@ -9,7 +9,7 @@
     <title>Foro de la Comunidad</title>
     <link rel="stylesheet" href="<?= $basePath ?>web/src/home/home.css">
     <link rel="stylesheet" href="<?= $basePath ?>web/src/foro/foro.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap">
     <script src="<?= $basePath ?>web/src/foro/foro.js" defer></script>
@@ -45,11 +45,20 @@
                 <h3 class="hilo-titulo"></h3>
                 <span class="autor">Publicado por <span class="hilo-autor"></span> el <span class="hilo-fecha"></span></span>
                 <div class="acciones-admin">
-                    <button class="borrar-hilo" data-id="">Borrar</button>
-                    <button class="bannear-usuario" data-autor="">Bannear</button>
+                    <button class="borrar-hilo" data-id="" title="Borrar hilo">
+                        <img src="../../../web/etc/assets/img/basura_cerrada.png" class="icon-cerrado" alt="Papelera cerrada">
+                        <img src="../../../web/etc/assets/img/basura_abierta.png" class="icon-abierto" alt="Papelera abierta">
+                    </button>
+                    <button class="bannear-usuario" data-autor="" title="Banear usuario">
+                        <img src="../../../web/etc/assets/img/persona_off.png" class="persona_off" alt="Banear"> 
+                        <img src="../../../web/etc/assets/img/prohibido.png" class="icon-prohibido" alt="Banear">               
+                    </button>
                     <div class="timeout-container">
                         <input type="number" placeholder="Timeout (min)" class="timeout-duration" data-autor="">
-                        <button class="timeout-usuario" data-autor="">Timeout</button>
+                        <button class="timeout-usuario" data-autor="" title="Expulsion temporal">
+                            <img src="../../../web/etc/assets/img/alarma.png" class="icon-alarma" alt="Timeout">
+                            <img src="../../../web/etc/assets/img/alarma_off.png" class="icon-alarma-off" alt="Timeout">
+                        </button>
                     </div>
                 </div>
             </div>
