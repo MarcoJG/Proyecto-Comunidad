@@ -9,7 +9,7 @@ $usuarioEsAdmin = isset($_SESSION["nombre_rol"]) && $_SESSION["nombre_rol"] === 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Reservas de Zonas Comunes</title>
-    <link rel="stylesheet" href="reservas.css">
+    <link rel="stylesheet" href="/../Proyecto-Comunidad/web/src/reservas/reservas.css">
 </head>
 <body class="fondo-cuerpo">
 
