@@ -41,8 +41,10 @@
                     <button class="user-dropdown-btn">&#9660;</button>
                     <div class="user-dropdown-content">
                         <p id="user-email" class="user-email"></p>
+                        <?php if (isset($_SESSION["nombre_rol"]) && $_SESSION["nombre_rol"] === "Admin"): ?>
+                            <a href="<?= $basePath ?>web/src/admin_panel/index.php" class="admin-link">Panel de Admin</a>
+                        <?php endif; ?>
                         <a href="<?= $basePath ?>backend/src/login/logout.php" id="logout-link" class="logout-link">Cerrar sesión</a>
-                    </div>
                 </div>
             </div>
         </div>

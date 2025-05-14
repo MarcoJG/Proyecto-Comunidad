@@ -30,7 +30,15 @@ session_start();
     ?>
     </header>
     <main>
+        
         <section id="bloque-noticias">
+            <?php if (isset($_SESSION["nombre_rol"]) && $_SESSION["nombre_rol"] === "Admin"): ?>
+            <div style="position: absolute; top: 10px; right: 10px;">
+                <a href="../admin_panel/index.php">
+                    <button style="padding: 10px 15px;">Panel de administración</button>
+                </a>
+            </div>
+        <?php endif; ?>
             <div>
                 <h2>Bloque de noticias</h2>
                 <p>Todas las noticias relevantes sobre nuestra comunidad</p>
