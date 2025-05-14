@@ -1,7 +1,8 @@
 <?php
 session_start();
 
-if (!isset($_SESSION['nombre_rol']) || $_SESSION['nombre_rol'] !== 'Admin') {
+// Verificar si el usuario es Admin o Presidente
+if (!isset($_SESSION['nombre_rol']) || !in_array($_SESSION['nombre_rol'], ['Admin', 'Presidente'])) {
     header("Location: ../../../web/src/eventos/acceso_denegado.php");
     exit();
 }
