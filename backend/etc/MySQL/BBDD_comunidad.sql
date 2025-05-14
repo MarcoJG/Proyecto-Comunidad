@@ -182,3 +182,19 @@ INSERT INTO aforo_zona (zona, aforo_maximo) VALUES
 ('Barbacoa', 2);
 
 ALTER TABLE eventos ADD COLUMN es_destacada TINYINT(1) DEFAULT 0;
+
+ALTER TABLE eventos
+ADD COLUMN valor_destacado TINYINT DEFAULT 5,
+ADD CONSTRAINT chk_valor_destacado CHECK (valor_destacado BETWEEN 1 AND 5);
+
+ALTER TABLE noticias
+ADD COLUMN valor_destacado TINYINT DEFAULT 5,
+ADD CONSTRAINT chk_valor_destacado CHECK (valor_destacado BETWEEN 1 AND 5);
+
+UPDATE eventos 
+SET valor_destacado = 5
+WHERE valor_destacado IS NULL;
+
+UPDATE noticias
+SET valor_destacado = 5
+WHERE valor_destacado IS NULL;
