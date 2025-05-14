@@ -16,7 +16,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $id_usuario = $_SESSION['id_usuario'];
 
     // Comprobar si el evento es destacado
-    $destacado = isset($_POST['destacado']) ? $_POST['destacado'] : 0; // 1 si está marcado, 0 si no
+    $destacado = isset($_POST['destacado']) ? $_POST['destacado'] : 0;
 
     // Validaciones
     if (empty($titulo) || empty($descripcion) || empty($fecha)) {
@@ -26,7 +26,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             'fecha' => $fecha,
             'destacado' => $destacado
         ];
-        header("Location: ../../../web/crear_evento.php?error=faltan_datos");
+        header("Location: ../../../web/eventos/crear_evento.php?error=faltan_datos");
         exit();
     }
 
@@ -37,7 +37,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             'fecha' => $fecha,
             'destacado' => $destacado
         ];
-        header("Location: ../../../web/crear_evento.php?error=longitud_invalida");
+        header("Location: ../../../web/eventos/crear_evento.php?error=longitud_invalida");
         exit();
     }
 
@@ -48,25 +48,44 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             'fecha' => $fecha,
             'destacado' => $destacado
         ];
-        header("Location: ../../../web/crear_evento.php?error=fecha_invalida");
+        header("Location: ../../../web/eventos/crear_evento.php?error=fecha_invalida");
         exit();
     }
 
     try {
-        // Insertar en la BBDD, incluyendo si el evento es destacado
-        $sql = "INSERT INTO eventos (titulo, descripcion, fecha, id_usuario, es_destacada) 
+        // Verificar si ya existe un evento destacado
+        if ($destacado == 1) {
+            $sql_check = "SELECT id_evento FROM eventos WHERE es_destacada = 1 LIMIT 1";
+            $result = $pdo->query($sql_check);
+
+            if ($result->rowCount() > 0) {
+                // Guardar los datos del nuevo evento en sesión y redirigir a confirmación
+                $_SESSION['evento_destacado_existente'] = true;
+                $_SESSION['evento_destacado_data'] = [
+                    'titulo' => $titulo,
+                    'descripcion' => $descripcion,
+                    'fecha' => $fecha,
+                    'destacado' => $destacado,
+                    'id_usuario' => $id_usuario
+                ];
+                header("Location: /Proyecto-Comunidad/web/eventos/confirmar_reemplazo.php");
+                exit();
+            }
+        }
+
+        // Insertar directamente si no hay conflicto
+        $sql = "INSERT INTO eventos (titulo, descripcion, fecha, id_usuario, es_destacada)
                 VALUES (:titulo, :descripcion, :fecha, :id_usuario, :es_destacada)";
         $stmt = $pdo->prepare($sql);
-        $stmt->bindValue(':titulo', $titulo, PDO::PARAM_STR);
-        $stmt->bindValue(':descripcion', $descripcion, PDO::PARAM_STR);
-        $stmt->bindValue(':fecha', $fecha, PDO::PARAM_STR);
-        $stmt->bindValue(':id_usuario', $id_usuario, PDO::PARAM_INT);
-        $stmt->bindValue(':es_destacada', $destacado, PDO::PARAM_INT); // Guardar si es destacado
+        $stmt->execute([
+            ':titulo' => $titulo,
+            ':descripcion' => $descripcion,
+            ':fecha' => $fecha,
+            ':id_usuario' => $id_usuario,
+            ':es_destacada' => $destacado
+        ]);
 
-        $stmt->execute();
-
-        // Redireccionar tras creación exitosa
-        header("Location: ../../../web/src/eventos/index.php");
+        header("Location: /Proyecto-Comunidad/web/eventos/index.php");
         exit();
 
     } catch (PDOException $e) {
