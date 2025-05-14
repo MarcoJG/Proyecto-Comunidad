@@ -2,13 +2,11 @@
     font-family: Arial, sans-serif;
 }
 
-
 .fondo-cuerpo {
     background-color: #f5f5f5;
     margin: 0;
     padding: 0;
 }
-
 
 .contenedor-principal {
     max-width: 800px;
@@ -18,14 +16,12 @@
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-
 .titulo-evento {
     color: #243D51;
     font-size: 24px;
     text-align: left;
     margin-bottom: 20px;
 }
-
 
 .formulario-evento label {
     font-size: 16px;
@@ -34,22 +30,20 @@
     display: block;
 }
 
-
 .formulario-evento input,
 .formulario-evento textarea {
-    width: 100%;
+    width: calc(100% - 20px); /* 100% del contenedor menos el padding */
     padding: 10px;
     margin-bottom: 12px;
     border: 1px solid #ddd;
     border-radius: 0px;
     font-size: 16px;
+    box-sizing: border-box; /* Asegura que el padding no afecte el tamaño total */
 }
-
 
 .formulario-evento input[type="date"] {
     background-color: #f9f9f9;
 }
-
 
 .formulario-evento button {
     background-color: #243D51;
@@ -62,11 +56,9 @@
     transition: background-color 0.3s ease;
 }
 
-
 .formulario-evento button:hover {
     background-color: #1c2f3d;
 }
-
 
 .formulario-evento .detalle-evento {
     color: #9c907d;
@@ -74,16 +66,34 @@
     margin-top: 5px;
 }
 
-
 .formulario-evento {
     display: flex;
     flex-direction: column;
     gap: 15px;
 }
 
-
 .formulario-evento input:focus,
 .formulario-evento textarea:focus {
     border-color: #243D51;
     outline: none;
+}
+
+/* Estilo para los radio buttons debajo de '¿Es evento destacado?' */
+.checkbox-destacado {
+    margin-top: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start; /* Alinea los radio buttons a la izquierda */
+}
+
+.checkbox-destacado label {
+    font-size: 16px;
+    color: #243D51;
+    margin-bottom: 5px;
+    display: flex;
+    align-items: center;
+}
+
+.checkbox-destacado input[type="radio"] {
+    margin-right: 10px;
 }

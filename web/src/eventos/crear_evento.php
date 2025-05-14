@@ -6,11 +6,11 @@ if (!isset($_SESSION['nombre_rol']) || $_SESSION['nombre_rol'] !== 'Admin') {
     exit();
 }
 
-
 // Recuperar datos del formulario en caso de error
 $titulo_guardado = $_SESSION['form_data']['titulo'] ?? '';
 $descripcion_guardado = $_SESSION['form_data']['descripcion'] ?? '';
 $fecha_guardada = $_SESSION['form_data']['fecha'] ?? '';
+$destacado_guardado = $_SESSION['form_data']['destacado'] ?? 0;
 
 // Limpiar datos de sesión después de usarlos
 unset($_SESSION['form_data']);
@@ -61,6 +61,18 @@ unset($_SESSION['form_data']);
 
             <label for="descripcion">Descripción:</label>
             <textarea id="descripcion" name="descripcion" maxlength="255" required><?= htmlspecialchars($descripcion_guardado) ?></textarea>
+
+            <!-- Campo para marcar si el evento es destacado -->
+            <label for="destacado">¿Es evento destacado?</label>
+
+            <div class="checkbox-destacado">
+                <label>
+                    <input type="radio" name="destacado" value="1" <?= $destacado_guardado == 1 ? 'checked' : '' ?>> Sí
+                </label>
+                <label>
+                    <input type="radio" name="destacado" value="0" <?= $destacado_guardado == 0 ? 'checked' : '' ?>> No
+                </label>
+            </div>
 
             <button type="submit" class="boton-evento">Crear evento</button>
         </form>
