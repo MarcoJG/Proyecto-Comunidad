@@ -91,18 +91,13 @@ main {
 }
 
 .acciones-admin button {
-    background-color: #243D51; /* Rojo para acciones administrativas */
-    color: white;
+    background: none;
     border: none;
-    padding: 8px 12px;
     cursor: pointer;
-    border-radius: 0px;
-    font-size: 0.8em;
+    
 }
 
-.acciones-admin button:hover {
-    background-color: #1c2f3d;
-}
+
 
 .hilo-contenido-texto {
     color: #333;
@@ -219,4 +214,41 @@ main {
 
 #foro-nuevo-hilo button:hover {
     background-color: #1a2e3e;
+}
+
+.borrar-hilo img{
+    width: 20px;
+    height: 20px;
+    margin-right: 8px; }
+.borrar-hilo .icon-abierto {
+    display: none;
+}
+.borrar-hilo:hover .icon-cerrado {
+    display: none;
+}
+.borrar-hilo:hover .icon-abierto {
+    display: inline;
+    scale : 1.2;
+}
+
+
+.timeout-usuario .icon-alarma-off {
+    display: none;
+}
+.timeout-usuario:hover .icon-alarma {
+    display: none;
+}
+.timeout-usuario:hover .icon-alarma-off {
+    display: inline;
+}                                      
+
+
+.bannear-usuario .persona_off {
+    display: none;
+}
+.bannear-usuario:hover .icon-prohibido {
+    display: none;
+}
+.bannear-usuario:hover .persona_off {
+    display: inline;
 }
