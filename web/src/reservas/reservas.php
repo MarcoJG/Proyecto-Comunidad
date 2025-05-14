@@ -34,14 +34,14 @@ if (isset($_SESSION['reserva_success']) && $_SESSION['reserva_success']) {
 
         <div class="contenedor-eventos">
             <?php
-            // Aquí ya agregamos "Todas las reservas" en ambas arrays
+           
             $zonas = [
                 ['nombre' => 'Piscina', 'imagen' => '../../etc/assets/img/piscina.jpg'],
                 ['nombre' => 'Pista de Tenis', 'imagen' => '../../etc/assets/img/tenis.jpg'],
                 ['nombre' => 'Gimnasio', 'imagen' => '../../etc/assets/img/gimnasio.jpg'],
                 ['nombre' => 'Sala de Reuniones', 'imagen' => '../../etc/assets/img/sala_reuniones.jpg'],
                 ['nombre' => 'Barbacoa', 'imagen' => '../../etc/assets/img/barbacoa.jpg'],
-                ['nombre' => 'Todas las Reservas', 'imagen' => '../../etc/assets/img/mis_reservas.jpg'],
+                ['nombre' => 'Todas las Reservas', 'imagen' => '../../etc/assets/img/evento.png'],
             ];
 
             $mensajes = [

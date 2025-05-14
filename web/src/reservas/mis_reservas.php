@@ -24,7 +24,6 @@ try {
     die("Error al obtener las reservas: " . $e->getMessage());
 }
 
-// Mensaje de éxito si la reserva se ha cancelado
 if (isset($_GET['success']) && $_GET['success'] == 2) {
     echo '<p>Reserva cancelada exitosamente.</p>';
 }
