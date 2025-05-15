@@ -1,11 +1,21 @@
 <?php
-session_start();
 require_once __DIR__ . '/../../../config.php';
-?>
+session_start(); 
 
-<?php
-// Verificación de sesión y rol
-$usuarioEsAdmin = (isset($_SESSION["nombre_rol"]) && $_SESSION["nombre_rol"] === "Admin");
+// Redirigir si no hay sesión activa
+if (!isset($_SESSION["id_usuario"]) || !isset($_SESSION["nombre_rol"])) {
+    header("Location: /login.php");
+    exit();
+}
+
+// Normalizar el rol del usuario para evitar problemas por mayúsculas o espacios
+$nombreRol = trim(strtolower($_SESSION["nombre_rol"]));
+$usuarioEsAdminOPresidente = ($nombreRol === 'admin' || $nombreRol === 'presidente');
+
+// Mostrar mensaje si se eliminó un evento
+if (isset($_GET['mensaje']) && $_GET['mensaje'] === 'eliminado') {
+    echo "<p style='color: green; text-align:center; margin-top: 20px;'>Evento eliminado correctamente.</p>";
+}
 ?>
 
 <!DOCTYPE html>
@@ -19,32 +29,27 @@ $usuarioEsAdmin = (isset($_SESSION["nombre_rol"]) && $_SESSION["nombre_rol"] ===
 </head>
 
 <body class="fondo-cuerpo">
-
-<header>
-        <?php include('../header/cabecera.php'); ?>
+<main>
+    <header>
+        <?php include $_SERVER['DOCUMENT_ROOT'] . $basePath . 'web/src/header/cabecera.php'; ?>
     </header>
-    <main>
-        <div class="contenedor-principal">
 
-            <!-- Crear evento solo para admins -->
-            <div>
-            <?php if ($usuarioEsAdmin): ?>  
-                <div style="text-align: right; margin: 20px;">
-                    <a href="crear_evento.php" class="boton-evento">
-                        Crear evento
-                    </a>
-                </div>
-            <?php endif; ?>
-            </div>
+    <?php if ($usuarioEsAdminOPresidente): ?>  
+        <div style="text-align: right; margin: 20px;">
+            <a href="crear_evento.php" class="boton-evento" style="background-color: #243D51; color: white; padding: 10px 20px; text-decoration: none; border-radius: 5px;">
+                Crear evento
+            </a>
+        </div>
+    <?php endif; ?>
 
-            <!-- Próximos Eventos -->
-            <section class="contenedor proximos-eventos">
+    <section class="contenedor-principal">
+        <!-- Próximos Eventos -->
+        <section class="contenedor proximos-eventos">
             <h2 class="titulo-eventos">Próximos eventos</h2>
             <p class="subtitulo">Consulta todos los eventos de nuestra comunidad aquí</p>
             <?php include '../../../backend/src/eventos/eventos_futuros.php'; ?>
         </section>
-
-    </div>
+    </section>
 
     <section class="contenedor-principal">
         <!-- Eventos pasados -->
@@ -53,9 +58,11 @@ $usuarioEsAdmin = (isset($_SESSION["nombre_rol"]) && $_SESSION["nombre_rol"] ===
             <?php include '../../../backend/src/eventos/eventos_pasados.php'; ?>
         </section>
     </section>
-    </main>
-    <footer> 
-        <iframe src="../footer/FOOTER.html" frameborder="0" width="100%" height="300px"></iframe> 
-    </footer>
+</main>
+
+<footer>
+    <iframe src="../footer/FOOTER.html" frameborder="0" width="100%" height="300px"></iframe>
+</footer>
+
 </body>
 </html>

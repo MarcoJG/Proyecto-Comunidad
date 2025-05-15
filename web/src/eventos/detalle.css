@@ -13,7 +13,7 @@ body.fondo-cuerpo {
     max-width: 900px;
     margin: 0 auto;
     padding: 60px 20px;
-    padding-top: 220px; /* Para dejar espacio al header si está fijo */
+    padding-top: 220px; 
 }
 
 .evento-header {
@@ -60,4 +60,29 @@ body.fondo-cuerpo {
     margin-top: 0;
     color: #243D51;
     font-size: 18px;
+}
+
+button.boton-evento {
+    all: unset;
+    background-color: #243D51 !important;
+    color: #fff !important;
+    padding: 10px 20px !important;
+    text-decoration: none !important;
+    border: none !important;
+    border-radius: 5px !important;
+    cursor: pointer !important;
+}
+
+.boton-evento:hover {
+    background-color: #1c2f3d !important;
+}
+
+form {
+    margin-top: 30px;
+}
+
+.botones-admin {
+    display: flex;
+    gap: 15px;
+    margin-top: 30px;
 }

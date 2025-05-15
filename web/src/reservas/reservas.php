@@ -9,7 +9,7 @@ $usuarioEsAdmin = isset($_SESSION["nombre_rol"]) && $_SESSION["nombre_rol"] === 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Reservas de Zonas Comunes</title>
-    <link rel="stylesheet" href="reservas.css">
+    <link rel="stylesheet" href="/../Proyecto-Comunidad/web/src/reservas/reservas.css">
 </head>
 <body class="fondo-cuerpo">
 
@@ -23,11 +23,9 @@ if (isset($_SESSION['reserva_success']) && $_SESSION['reserva_success']) {
 }
 ?>
 
-
 <header>
-        <?php include('../header/cabecera.php'); ?>
-    </header>
-
+    <?php include('../header/cabecera.php'); ?>
+</header>
 
 <main>
     <section class="contenedor-principal">
@@ -36,12 +34,14 @@ if (isset($_SESSION['reserva_success']) && $_SESSION['reserva_success']) {
 
         <div class="contenedor-eventos">
             <?php
+           
             $zonas = [
                 ['nombre' => 'Piscina', 'imagen' => '../../etc/assets/img/piscina.jpg'],
                 ['nombre' => 'Pista de Tenis', 'imagen' => '../../etc/assets/img/tenis.jpg'],
                 ['nombre' => 'Gimnasio', 'imagen' => '../../etc/assets/img/gimnasio.jpg'],
                 ['nombre' => 'Sala de Reuniones', 'imagen' => '../../etc/assets/img/sala_reuniones.jpg'],
                 ['nombre' => 'Barbacoa', 'imagen' => '../../etc/assets/img/barbacoa.jpg'],
+                ['nombre' => 'Todas las Reservas', 'imagen' => '../../etc/assets/img/evento.png'],
             ];
 
             $mensajes = [
@@ -50,6 +50,7 @@ if (isset($_SESSION['reserva_success']) && $_SESSION['reserva_success']) {
                 'Gimnasio'           => 'Mantente en forma reservando tu sesión en el gimnasio.',
                 'Sala de Reuniones'  => 'Planifica tu próxima reunión con comodidad y privacidad.',
                 'Barbacoa'           => 'Comparte una comida al aire libre reservando la zona de barbacoa.',
+                'Todas las Reservas' => 'Accede aquí para ver todas las reservas que tienes activas',
             ];
 
             foreach ($zonas as $zona) {
@@ -58,7 +59,14 @@ if (isset($_SESSION['reserva_success']) && $_SESSION['reserva_success']) {
                 echo '<div class="evento-texto">';
                 echo '<h3 class="titulo-evento">'.$zona['nombre'].'</h3>';
                 echo '<p class="detalle-evento">'.$mensajes[$zona['nombre']].'</p>';
-                echo '<a href="reserva_formulario.php?zona='.urlencode($zona['nombre']).'" class="boton-evento">Reservar</a>';
+
+                // Condición para cambiar el texto del botón
+                if ($zona['nombre'] == 'Todas las Reservas') {
+                    echo '<a href="mis_reservas.php" class="boton-evento">Accede</a>';
+                } else {
+                    echo '<a href="reserva_formulario.php?zona='.urlencode($zona['nombre']).'" class="boton-evento">Reservar</a>';
+                }
+
                 echo '</div></div>';
             }
             ?>
