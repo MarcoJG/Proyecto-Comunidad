@@ -5,7 +5,6 @@ include __DIR__ . '/../conexion_BBDD/conexion_db_pm.php';
 
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
-    // Verificar usuario Admin o Presidente
     if (!isset($_SESSION['id_usuario']) || !isset($_SESSION["nombre_rol"]) || !in_array($_SESSION["nombre_rol"], ["Admin", "Presidente"])) {
         die("No autorizado.");
     }
@@ -18,7 +17,6 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     // Comprobar si el evento es destacado
     $destacado = isset($_POST['destacado']) ? $_POST['destacado'] : 0;
 
-    // Validaciones
     if (empty($titulo) || empty($descripcion) || empty($fecha)) {
         $_SESSION['form_data'] = [
             'titulo' => $titulo,
@@ -26,7 +24,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             'fecha' => $fecha,
             'destacado' => $destacado
         ];
-        header("Location: ../../../web/eventos/crear_evento.php?error=faltan_datos");
+        header("Location: ../../../web/src/eventos/crear_evento.php?error=faltan_datos");
         exit();
     }
 
@@ -37,7 +35,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             'fecha' => $fecha,
             'destacado' => $destacado
         ];
-        header("Location: ../../../web/eventos/crear_evento.php?error=longitud_invalida");
+        header("Location: ../../../web/src/eventos/crear_evento.php?error=longitud_invalida");
         exit();
     }
 
@@ -48,7 +46,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             'fecha' => $fecha,
             'destacado' => $destacado
         ];
-        header("Location: ../../../web/eventos/crear_evento.php?error=fecha_invalida");
+        header("Location: ../../../web/src/eventos/crear_evento.php?error=fecha_invalida");
         exit();
     }
 
@@ -59,7 +57,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             $result = $pdo->query($sql_check);
 
             if ($result->rowCount() > 0) {
-                // Guardar los datos del nuevo evento en sesión y redirigir a confirmación
+                // Guardar los datos del nuevo evento y redirigir a confirmación
                 $_SESSION['evento_destacado_existente'] = true;
                 $_SESSION['evento_destacado_data'] = [
                     'titulo' => $titulo,
@@ -68,12 +66,12 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                     'destacado' => $destacado,
                     'id_usuario' => $id_usuario
                 ];
-                header("Location: /Proyecto-Comunidad/web/eventos/confirmar_reemplazo.php");
+                header("Location: /Proyecto-Comunidad/web/src/eventos/confirmar_reemplazo.php");
                 exit();
             }
         }
 
-        // Insertar directamente si no hay conflicto
+        // Insertar si no hay conflicto
         $sql = "INSERT INTO eventos (titulo, descripcion, fecha, id_usuario, es_destacada)
                 VALUES (:titulo, :descripcion, :fecha, :id_usuario, :es_destacada)";
         $stmt = $pdo->prepare($sql);
@@ -85,7 +83,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             ':es_destacada' => $destacado
         ]);
 
-        header("Location: /Proyecto-Comunidad/web/eventos/index.php");
+        header("Location: /Proyecto-Comunidad/web/src/eventos/index.php");
         exit();
 
     } catch (PDOException $e) {

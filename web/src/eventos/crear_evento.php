@@ -1,8 +1,7 @@
 <?php
 session_start();
 
-// Verificar si el usuario es Admin o Presidente
-if (!isset($_SESSION['nombre_rol']) || !in_array($_SESSION['nombre_rol'], ['Admin', 'Presidente'])) {
+if (!isset($_SESSION['nombre_rol']) || $_SESSION['nombre_rol'] !== 'Admin') {
     header("Location: ../../../web/src/eventos/acceso_denegado.php");
     exit();
 }
@@ -63,7 +62,7 @@ unset($_SESSION['form_data']);
             <label for="descripcion">Descripción:</label>
             <textarea id="descripcion" name="descripcion" maxlength="255" required><?= htmlspecialchars($descripcion_guardado) ?></textarea>
 
-            <!-- Campo para marcar si el evento es destacado -->
+            <!-- Evento es destacado -->
             <label for="destacado">¿Es evento destacado?</label>
 
             <div class="checkbox-destacado">
