@@ -9,19 +9,23 @@ body, html {
 }
 
 body {
-         background-color: #f5f5f5;
+    background-color: #f5f5f5;
 }
 
 header {
     background-color: white;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    height: 170px;  
+    height: 170px;
     width: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1000;
 }
 
 main {
     padding: 20px;
-    padding-top: 160px;
+    padding-top: 190px; 
 }
 
 .contenedor-principal {
@@ -29,22 +33,6 @@ main {
     margin: 0 auto;
     padding: 20px;
 }
-
-.boton-evento {
-    background-color: #243D51;
-    color: #fff;
-    padding: 10px 20px;
-    text-decoration: none;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    
-}
-
-.boton-evento:hover {
-    background-color: #1c2f3d;
-}
-
 
 .titulo-principal,
 .titulo-evento,
@@ -59,11 +47,30 @@ main {
     color: #9c907d;
 }
 
+
+.boton-evento {
+    background-color: #243D51;
+    color: #fff;
+    padding: 10px 20px;
+    text-decoration: none;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 13px;
+    display: inline-block;
+}
+
+.boton-evento:hover {
+    background-color: #1c2f3d;
+}
+
+
 .contenedor-eventos {
     display: flex;
     flex-direction: column;
     gap: 10px;
 }
+
 
 .evento {
     display: flex;
@@ -75,12 +82,13 @@ main {
     margin-top: 10px;
 }
 
+
 .evento-imagen img {
     width: 150px;
     height: 150px;
     object-fit: cover;
-    border-radius: 0;
 }
+
 
 .evento-texto {
     flex-grow: 1;
@@ -96,17 +104,25 @@ main {
     margin-top: 5px;
 }
 
-.boton-evento {
-    background-color: #243D51;
-    color: #fff;
-    padding: 10px 20px;
-    text-decoration: none;
-    border: none;
-    border-radius: 0px;
+.estrella {
+    font-size: 24px;
+    color: #ccc;
     cursor: pointer;
-    font-size: 13px;
+    margin-left: 10px;
+    user-select: none;
+    transition: color 0.3s ease;
 }
 
-.boton-evento:hover {
-    background-color: #1c2f3d;
+.estrella.seleccionada {
+    color: #f39c12; 
 }
+
+.eventos-destacado {
+    margin-top: 10px;
+}
+
+.estrellas {
+    display: flex;
+    gap: 5px; 
+}
+
