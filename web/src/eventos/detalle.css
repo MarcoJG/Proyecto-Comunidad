@@ -80,3 +80,9 @@ button.boton-evento {
 form {
     margin-top: 30px;
 }
+
+.botones-admin {
+    display: flex;
+    gap: 15px;
+    margin-top: 30px;
+}

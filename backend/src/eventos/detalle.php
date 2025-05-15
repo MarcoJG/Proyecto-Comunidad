@@ -2,7 +2,8 @@
 session_start();
 include __DIR__ . '/../conexion_BBDD/conexion_db_pm.php';
 
-$usuarioEsAdmin = isset($_SESSION["nombre_rol"]) && $_SESSION["nombre_rol"] === "Admin";
+// Verificar si el usuario tiene permiso para editar/borrar (Admin o Presidente)
+$usuarioPuedeEditar = isset($_SESSION['id_usuario']) && isset($_SESSION["nombre_rol"]) && in_array($_SESSION["nombre_rol"], ["Admin", "Presidente"]);
 
 if (isset($_GET['id'])) {
     $id_evento = intval($_GET['id']); // Evitar inyecciones
@@ -28,15 +29,22 @@ if (isset($_GET['id'])) {
             </div>
         ";
 
-        // Si es admin mostrar botón
-        if ($usuarioEsAdmin) {
+        // Mostrar botones si es admin o presidente
+        if ($usuarioPuedeEditar) {
             echo "
-                <form method='POST' action='../../../backend/src/eventos/eliminar_evento.php' onsubmit='return confirmarBorrado(event)'>
-                    <input type='hidden' name='id_evento' value='$id_evento'>
-                    <button type='submit' class='boton-evento'>Borrar evento</button>
-                </form>
+                <div class='botones-admin'>
+                    <form method='POST' action='../../../backend/src/eventos/eliminar_evento.php' onsubmit='return confirmarBorrado(event)'>
+                        <input type='hidden' name='id_evento' value='$id_evento'>
+                        <button type='submit' class='boton-evento'>Borrar evento</button>
+                    </form>
+                    <form method='GET' action='../../../web/src/eventos/editar_evento.php'>
+                        <input type='hidden' name='id' value='$id_evento'>
+                        <button type='submit' class='boton-evento'>Editar evento</button>
+                    </form>
+                </div>
             ";
         }
+
     } else {
         echo "<p>Evento no encontrado.</p>";
     }
