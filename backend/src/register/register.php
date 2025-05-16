@@ -37,13 +37,20 @@ function sendVerificationEmail($correo, $token) {
 }
 
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
+    header('Content-Type: application/json');
     if (empty($_POST['nombre']) || empty($_POST['usuario']) || empty($_POST['correo']) || empty($_POST['contrasenya'])
         || empty($_POST['confirm_contrasenya'])) {
-        echo "Error: Todos los campos son obligatorios.";
+       // echo "Error: Todos los campos son obligatorios.";
+        echo json_encode(['codigo' => 'campos_vacios']); 
+        exit;
     } elseif ($_POST['contrasenya'] !== $_POST['confirm_contrasenya']) {
-        echo "Error: Las contraseñas no coinciden.";
+        //echo "Error: Las contraseñas no coinciden.";
+        echo json_encode(['codigo' => 'contrasenas_no_coinciden']); 
+        exit;
     } elseif (!filter_var($_POST['correo'], FILTER_VALIDATE_EMAIL)) {
-        echo "Error: El formato del correo electrónico no es válido.";
+       // echo "Error: El formato del correo electrónico no es válido.";
+        echo json_encode(['codigo' => 'correo_invalido']); 
+        exit;
     } else {
         $nombre = htmlspecialchars($_POST['nombre']);
         $usuario = htmlspecialchars($_POST['usuario']);
@@ -60,9 +67,13 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             $stmt_correo->execute();
 
             if ($stmt_usuario->fetchColumn() > 0) {
-                echo "Error: El nombre de usuario ya está en uso.";
+                //echo "Error: El nombre de usuario ya está en uso.";
+                echo json_encode(['codigo' => 'usuario_existente']); 
+                exit;
             } elseif ($stmt_correo->fetchColumn() > 0) {
-                echo "Error: El correo ya está registrado.";
+                echo json_encode(['codigo' => 'correo_existente']);
+                exit;
+                //echo "Error: El correo ya está registrado.";
             } else {
                 $hashedContrasenya = password_hash($contrasenya, PASSWORD_DEFAULT);
                 $verification_token = bin2hex(random_bytes(32));  // Generate a unique token
@@ -79,9 +90,11 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                 ]);
 
                 if (sendVerificationEmail($correo, $verification_token)) {
-                    echo "Registro exitoso. Por favor, verifica tu correo electrónico.";
+                    //echo "Registro exitoso. Por favor, verifica tu correo electrónico.";
+                    echo json_encode(['codigo' => 'registro_exitoso']);
                 } else {
-                    echo "Registro exitoso, pero no se pudo enviar el correo de verificación. Por favor, contacta con el soporte.";
+                    //echo "Registro exitoso, pero no se pudo enviar el correo de verificación. Por favor, contacta con el soporte.";
+                    echo json_encode(['codigo' => 'correo_no_enviado']);
                     // Consider logging this error and possibly cleaning up the newly created user
                 }
 
@@ -89,8 +102,10 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                 //  exit();
             }
         } catch (PDOException $e) {
-            echo "Error al registrar usuario: " . $e->getMessage();
+            //echo "Error al registrar usuario: " . $e->getMessage();
+            echo json_encode(['codigo' => 'error_bd']);
         }
     }
 }
+
 ?>
