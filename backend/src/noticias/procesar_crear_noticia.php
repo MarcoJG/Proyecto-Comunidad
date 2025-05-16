@@ -56,9 +56,26 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         $rutaTemporal = $_FILES['imagen']['tmp_name'];
 
         $permitidos = ['image/jpeg', 'image/png', 'image/gif', 'image/webp'];
-        if (in_array($tipoArchivo, $permitidos)) {
-            $nombreUnico = uniqid() . "_" . basename($nombreArchivo);
-            $rutaDestino = __DIR__ . '/../../../web/etc/assets/img/' . $nombreUnico;
+    if (in_array($tipoArchivo, $permitidos)) {
+        $hashArchivo = md5_file($rutaTemporal);
+        $directorioDestino = __DIR__ . '/../../../web/etc/assets/img/';
+        $archivosExistentes = scandir($directorioDestino);
+        $imagenEncontrada = false;
+
+        foreach ($archivosExistentes as $archivo) {
+            if (in_array(pathinfo($archivo, PATHINFO_EXTENSION), ['jpg', 'jpeg', 'png', 'gif', 'webp'])) {
+                $rutaCompleta = $directorioDestino . $archivo;
+                if (is_file($rutaCompleta) && md5_file($rutaCompleta) === $hashArchivo) {
+                    $rutaImagenBD = '/Proyecto-Comunidad/web/etc/assets/img/' . $archivo;
+                    $imagenEncontrada = true;
+                    break;
+                }
+            }
+        }
+
+        if (!$imagenEncontrada) {
+            $nombreUnico = basename($nombreArchivo); // Puedes cambiar por $hashArchivo si prefieres
+            $rutaDestino = $directorioDestino . $nombreUnico;
 
             // Crear carpeta si no existe
             if (!is_dir(dirname($rutaDestino))) {
@@ -69,6 +86,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                 $rutaImagenBD = '/Proyecto-Comunidad/web/etc/assets/img/' . $nombreUnico;
             }
         }
+    }
     }
 
     try {
