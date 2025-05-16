@@ -15,10 +15,10 @@
     <script src="<?= $basePath ?>web/src/foro/foro.js" defer></script>
 </head>
 <body>
-    <header>
-        <?php
-            include $_SERVER['DOCUMENT_ROOT'] . $basePath . 'web/src/header/cabecera.php';
-        ?>
+    <?php
+        define('BASE_PATH', '../header/');
+        include(BASE_PATH . 'cabecera.php');
+    ?>
     </header>
     
 <main class="foro-main">
