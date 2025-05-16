@@ -2,8 +2,17 @@
 require_once __DIR__ . '/../../../config.php';
 session_start(); 
 
-$usuarioEsAdmin = isset($_SESSION["nombre_rol"]) && $_SESSION["nombre_rol"] === "Admin";
+// Redirigir si no hay sesión activa
+if (!isset($_SESSION["id_usuario"]) || !isset($_SESSION["nombre_rol"])) {
+    header("Location: /login.php");
+    exit();
+}
 
+// Normalizar el rol del usuario para evitar problemas por mayúsculas o espacios
+$nombreRol = trim(strtolower($_SESSION["nombre_rol"]));
+$usuarioEsAdminOPresidente = ($nombreRol === 'admin' || $nombreRol === 'presidente');
+
+// Mostrar mensaje si se eliminó un evento
 if (isset($_GET['mensaje']) && $_GET['mensaje'] === 'eliminado') {
     echo "<p style='color: green; text-align:center; margin-top: 20px;'>Evento eliminado correctamente.</p>";
 }
@@ -25,7 +34,7 @@ if (isset($_GET['mensaje']) && $_GET['mensaje'] === 'eliminado') {
         <?php include $_SERVER['DOCUMENT_ROOT'] . $basePath . 'web/src/header/cabecera.php'; ?>
     </header>
 
-    <?php if ($usuarioEsAdmin): ?>  
+    <?php if ($usuarioEsAdminOPresidente): ?>  
         <div style="text-align: right; margin: 20px;">
             <a href="crear_evento.php" class="boton-evento" style="background-color: #243D51; color: white; padding: 10px 20px; text-decoration: none; border-radius: 5px;">
                 Crear evento
