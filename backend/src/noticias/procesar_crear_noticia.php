@@ -46,15 +46,40 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         header("Location: ../../../web/crear_noticia.php?error=fecha_invalida");
         exit();
     }
+     // Imagen por defecto
+    $rutaImagenBD = '/Proyecto-Comunidad/web/etc/assets/img/bloque.jpg';
+
+    // Procesar imagen si se ha subido
+    if (isset($_FILES['imagen']) && $_FILES['imagen']['error'] === UPLOAD_ERR_OK) {
+        $nombreArchivo = $_FILES['imagen']['name'];
+        $tipoArchivo = $_FILES['imagen']['type'];
+        $rutaTemporal = $_FILES['imagen']['tmp_name'];
+
+        $permitidos = ['image/jpeg', 'image/png', 'image/gif', 'image/webp'];
+        if (in_array($tipoArchivo, $permitidos)) {
+            $nombreUnico = uniqid() . "_" . basename($nombreArchivo);
+            $rutaDestino = __DIR__ . '/../../../web/etc/assets/img/' . $nombreUnico;
+
+            // Crear carpeta si no existe
+            if (!is_dir(dirname($rutaDestino))) {
+                mkdir(dirname($rutaDestino), 0755, true);
+            }
+
+            if (move_uploaded_file($rutaTemporal, $rutaDestino)) {
+                $rutaImagenBD = '/Proyecto-Comunidad/web/etc/assets/img/' . $nombreUnico;
+            }
+        }
+    }
 
     try {
         // Insertar en la BBDD
-        $sql = "INSERT INTO noticias (titulo, contenido, fecha, id_usuario) VALUES (:titulo, :contenido, :fecha, :id_usuario)";
+        $sql = "INSERT INTO noticias (titulo, contenido, fecha, id_usuario, imagen) VALUES (:titulo, :contenido, :fecha, :id_usuario, :imagen)";
         $stmt = $pdo->prepare($sql);
         $stmt->bindValue(':titulo', $titulo, PDO::PARAM_STR);
         $stmt->bindValue(':contenido', $contenido, PDO::PARAM_STR);
         $stmt->bindValue(':fecha', $fecha, PDO::PARAM_STR);
         $stmt->bindValue(':id_usuario', $id_usuario, PDO::PARAM_INT);
+        $stmt->bindValue(':imagen', $rutaImagenBD, PDO::PARAM_STR);
         
         $stmt->execute();
         

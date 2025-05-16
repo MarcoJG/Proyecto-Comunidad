@@ -199,4 +199,4 @@ UPDATE noticias
 SET valor_destacado = 5
 WHERE valor_destacado IS NULL;
 
-ALTER TABLE noticias ADD COLUMN imagen VARCHAR(255) DEFAULT /Proyecto-Comunidad/web/etc/assets/img/bloque.jpg;
+ALTER TABLE noticias ADD imagen VARCHAR(255) DEFAULT '/Proyecto-Comunidad/web/etc/assets/img/bloque.jpg';

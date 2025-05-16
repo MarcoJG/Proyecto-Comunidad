@@ -6,7 +6,7 @@ include __DIR__ . '/../conexion_BBDD/conexion_db_pm.php';
 $hoy = date('Y-m-d');
 
 // Consulta segura con prepared statement
-$sql = "SELECT id_noticias, titulo, contenido, fecha FROM noticias WHERE DATE(fecha) < :hoy ORDER BY fecha ASC";
+$sql = "SELECT id_noticias, titulo, contenido, fecha, imagen FROM noticias WHERE DATE(fecha) < :hoy ORDER BY fecha ASC";
 $stmt = $pdo->prepare($sql);
 $stmt->execute(['hoy' => $hoy]);
 
@@ -16,9 +16,11 @@ if ($stmt->rowCount() > 0) {
         $id = (int)$row['id_noticias'];
         $titulo = htmlspecialchars($row['titulo'], ENT_QUOTES, 'UTF-8');
         $contenido = htmlspecialchars($row['contenido'], ENT_QUOTES, 'UTF-8');
+        $imagen = !empty($row['imagen']) ? htmlspecialchars($row['imagen'], ENT_QUOTES, 'UTF-8') : '../../../web/etc/assets/img/bloque.jpg';
+
 
         echo "<article class='noticia'>";
-        echo "<div class='noticia-imagen'><img src='../../etc/assets/img/bloque.jpg' alt='ImagenNoticia'></div>";
+        echo "<div class='noticia-imagen'><img src='" . htmlspecialchars($row['imagen']) . "' alt='Imagen de la noticia'></div>";
         echo "<div class='noticia-texto'>";
         echo "<h2 class='titulo-noticia'>{$titulo} - {$fecha_formateada}</h2>";
         echo "<p class='detalle-noticia'>{$contenido}</p>";

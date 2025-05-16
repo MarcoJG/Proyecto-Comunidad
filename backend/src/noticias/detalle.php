@@ -14,10 +14,17 @@ if (isset($_GET['id'])) {
     if ($resultado->rowCount() > 0) {
         $noticia = $resultado->fetch();
 
+         // Verificar si la imagen está vacía y asignar la ruta por defecto si es necesario
+        $imagen = !empty($noticia['imagen']) ? $noticia['imagen'] : '/Proyecto-Comunidad/web/etc/assets/img/bloque.jpg';
+
+        // Escapar la ruta de la imagen
+        $imagen = htmlspecialchars($imagen, ENT_QUOTES, 'UTF-8');
+
+
         echo "
             <div class='noticia-header'>
                 <div class='noticia-imagen'>
-                    <img src='../../etc/assets/img/bloque.jpg' alt='Imagen del noticia'>
+                    <img src='" . $imagen . "' alt='Imagen de la noticia'>
                 </div>
                 <div class='noticia-info'>
                     <h2 class='titulo-noticia'>" . htmlspecialchars($noticia['titulo']) . "</h2>
