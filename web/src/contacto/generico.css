@@ -34,6 +34,10 @@ body {
   background-color:var(--blanco); /* Color de fondo claro */
 }
 
+main {
+  padding-top: 180px;
+}
+
 h1, h2, h3, h4, h5, h6 {
   font-family: 'Playfair Display', sans-serif; /* Fuente para encabezados */
   font-weight: 700;
@@ -88,6 +92,11 @@ button:disabled {
     color: white; /* Color de texto del botón */
     cursor: pointer;
     transition: background-color 0.3s ease;
+    font-family: 'Open Sans', sans-serif;
+    font-size: 16px;
+    margin-bottom: 10px;
+    width: 100%;
+    height: 35px;
   }
   
   .boton_secundario:hover {
@@ -185,7 +194,7 @@ header{
    Formularios
 -------------------------------------------*/
 
-input, select, textarea, button {
+input, select, textarea {
   font-family: 'Open Sans', sans-serif;
   font-size: 16px;
   padding: 10px;
@@ -280,7 +289,7 @@ section:nth-child(even) {
 }
 
 /* Animación simple para un hover de botones */
-button:hover {
+.boton_secundario:hover {
   transform: scale(1.01);
 }
 .contact-form {
@@ -308,6 +317,3 @@ label {
 textarea {
   width: 100%; /* Asegura que el textarea ocupe todo el ancho */
 }
-
-
-

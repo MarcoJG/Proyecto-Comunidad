@@ -1,3 +1,23 @@
+<?php
+require_once __DIR__ . '/../../../config.php';
+session_start(); 
+
+// Redirigir si no hay sesión activa
+if (!isset($_SESSION["id_usuario"]) || !isset($_SESSION["nombre_rol"])) {
+    header("Location: /login.php");
+    exit();
+}
+
+// Normalizar el rol del usuario para evitar problemas por mayúsculas o espacios
+$nombreRol = trim(strtolower($_SESSION["nombre_rol"]));
+$usuarioEsAdminOPresidente = ($nombreRol === 'admin' || $nombreRol === 'presidente');
+
+// Mostrar mensaje si se eliminó un evento
+if (isset($_GET['mensaje']) && $_GET['mensaje'] === 'eliminado') {
+    echo "<p style='color: green; text-align:center; margin-top: 20px;'>Evento eliminado correctamente.</p>";
+}
+?>
+
 <!DOCTYPE html>
 <html lang="es">
 
@@ -9,95 +29,40 @@
 </head>
 
 <body class="fondo-cuerpo">
+<main>
+    <header>
+        <?php include $_SERVER['DOCUMENT_ROOT'] . $basePath . 'web/src/header/cabecera.php'; ?>
+    </header>
 
-    <!-- Aquí irá la cabecera -->
+    <?php if ($usuarioEsAdminOPresidente): ?>  
+        <div style="text-align: right; margin: 20px;">
+            <a href="crear_evento.php" class="boton-evento" style="background-color: #243D51; color: white; padding: 10px 20px; text-decoration: none; border-radius: 5px;">
+                Crear evento
+            </a>
+        </div>
+    <?php endif; ?>
 
-    <div class="contenedor-principal">
-
+    <section class="contenedor-principal">
         <!-- Próximos Eventos -->
-        <div class="contenedor proximos-eventos">
+        <section class="contenedor proximos-eventos">
             <h2 class="titulo-eventos">Próximos eventos</h2>
             <p class="subtitulo">Consulta todos los eventos de nuestra comunidad aquí</p>
+            <?php include '../../../backend/src/eventos/eventos_futuros.php'; ?>
+        </section>
+    </section>
 
-            <!--Evento 1 -->
-            <div class="evento">
-
-                <div class="evento-imagen">
-                    <img src="../../etc/assets/img/bloque.jpg" alt="ImagenEvento">
-                </div>
-
-                <!-- Texto y botón -->
-                <div class="evento-texto">
-                    <h2 class="titulo-evento">Próxima Junta de Propietarios</h2>
-                    <p class="detalle-evento">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quam
-                        consequuntur ipsa aspernatur fugit suscipit aliquam beatae, voluptatum praesentium maxime
-                        doloremque! Sint quia dolores soluta molestias sunt. Quos iste quia quo!.</p>
-                    <button class="boton-evento">Accede</button>
-                </div>
-            </div>
-
-            <!-- Evento 2 -->
-            <div class="evento">
-
-                <div class="evento-imagen">
-                    <img src="../../etc/assets/img/reparar.jpg" alt="ImagenEvento">
-                </div>
-
-                <!-- Texto y botón -->
-                <div class="evento-texto">
-                    <h2 class="titulo-evento">Cambio de contadores</h2>
-                    <p class="detalle-evento">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quod,
-                        exercitationem vel! Perferendis minus aliquam rerum dolore quam sequi necessitatibus explicabo.
-                    </p>
-                    <button class="boton-evento">Accede</button>
-                </div>
-            </div>
-        </div>
-    </div>
-
-
-    <div class="contenedor-principal">
-
-        <!--  Eventos pasados -->
-        <div class="contenedor proximos-eventos">
+    <section class="contenedor-principal">
+        <!-- Eventos pasados -->
+        <section class="contenedor proximos-eventos">
             <h2 class="titulo-eventos">Eventos pasados</h2>
+            <?php include '../../../backend/src/eventos/eventos_pasados.php'; ?>
+        </section>
+    </section>
+</main>
 
-            <!-- Evento 1 -->
-            <div class="evento">
-                <div class="evento-imagen">
-                    <img src="../../etc/assets/img/bloque.jpg" alt="ImagenEvento">
-                </div>
+<footer>
+    <iframe src="../footer/FOOTER.html" frameborder="0" width="100%" height="300px"></iframe>
+</footer>
 
-                <!-- Texto y botón -->
-                <div class="evento-texto">
-                    <h2 class="titulo-evento">Junta de Propietarios 10/12/2024</h2>
-                    <p class="detalle-evento">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quam
-                        consequuntur ipsa aspernatur fugit suscipit aliquam beatae, voluptatum praesentium maxime
-                        doloremque! Sint quia dolores soluta molestias sunt. Quos iste quia quo!.</p>
-                    <button class="boton-evento">Accede</button>
-                </div>
-            </div>
-
-            <!-- Evento 2  -->
-            <div class="evento">
-                <div class="evento-imagen">
-                    <img src="../../etc/assets/img/ayuda.jpg" alt="ImagenEvento">
-                </div>
-
-                <!-- Texto y botón -->
-                <div class="evento-texto">
-                    <h2 class="titulo-evento">La Comunidad con los afectados por la DANA</h2>
-                    <p class="detalle-evento">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quod,
-                        exercitationem vel! Perferendis minus aliquam rerum dolore quam sequi necessitatibus explicabo.
-                    </p>
-                    <button class="boton-evento">Accede</button>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Aquí irá el footer -->
-     
 </body>
-
 </html>

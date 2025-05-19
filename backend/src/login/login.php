@@ -26,7 +26,7 @@ function iniciarSesion($pdo) {
             $_SESSION["nombre_rol"] = $usuario["nombre_rol"];
 
             if ($_SESSION["nombre_rol"] === "Admin") {
-                header("Location: ../../../web/src/admin_panel/index.php");
+                header("Location: ../../../web/src/home/index.php");
                 exit();
             } else {
                 // Redirigir a la página principal de usuarios no administradores

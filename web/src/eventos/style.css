@@ -1,11 +1,31 @@
 * {
     font-family: Arial, sans-serif;
+    box-sizing: border-box;
 }
 
-.fondo-cuerpo {
-    background-color: #f3f3ec;
+body, html {
     margin: 0;
     padding: 0;
+}
+
+body {
+    background-color: #f5f5f5;
+}
+
+header {
+    background-color: white;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    height: 170px;
+    width: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+}
+
+main {
+    padding: 20px;
+    padding-top: 190px; 
 }
 
 .contenedor-principal {
@@ -18,7 +38,7 @@
 .titulo-evento,
 .titulo-evento2,
 .subtitulo,
-.titulo-evento2 {
+.titulo-eventos {
     color: #243D51;
     text-align: left;
 }
@@ -27,11 +47,30 @@
     color: #9c907d;
 }
 
+
+.boton-evento {
+    background-color: #243D51;
+    color: #fff;
+    padding: 10px 20px;
+    text-decoration: none;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 13px;
+    display: inline-block;
+}
+
+.boton-evento:hover {
+    background-color: #1c2f3d;
+}
+
+
 .contenedor-eventos {
     display: flex;
     flex-direction: column;
     gap: 10px;
 }
+
 
 .evento {
     display: flex;
@@ -43,12 +82,13 @@
     margin-top: 10px;
 }
 
+
 .evento-imagen img {
     width: 150px;
     height: 150px;
     object-fit: cover;
-    border-radius: 0;
 }
+
 
 .evento-texto {
     flex-grow: 1;
@@ -64,31 +104,25 @@
     margin-top: 5px;
 }
 
-.boton-evento {
-    background-color: #243D51;
-    color: #fff;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-}
-
-
-.contenedor-eventos h2 {
+.estrella {
     font-size: 24px;
-    margin-bottom: 10px;
+    color: #ccc;
+    cursor: pointer;
+    margin-left: 10px;
+    user-select: none;
+    transition: color 0.3s ease;
 }
 
-.boton-crear {
-    display: inline-block;
-    padding: 10px 15px;
-    background-color: #243D51;
-    color: white;
-    text-decoration: none;
-    border-radius: 5px;
-    font-weight: bold;
+.estrella.seleccionada {
+    color: #f39c12; 
 }
 
-.boton-crear:hover {
-    background-color: #1c2f3d;
+.eventos-destacado {
+    margin-top: 10px;
 }
+
+.estrellas {
+    display: flex;
+    gap: 5px; 
+}
+

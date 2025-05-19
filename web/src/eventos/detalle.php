@@ -1,26 +1,36 @@
-¡Entendido! Quieres mantener los "incoming changes" de la rama develop, que son los que están entre ======= y >>>>>>> develop.
-
-Aquí tienes el contenido editado del archivo web/src/eventos/detalle.php manteniendo solo los "incoming changes":
-
-HTML
-
+<?php
+require_once __DIR__ . '/../../../config.php';
+?>
 <!DOCTYPE html>
 <html lang="es">
-
 <head>
     <meta charset="UTF-8">
     <title>Evento</title>
-    <link rel="stylesheet" href="detalle.css">
-</head>
+    <link rel="stylesheet" href="detalle.css?<?= time(); ?>" />
 
+</head>
 <body class="fondo-cuerpo">
 
-    <div class="contenedor-principal">
-        <?php
-        include '../../../backend/src/eventos/detalle.php';
-        ?>
-    </div>
+<header>
+    <?php include $_SERVER['DOCUMENT_ROOT'] . $basePath . 'web/src/header/cabecera.php'; ?>
+</header>
+
+<div class="contenedor-principal">
+    <?php include '../../../backend/src/eventos/detalle.php'; ?>
+</div>
+
+<footer> 
+    <iframe src="../footer/FOOTER.html" frameborder="0" width="100%" height="300px"></iframe> 
+</footer>
+
+<script>
+    function confirmarBorrado(event) {
+        event.preventDefault();
+        if (confirm("¿Estás seguro de que quieres borrar este evento?")) {
+            event.target.submit();
+        }
+    }
+</script>
 
 </body>
-
 </html>

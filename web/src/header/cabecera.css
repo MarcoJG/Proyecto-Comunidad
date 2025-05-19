@@ -1,0 +1,126 @@
+body {
+    font-family: sans-serif;
+    margin: 0; /* Asegúrate de que el margen del body sea 0 */
+    padding: 0; /* Asegúrate de que el padding del body sea 0 */
+}
+
+header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background-color: #f5f5f5;
+    z-index: 100;
+}
+
+/* Estilos para el contenedor principal del header */
+.header-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+/* Estilos para el logo */
+.logo {
+    display: flex;
+}
+
+.logo:hover {
+    cursor: pointer;
+    transform: scale(1.02);
+}
+
+.logo img {
+    height: 150px;
+    width: 250px;
+}
+
+/* Estilos para los enlaces de navegación */
+.nav-container {
+    display: flex;
+}
+
+.nav-container a.nav-link {
+    color: #243d51;
+    margin: 40px;
+    text-decoration: none;
+}
+
+.nav-container a.nav-link:hover {
+    color: #786247;
+}
+
+/* Estilos para el contenedor de botones */
+.buttons-container {
+    display: flex;
+    align-items: center;
+    margin-right: 5%;
+}
+
+/* Estilos para el botón de inicio de sesión */
+.boton-login {
+    background-color: #243d51;
+    border: #243d51;
+    color: white;
+    padding: 7px;
+    margin-left: 10px;
+    cursor: pointer;
+    font-family: sans-serif;
+}
+
+/* Estilos para el contenedor de información del usuario */
+.user-info-container {
+    display: flex;
+    align-items: center;
+    position: relative;
+    
+    margin-right: 20px;
+    color : #243d51;
+}
+
+/* Estilos para el mensaje de bienvenida */
+.welcome-message {
+    margin-right: 10px;
+    font-weight: bold;
+    color : #243d51;
+}
+
+/* Estilos para el desplegable del usuario */
+.user-dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.user-dropdown-btn {
+    background-color: #243d51;
+    color: white;
+    padding: 8px;
+    border: none;
+    cursor: pointer;
+    border-radius: 0px;
+    font-size: 1em;
+}
+
+/* Estilos para el contenido del desplegable */
+.user-dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+    right: 0;
+}
+
+.user-dropdown-content p, .user-dropdown-content a {
+    color: #243d51;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+}
+
+.user-dropdown-content a:hover {
+    background-color: #ddd;
+}

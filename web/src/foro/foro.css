@@ -1,13 +1,51 @@
 /* foro/foro.css */
+main {
+    
+    padding-top: 110px;
+}
 
 #foro-content {
     background-color: #fff;
     padding: 25px;
     box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
-    border-radius: 10px;
-    width: 90%;
+    border-radius: 0px;
+    width: 100%;
     max-width: 1200px;
-    margin: 40px auto;
+    
+    
+}
+
+.foro-main{
+    align-items: center;
+    display: flex;
+
+}
+
+.foro-principal {
+    display: flex;
+    flex-direction: column; /* Apila los elementos verticalmente */
+    align-items: center; /* Centra los elementos horizontalmente */
+    width: 100%;
+    max-width: 1200px;
+    margin: 20px auto; /* Centra el contenedor en la página */
+    padding: 20px;
+}
+.foro-header {
+    text-align: center; /* Centra el texto dentro del header */
+    margin-bottom: 20px; /* Espacio entre el header y el contenido principal */
+}
+
+.foro-header h2 {
+    color: #243D51;
+    font-weight: 700;
+    margin-bottom: 10px;
+    
+}
+
+.foro-header p {
+    color: #9c907d;
+    margin-bottom: 20px;
+    line-height: 1.6;
 }
 
 #foro-content h2 {
@@ -15,6 +53,7 @@
     font-weight: 700;
     margin-bottom: 20px;
     font-size: 22px;
+    align-items: center;
 }
 
 #foro-mensajes {
@@ -27,7 +66,7 @@
 .hilo-foro {
     background-color: #f9f9f9;
     padding: 15px;
-    border-radius: 8px;
+    border-radius: 0px;
     border: 1px solid #e0e0e0;
 }
 
@@ -52,22 +91,23 @@
 }
 
 .acciones-admin button {
-    background-color: #d9534f; /* Rojo para acciones administrativas */
+    background-color: #243D51; /* Rojo para acciones administrativas */
     color: white;
     border: none;
     padding: 8px 12px;
     cursor: pointer;
-    border-radius: 4px;
+    border-radius: 0px;
     font-size: 0.8em;
 }
 
 .acciones-admin button:hover {
-    background-color: #c9302c;
+    background-color: #1c2f3d;
 }
 
-.hilo-contenido p {
+.hilo-contenido-texto {
     color: #333;
     line-height: 1.6;
+    font-size: 1em;
 }
 
 .hilo-interacciones {
@@ -102,7 +142,7 @@
     margin-bottom: 10px;
     padding: 10px;
     background-color: #f0f0f0;
-    border-radius: 5px;
+    border-radius: 0px;
 }
 
 .autor-respuesta {
@@ -123,7 +163,7 @@
     padding: 10px;
     margin-top: 10px;
     border: 1px solid #ccc;
-    border-radius: 5px;
+    border-radius: 0px;
     resize: vertical;
 }
 
@@ -133,7 +173,7 @@
     border: none;
     padding: 10px 15px;
     cursor: pointer;
-    border-radius: 6px;
+    border-radius: 0px;
     font-size: 0.9em;
     margin-top: 10px;
 }
@@ -144,9 +184,11 @@
 
 #foro-nuevo-hilo {
     padding: 15px;
-    background-color: #f9f9f9;
-    border-radius: 8px;
+    background-color: #f8f8f8;
+    border-radius: 0px;
     border: 1px solid #e0e0e0;
+    margin-bottom: 20px;
+    box-shadow: 0px 3px 7px rgba(36, 61, 81, 0.712);
 }
 
 #foro-nuevo-hilo h3 {
@@ -161,7 +203,7 @@
     padding: 10px;
     margin-bottom: 10px;
     border: 1px solid #ccc;
-    border-radius: 5px;
+    border-radius: 0px;
     box-sizing: border-box;
 }
 
@@ -171,7 +213,7 @@
     border: none;
     padding: 10px 15px;
     cursor: pointer;
-    border-radius: 6px;
+    border-radius: 0px;
     font-size: 0.9em;
 }
 

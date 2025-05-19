@@ -1,5 +1,9 @@
+<?php
+session_start();
+?>
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -17,9 +21,24 @@
     <meta property="og:description" content="Noticias y eventos de tu comunidad de vecinos.">
     <meta name="twitter:card" content="summary_large_image">
 </head>
+
 <body>
+    <header>
+    <?php
+        define('BASE_PATH', '../header/');
+        include(BASE_PATH . 'cabecera.php');
+    ?>
+    </header>
     <main>
+        
         <section id="bloque-noticias">
+            <?php if (isset($_SESSION["nombre_rol"]) && $_SESSION["nombre_rol"] === "Admin"): ?>
+            <div style="position: absolute; top: 10px; right: 10px;">
+                <a href="../admin_panel/index.php">
+                    <button style="padding: 10px 15px;">Panel de administración</button>
+                </a>
+            </div>
+        <?php endif; ?>
             <div>
                 <h2>Bloque de noticias</h2>
                 <p>Todas las noticias relevantes sobre nuestra comunidad</p>
@@ -76,18 +95,20 @@
                         <button id="nextMonth"><i class="fas fa-chevron-right"></i></button>
                     </div>
                 </div>
-            </div>
-            <div class="calendar-grid" id="calendarGrid"></div>
-        </section>
-        <section id="bloqueDestacado">
-            <h2>Bloque destacado</h2>
-            <div>
-                <img src="" alt="Imagen destacada del evento">
-                <h2>Reunion Comunidad 18/10/2025</h2>
-                <p>Lorem ipsum dolor...</p>
-                <button>Button</button>
-            </div>
-        </section>
-    </main>
-</body>
-</html>
+                <div class="calendar-grid" id="calendarGrid"></div>
+            </section>
+            <section id="bloqueDestacado">
+                <h2>Bloque destacado</h2>
+                <div>
+                    <img src="" alt="Imagen destacada del evento">
+                    <h2>Reunion Comunidad 18/10/2025</h2>
+                    <p>Lorem ipsum dolor...</p>
+                    <button>Button</button>
+                </div>
+            </section>
+        </main>
+        <footer> 
+            <iframe src="../footer/FOOTER.html" frameborder="0" width="100%" height="300px"></iframe> 
+        </footer>
+    </body>
+    </html>

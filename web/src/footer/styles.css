@@ -23,6 +23,11 @@ footer {
     margin: 0 auto;
 }
 
+.logo-container:hover {
+    cursor: pointer;
+    transform: scale(1.01);
+}
+
 .links-section ul {
     list-style: none;
     padding: 0;

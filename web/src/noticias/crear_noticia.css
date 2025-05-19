@@ -1,0 +1,89 @@
+* {
+    font-family: Arial, sans-serif;
+}
+
+
+.fondo-cuerpo {
+    background-color: #f5f5f5;
+    margin: 0;
+    padding: 0;
+}
+
+
+.contenedor-principal {
+    max-width: 800px;
+    margin: 50px auto;
+    padding: 20px;
+    background-color: #fff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+
+.titulo-noticia {
+    color: #243D51;
+    font-size: 24px;
+    text-align: left;
+    margin-bottom: 20px;
+}
+
+
+.formulario-noticia label {
+    font-size: 16px;
+    color: #243D51;
+    margin-bottom: 8px;
+    display: block;
+}
+
+
+.formulario-noticia input,
+.formulario-noticia textarea {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 12px;
+    border: 1px solid #ddd;
+    border-radius: 0px;
+    font-size: 16px;
+}
+
+
+.formulario-noticia input[type="date"] {
+    background-color: #f9f9f9;
+}
+
+
+.formulario-noticia button {
+    background-color: #243D51;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 0px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+}
+
+
+.formulario-noticia button:hover {
+    background-color: #1c2f3d;
+}
+
+
+.formulario-noticia .detalle-noticia {
+    color: #9c907d;
+    font-size: 14px;
+    margin-top: 5px;
+}
+
+
+.formulario-noticia {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+
+.formulario-noticia input:focus,
+.formulario-noticia textarea:focus {
+    border-color: #243D51;
+    outline: none;
+}
