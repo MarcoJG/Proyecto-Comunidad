@@ -97,7 +97,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     try {
          // Verificar si ya existe un noticia destacado
         if ($destacado == 1) {
-            $sql_check = "SELECT id_noticia FROM noticias WHERE es_destacada = 1 LIMIT 1";
+            $sql_check = "SELECT id_noticias FROM noticias WHERE es_destacada = 1 LIMIT 1";
             $result = $pdo->query($sql_check);
 
             if ($result->rowCount() > 0) {
@@ -115,7 +115,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             }
         }
         // Insertar en la BBDD
-        $sql = "INSERT INTO noticias (titulo, contenido, fecha, id_usuario,es_destacada, imagen) VALUES (:titulo, :contenido, :fecha, :id_usuario, :es_destacada :imagen)";
+        $sql = "INSERT INTO noticias (titulo, contenido, fecha, id_usuario,es_destacada, imagen) VALUES (:titulo, :contenido, :fecha, :id_usuario, :es_destacada, :imagen)";
         $stmt = $pdo->prepare($sql);
         $stmt->bindValue(':titulo', $titulo, PDO::PARAM_STR);
         $stmt->bindValue(':contenido', $contenido, PDO::PARAM_STR);

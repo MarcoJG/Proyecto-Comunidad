@@ -9,7 +9,7 @@ if (!isset($_SESSION['nombre_rol']) || $_SESSION['nombre_rol'] !== 'Admin') {
 
 // Recuperar datos del formulario en caso de error
 $titulo_guardado = $_SESSION['form_data']['titulo'] ?? '';
-$descripcion_guardado = $_SESSION['form_data']['descripcion'] ?? '';
+$descripcion_guardado = $_SESSION['form_data']['contenido'] ?? '';
 $fecha_guardada = $_SESSION['form_data']['fecha'] ?? '';
 $destacado_guardado = $_SESSION['form_data']['destacado'] ?? 0;
 
@@ -58,7 +58,7 @@ unset($_SESSION['form_data']);
             <input type="text" id="titulo" name="titulo" maxlength="100" required value="<?= htmlspecialchars($titulo_guardado) ?>">
 
             <label for="descripcion">Descripción:</label>
-            <textarea id="descripcion" name="descripcion" maxlength="255" required><?= htmlspecialchars($descripcion_guardado) ?></textarea>
+            <textarea id="contenido" name="contenido" maxlength="255" required><?= htmlspecialchars($descripcion_guardado) ?></textarea>
 
             <label for="fecha">Fecha de la noticia:</label>
             <input type="date" id="fecha" name="fecha" required min="<?= date('Y-m-d', strtotime('+1 day')) ?>" value="<?= htmlspecialchars($fecha_guardada) ?>">
