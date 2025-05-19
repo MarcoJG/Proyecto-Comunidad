@@ -11,7 +11,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
      
 
     $titulo = trim($_POST['titulo']);
-    $contenido = trim($_POST['descripcion']);
+    $contenido = trim($_POST['contenido']);
     $fecha = $_POST['fecha'];
     $id_usuario = $_SESSION['id_usuario'];
     
@@ -22,7 +22,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     if (empty($titulo) || empty($contenido) || empty($fecha)) {
             $_SESSION['form_data'] = [
                 'titulo' => $titulo,
-                'descripcion' => $contenido,
+                'contenido' => $contenido,
                 'fecha' => $fecha,
                 'destacado' => $destacado
             ];
@@ -33,7 +33,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         if (strlen($titulo) > 100 || strlen($contenido) > 255) {
             $_SESSION['form_data'] = [
                 'titulo' => $titulo,
-                'descripcion' => $contenido,
+                'contenido' => $contenido,
                 'fecha' => $fecha,
                 'destacado' => $destacado
             ];
@@ -44,7 +44,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         if (strtotime($fecha) <= strtotime('today')) {
             $_SESSION['form_data'] = [
                 'titulo' => $titulo,
-                'descripcion' => $contenido,
+                'contenido' => $contenido,
                 'fecha' => $fecha,
                 'destacado' => $destacado
             ];
@@ -105,7 +105,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                 $_SESSION['noticia_destacado_existente'] = true;
                 $_SESSION['noticia_destacado_data'] = [
                     'titulo' => $titulo,
-                    'descripcion' => $contenido,
+                    'contenido' => $contenido,
                     'fecha' => $fecha,
                     'destacado' => $destacado,
                     'id_usuario' => $id_usuario
