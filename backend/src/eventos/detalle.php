@@ -14,7 +14,7 @@ if (isset($_GET['id'])) {
     if ($resultado->rowCount() > 0) {
         $evento = $resultado->fetch();
         // Verificar si la imagen está vacía y asignar la ruta por defecto si es necesario
-        $imagen = !empty($noticia['imagen']) ? $noticia['imagen'] : '/Proyecto-Comunidad/web/etc/assets/img/bloque.jpg';
+        $imagen = !empty($evento['imagen']) ? $evento['imagen'] : '/Proyecto-Comunidad/web/etc/assets/img/bloque.jpg';
 
         // Escapar la ruta de la imagen
         $imagen = htmlspecialchars($imagen, ENT_QUOTES, 'UTF-8');
