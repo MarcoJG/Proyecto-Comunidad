@@ -14,26 +14,42 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $fecha = $_POST["fecha"];
     $es_destacada = isset($_POST["es_destacada"]) ? intval($_POST["es_destacada"]) : 0;
 
+    if ($es_destacada === 1) {
+        // Verificar si existe otro evento destacado 
+        $sql_check = "SELECT id_evento FROM eventos WHERE es_destacada = 1 AND id_evento != :id_evento LIMIT 1";
+        $stmt = $pdo->prepare($sql_check);
+        $stmt->execute([':id_evento' => $id_evento]);
+
+        if ($stmt->rowCount() > 0) {
+            // Guardar datos en sesión y redirigir a confirmación
+            $_SESSION['evento_editar_destacado_data'] = [
+                'id_evento' => $id_evento,
+                'titulo' => $titulo,
+                'descripcion' => $descripcion,
+                'fecha' => $fecha,
+                'es_destacada' => $es_destacada
+            ];
+            header("Location: /Proyecto-Comunidad/web/src/eventos/confirmar_reemplazo_edicion.php");
+            exit;
+        }
+    }
+
+    // Si no hay conflicto, actualizar directamente
     $sql = "UPDATE eventos 
             SET titulo = :titulo, descripcion = :descripcion, fecha = :fecha, es_destacada = :es_destacada 
             WHERE id_evento = :id_evento";
 
     $stmt = $pdo->prepare($sql);
-    $stmt->bindParam(":titulo", $titulo);
-    $stmt->bindParam(":descripcion", $descripcion);
-    $stmt->bindParam(":fecha", $fecha);
-    $stmt->bindParam(":es_destacada", $es_destacada);
-    $stmt->bindParam(":id_evento", $id_evento);
+    $stmt->execute([
+        ":titulo" => $titulo,
+        ":descripcion" => $descripcion,
+        ":fecha" => $fecha,
+        ":es_destacada" => $es_destacada,
+        ":id_evento" => $id_evento
+    ]);
 
-    if ($stmt->execute()) {
-        // ✅ Redirección correcta con base URL
-        $host = $_SERVER['HTTP_HOST'];
-        $uri = "/Proyecto-Comunidad/web/src/eventos/detalle.php?id=$id_evento";
-        header("Location: http://$host$uri");
-        exit;
-    } else {
-        echo "<p>Error al actualizar el evento.</p>";
-    }
+    header("Location: /Proyecto-Comunidad/web/src/eventos/detalle.php?id=$id_evento");
+    exit;
 } else {
     echo "<p>Método no permitido.</p>";
 }
