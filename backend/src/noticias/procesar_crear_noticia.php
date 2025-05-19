@@ -115,7 +115,9 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             }
         }
         // Insertar en la BBDD
+
         $sql = "INSERT INTO noticias (titulo, contenido, fecha, id_usuario, es_destacada, imagen) VALUES (:titulo, :contenido, :fecha, :id_usuario, :es_destacada, :imagen)";
+
         $stmt = $pdo->prepare($sql);
         $stmt->bindValue(':titulo', $titulo, PDO::PARAM_STR);
         $stmt->bindValue(':contenido', $contenido, PDO::PARAM_STR);

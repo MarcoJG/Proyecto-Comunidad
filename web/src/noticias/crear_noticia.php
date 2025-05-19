@@ -57,7 +57,9 @@ unset($_SESSION['form_data']);
             <label for="titulo">Título de la noticia:</label>
             <input type="text" id="titulo" name="titulo" maxlength="100" required value="<?= htmlspecialchars($titulo_guardado) ?>">
 
+
             <label for="contenido">Descripción:</label>
+
             <textarea id="contenido" name="contenido" maxlength="255" required><?= htmlspecialchars($descripcion_guardado) ?></textarea>
 
             <label for="fecha">Fecha de la noticia:</label>
