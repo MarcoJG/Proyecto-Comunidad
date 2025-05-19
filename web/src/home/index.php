@@ -6,6 +6,9 @@ if (!isset($_SESSION['usuario'])) {
     header("Location: ../../login/login.php");
     exit();
 }
+
+// Incluir la conexión a la base de datos AL PRINCIPIO
+include __DIR__ . '/../../../backend/src/conexion_BBDD/conexion_db_pm.php';
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -35,7 +38,6 @@ if (!isset($_SESSION['usuario'])) {
     ?>
 
     <main>
-        <!-- BLOQUE DE NOTICIAS (estático, no tocado) -->
         <div>
             <h2>Bloque de noticias</h2>
             <p>Las noticias más próximas sobre nuestra comunidad</p>
@@ -55,40 +57,12 @@ if (!isset($_SESSION['usuario'])) {
             </div>
         </div>
 
-        <!-- BLOQUE DESTACADO (dinámico) -->
-        <?php
-        include __DIR__ . '/../../../backend/src/conexion_BBDD/conexion_db_pm.php';
-
-        $sql_destacado = "SELECT id_evento, titulo, descripcion, fecha FROM eventos WHERE es_destacada = 1 LIMIT 1";
-        $stmt_destacado = $pdo->query($sql_destacado);
-
-        if ($stmt_destacado->rowCount() > 0) {
-            $evento_destacado = $stmt_destacado->fetch(PDO::FETCH_ASSOC);
-            $fecha_formateada = date("d/m/Y", strtotime($evento_destacado['fecha']));
-        ?>
-            <section id="bloqueDestacado">
-                <h2>Evento Destacado</h2>
-                <div>
-                    <img src="../../etc/assets/img/bloque.jpg" alt="Imagen destacada del evento">
-                    <h3><?php echo htmlspecialchars($evento_destacado['titulo']); ?></h3>
-                    <p><?php echo htmlspecialchars($evento_destacado['descripcion']); ?></p>
-                    <p><strong>Fecha:</strong> <?php echo $fecha_formateada; ?></p>
-                    <a href="../eventos/detalle.php?id=<?php echo $evento_destacado['id_evento']; ?>">
-                        <button>Ver Detalles</button>
-                    </a>
-                </div>
-            </section>
-        <?php
-        }
-        ?>
-
-        <!-- BLOQUE DE EVENTOS MÁS RECIENTES (dinámico) -->
         <?php
         $sql_recientes = "
-            SELECT id_evento, titulo, descripcion, fecha 
-            FROM eventos 
+            SELECT id_evento, titulo, descripcion, fecha
+            FROM eventos
             WHERE fecha >= CURDATE()
-            ORDER BY fecha ASC 
+            ORDER BY fecha ASC
             LIMIT 2
         ";
         $stmt_recientes = $pdo->query($sql_recientes);
@@ -120,8 +94,9 @@ if (!isset($_SESSION['usuario'])) {
         <?php
         }
         ?>
+    </main>
 
-        <!-- CALENDARIO (no tocado) -->
+    <aside class="sidebar-right">
         <section id="calendario">
             <div class="calendar-header">
                 <span>Select date</span>
@@ -143,7 +118,30 @@ if (!isset($_SESSION['usuario'])) {
             </div>
         </section>
 
-    </main>
+        <?php
+        $sql_destacado = "SELECT id_evento, titulo, descripcion, fecha FROM eventos WHERE es_destacada = 1 LIMIT 1";
+        $stmt_destacado = $pdo->query($sql_destacado);
+
+        if ($stmt_destacado->rowCount() > 0) {
+            $evento_destacado = $stmt_destacado->fetch(PDO::FETCH_ASSOC);
+            $fecha_formateada = date("d/m/Y", strtotime($evento_destacado['fecha']));
+        ?>
+            <section id="bloqueDestacado">
+                <h2>Evento Destacado</h2>
+                <div>
+                    <img src="../../etc/assets/img/bloque.jpg" alt="Imagen destacada del evento">
+                    <h3><?php echo htmlspecialchars($evento_destacado['titulo']); ?></h3>
+                    <p><?php echo htmlspecialchars($evento_destacado['descripcion']); ?></p>
+                    <p><strong>Fecha:</strong> <?php echo $fecha_formateada; ?></p>
+                    <a href="../eventos/detalle.php?id=<?php echo $evento_destacado['id_evento']; ?>">
+                        <button>Ver Detalles</button>
+                    </a>
+                </div>
+            </section>
+        <?php
+        }
+        ?>
+    </aside>
 
     <footer>
         <iframe src="../footer/FOOTER.html" frameborder="0" width="100%" height="300px"></iframe>
