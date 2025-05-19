@@ -84,3 +84,16 @@ form {
     gap: 15px;
     margin-top: 30px;
 }
+
+.boton-noticia-volver {
+    all: unset;
+    background-color: #243D51 !important;
+    color: #fff !important;
+    padding: 10px 20px !important;
+    text-decoration: none !important;
+    border: none !important;
+    cursor: pointer !important;
+    margin-bottom: 2rem;
+    margin-top: -20px;
+
+}
