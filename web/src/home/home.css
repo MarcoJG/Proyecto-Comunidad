@@ -274,7 +274,7 @@ main > div:first-child { /* Selecciona el primer div dentro de main (bloque de n
     }
 
     #bloqueDestacado {
-        /* No necesitamos márgenes adicionales aquí ya que es el último elemento */
+        margin-bottom: 20px;
     }
 
     .noticia, .evento {
