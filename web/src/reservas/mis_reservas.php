@@ -3,12 +3,12 @@ session_start();
 require_once __DIR__ . '/../../../backend/src/conexion_BBDD/conexion_db_pm.php';
 
 if (!isset($_SESSION['usuario'])) {
-    header("Location: /Proyecto-Comunidad/web/public/login.php"); 
+    header("Location: /Proyecto-Comunidad/web/public/login.php");
     exit;
 }
 
 $usuario = $_SESSION['usuario'];
-$id_usuario = $_SESSION['id_usuario'];  
+$id_usuario = $_SESSION['id_usuario'];
 
 // Consultar las reservas del usuario
 try {
@@ -30,9 +30,9 @@ if (isset($_GET['success']) && $_GET['success'] == 2) {
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
+    <meta charset="UTF-8"> <br>
     <title>Mis Reservas</title>
-    <link rel="stylesheet" href="/../Proyecto-Comunidad/web/src/reservas/mis_reservas.css"> 
+    <link rel="stylesheet" href="/../Proyecto-Comunidad/web/src/reservas/mis_reservas.css">
 </head>
 <body>
 
@@ -45,7 +45,7 @@ if (isset($_GET['success']) && $_GET['success'] == 2) {
 
 <main>
     <div class="contenedor-reservas">
-        <h2>Mis Reservas</h2>
+        <h2 class="titulo-mis-reservas">Mis Reservas</h2>
 
         <?php if (empty($reservas)): ?>
             <div class="contenido-centrado mensaje-sin-reservas">
@@ -68,7 +68,7 @@ if (isset($_GET['success']) && $_GET['success'] == 2) {
                         <tr>
                             <td><?php echo htmlspecialchars($reserva['zona']); ?></td>
                             <td>
-                                <?php 
+                                <?php
                                 $fechaReserva = new DateTime($reserva['fecha_reserva']);
                                 echo $fechaReserva->format('d-m-Y H:i');
                                 ?>
@@ -82,11 +82,14 @@ if (isset($_GET['success']) && $_GET['success'] == 2) {
             </table>
         <?php endif; ?>
 
-        <div class="volver-centro">
-            <a href="/Proyecto-Comunidad/web/src/reservas/reservas.php">
-                <button class="btn-volver">Volver a Reservas</button>
-            </a>
+        <!-- Botones centrados y en línea -->
+        <div class="botones-en-linea">
+            <a href="/Proyecto-Comunidad/web/src/reservas/reservas.php" class="btn-volver">Volver a Reservas</a>
+            <?php if ($_SESSION['nombre_rol'] === 'Presidente'): ?>
+                <a href="/Proyecto-Comunidad/web/src/reservas/admin_reservas.php" class="btn-volver">Ver todas las reservas</a>
+            <?php endif; ?>
         </div>
+
     </div>
 </main>
 
