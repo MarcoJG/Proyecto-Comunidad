@@ -24,6 +24,15 @@
     <footer> 
         <iframe src="../footer/FOOTER.html" frameborder="0" width="100%" height="300px"></iframe> 
     </footer>
+
+    <script>
+    function confirmarBorrado(event) {
+        event.preventDefault();
+        if (confirm("¿Estás seguro de que quieres borrar este evento?")) {
+            event.target.submit();
+        }
+    }
+</script>
 </body>
 
 </html>

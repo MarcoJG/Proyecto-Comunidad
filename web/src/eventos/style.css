@@ -54,7 +54,6 @@ main {
     padding: 10px 20px;
     text-decoration: none;
     border: none;
-    border-radius: 5px;
     cursor: pointer;
     font-size: 13px;
     display: inline-block;
@@ -126,3 +125,9 @@ main {
     gap: 5px; 
 }
 
+.noticia-imagen img {
+    width: 150px;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 0;
+}
