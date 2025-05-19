@@ -22,6 +22,10 @@ if (isset($_GET['id'])) {
 
 
         echo "
+                    <form method='GET' action='../../../web/src/noticias/index.php'>
+                        <input type='hidden' name='id' value='$id_noticia'>
+                        <button type='submit' class='boton-noticia'>Volver a Noticias</button>
+                    </form>
             <div class='noticia-header'>
                 <div class='noticia-imagen'>
                     <img src='" . $imagen . "' alt='Imagen de la noticia'>

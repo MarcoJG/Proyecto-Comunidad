@@ -50,6 +50,7 @@ $noticia = $result->fetch();
             <input type="date" id="fecha" name="fecha" value="<?= $noticia['fecha']; ?>" required>
 
             <div class="checkbox-destacado">
+                <label for="descripcion">¿La noticia es destacada?</label> <br>
                 <label><input type="radio" name="es_destacada" value="1" <?= $noticia['es_destacada'] == 1 ? 'checked' : ''; ?>> Sí</label>
                 <label><input type="radio" name="es_destacada" value="0" <?= $noticia['es_destacada'] == 0 ? 'checked' : ''; ?>> No</label>
             </div>

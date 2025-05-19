@@ -5,47 +5,52 @@ include __DIR__ . '/../conexion_BBDD/conexion_db_pm.php';
 
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
-    // Verificar usuario Admin
-    if (!isset($_SESSION['id_usuario']) || !isset($_SESSION["nombre_rol"]) || $_SESSION["nombre_rol"] !== "Admin") {
+    if (!isset($_SESSION['id_usuario']) || !isset($_SESSION["nombre_rol"]) || !in_array($_SESSION["nombre_rol"], ["Admin", "Presidente"])) {
         die("No autorizado.");
-     }
+    }
+     
 
     $titulo = trim($_POST['titulo']);
     $contenido = trim($_POST['descripcion']);
     $fecha = $_POST['fecha'];
     $id_usuario = $_SESSION['id_usuario'];
-   
+    
+    
+    // Comprobar si el noticia es destacado
+    $destacado = isset($_POST['destacado']) ? $_POST['destacado'] : 0;
 
-    // Validaciones
-    if (empty($titulo) || empty($contenido) || empty($fecha)) {
-        $_SESSION['form_data'] = [
-            'titulo' => $titulo,
-            'descripcion' => $contenido,
-            'fecha' => $fecha
-        ];
-        header("Location: ../../../web/crear_noticia.php?error=faltan_datos");
-        exit();
-    }
+    if (empty($titulo) || empty($descripcion) || empty($fecha)) {
+            $_SESSION['form_data'] = [
+                'titulo' => $titulo,
+                'descripcion' => $descripcion,
+                'fecha' => $fecha,
+                'destacado' => $destacado
+            ];
+            header("Location: ../../../web/src/noticias/crear_noticia.php?error=faltan_datos");
+            exit();
+        }
 
-    if (strlen($titulo) > 100 || strlen($contenido) > 255) {
-        $_SESSION['form_data'] = [
-            'titulo' => $titulo,
-            'descripcion' => $contenido,
-            'fecha' => $fecha
-        ];
-        header("Location: ../../../web/crear_noticia.php?error=longitud_invalida");
-        exit();
-    }
+        if (strlen($titulo) > 100 || strlen($descripcion) > 255) {
+            $_SESSION['form_data'] = [
+                'titulo' => $titulo,
+                'descripcion' => $descripcion,
+                'fecha' => $fecha,
+                'destacado' => $destacado
+            ];
+            header("Location: ../../../web/src/noticias/crear_noticia.php?error=longitud_invalida");
+            exit();
+        }
 
-    if (strtotime($fecha) <= strtotime('today')) {
-        $_SESSION['form_data'] = [
-            'titulo' => $titulo,
-            'descripcion' => $contenido,
-            'fecha' => $fecha
-        ];
-        header("Location: ../../../web/crear_noticia.php?error=fecha_invalida");
-        exit();
-    }
+        if (strtotime($fecha) <= strtotime('today')) {
+            $_SESSION['form_data'] = [
+                'titulo' => $titulo,
+                'descripcion' => $descripcion,
+                'fecha' => $fecha,
+                'destacado' => $destacado
+            ];
+            header("Location: ../../../web/src/noticias/crear_noticia.php?error=fecha_invalida");
+            exit();
+        }
      // Imagen por defecto
     $rutaImagenBD = '/Proyecto-Comunidad/web/etc/assets/img/bloque.jpg';
 
@@ -90,13 +95,33 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     }
 
     try {
+         // Verificar si ya existe un noticia destacado
+        if ($destacado == 1) {
+            $sql_check = "SELECT id_noticia FROM noticias WHERE es_destacada = 1 LIMIT 1";
+            $result = $pdo->query($sql_check);
+
+            if ($result->rowCount() > 0) {
+                // Guardar los datos del nuevo noticia y redirigir a confirmación
+                $_SESSION['noticia_destacado_existente'] = true;
+                $_SESSION['noticia_destacado_data'] = [
+                    'titulo' => $titulo,
+                    'descripcion' => $descripcion,
+                    'fecha' => $fecha,
+                    'destacado' => $destacado,
+                    'id_usuario' => $id_usuario
+                ];
+                header("Location: /Proyecto-Comunidad/web/src/noticias/confirmar_reemplazo.php");
+                exit();
+            }
+        }
         // Insertar en la BBDD
-        $sql = "INSERT INTO noticias (titulo, contenido, fecha, id_usuario, imagen) VALUES (:titulo, :contenido, :fecha, :id_usuario, :imagen)";
+        $sql = "INSERT INTO noticias (titulo, contenido, fecha, id_usuario,es_destacada, imagen) VALUES (:titulo, :contenido, :fecha, :id_usuario, :es_destacada :imagen)";
         $stmt = $pdo->prepare($sql);
         $stmt->bindValue(':titulo', $titulo, PDO::PARAM_STR);
         $stmt->bindValue(':contenido', $contenido, PDO::PARAM_STR);
         $stmt->bindValue(':fecha', $fecha, PDO::PARAM_STR);
         $stmt->bindValue(':id_usuario', $id_usuario, PDO::PARAM_INT);
+        $stmt->bindValue(':es_destacada', $destacado, PDO::PARAM_INT);
         $stmt->bindValue(':imagen', $rutaImagenBD, PDO::PARAM_STR);
         
         $stmt->execute();

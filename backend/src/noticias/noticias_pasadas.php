@@ -6,7 +6,7 @@ include __DIR__ . '/../conexion_BBDD/conexion_db_pm.php';
 $hoy = date('Y-m-d');
 
 // Consulta segura con prepared statement
-$sql = "SELECT id_noticias, titulo, contenido, fecha, imagen FROM noticias WHERE DATE(fecha) < :hoy ORDER BY fecha ASC";
+$sql = "SELECT id_noticias, titulo, contenido, fecha, es_destacada, imagen FROM noticias WHERE DATE(fecha) < :hoy ORDER BY fecha ASC";
 $stmt = $pdo->prepare($sql);
 $stmt->execute(['hoy' => $hoy]);
 
@@ -16,15 +16,19 @@ if ($stmt->rowCount() > 0) {
         $id = (int)$row['id_noticias'];
         $titulo = htmlspecialchars($row['titulo'], ENT_QUOTES, 'UTF-8');
         $contenido = htmlspecialchars($row['contenido'], ENT_QUOTES, 'UTF-8');
+         // Lógica para asignar clase para la estrella
+        $estrella_class = ($row['es_destacada'] == 1) ? 'estrella seleccionada' : 'estrella';
+
         $imagen = !empty($row['imagen']) ? htmlspecialchars($row['imagen'], ENT_QUOTES, 'UTF-8') : '../../../web/etc/assets/img/bloque.jpg';
 
 
         echo "<article class='noticia'>";
         echo "<div class='noticia-imagen'><img src='" . htmlspecialchars($row['imagen']) . "' alt='Imagen de la noticia'></div>";
         echo "<div class='noticia-texto'>";
-        echo "<h2 class='titulo-noticia'>{$titulo} - {$fecha_formateada}</h2>";
-        echo "<p class='detalle-noticia'>{$contenido}</p>";
-        echo "<a href='detalle.php?id={$id}' class='boton-noticia'>Accede</a>";
+        echo "<h2 class='titulo-noticia'>" . htmlspecialchars($row['titulo']) . " <span class='$estrella_class'>&#9733;</span></h2>";
+        echo "<p class='detalle-noticia'>" . htmlspecialchars($row['contenido']) . "</p>";
+        echo "<p class='fecha-noticia'>" . $fecha_formateada . "</p>";
+        echo "<a href='detalle.php?id=" . $row['id_noticias'] . "' class='boton-noticia'>Accede</a>";
         echo "</div>";
         echo "</article>";
     }

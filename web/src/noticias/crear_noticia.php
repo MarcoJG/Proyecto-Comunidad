@@ -57,16 +57,17 @@ unset($_SESSION['form_data']);
             <label for="titulo">Título de la noticia:</label>
             <input type="text" id="titulo" name="titulo" maxlength="100" required value="<?= htmlspecialchars($titulo_guardado) ?>">
 
-            <label for="fecha">Fecha de la noticia:</label>
-            <input type="date" id="fecha" name="fecha" required min="<?= date('Y-m-d', strtotime('+1 day')) ?>" value="<?= htmlspecialchars($fecha_guardada) ?>">
-
             <label for="descripcion">Descripción:</label>
             <textarea id="descripcion" name="descripcion" maxlength="255" required><?= htmlspecialchars($descripcion_guardado) ?></textarea>
+
+            <label for="fecha">Fecha de la noticia:</label>
+            <input type="date" id="fecha" name="fecha" required min="<?= date('Y-m-d', strtotime('+1 day')) ?>" value="<?= htmlspecialchars($fecha_guardada) ?>">
+            
             <label for="imagen">Imagen de la noticia:</label>
             <input type="file" name="imagen" accept="image/*">
             
             <!-- Evento es destacado -->
-            <label for="destacado">¿Es evento destacado?</label>
+            <label for="destacado">¿Es noticia destacada?</label>
 
             <div class="checkbox-destacado">
                 <label>
