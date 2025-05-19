@@ -1,9 +1,9 @@
 <?php
 session_start();
 
-if (!isset($_SESSION['nombre_rol']) || $_SESSION['nombre_rol'] !== 'Admin') {
-    header("Location: ../../../web/src/eventos/acceso_denegado.php");
-    exit();
+if (!isset($_SESSION["nombre_rol"]) || !in_array($_SESSION["nombre_rol"], ["Admin", "Presidente"])) {
+    echo "<p>No tienes permiso para acceder a esta página.</p>";
+    exit;
 }
 
 // Recuperar datos del formulario en caso de error

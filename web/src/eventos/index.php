@@ -26,6 +26,8 @@ if (isset($_GET['mensaje']) && $_GET['mensaje'] === 'eliminado') {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Eventos</title>
     <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
 </head>
 
 <body class="fondo-cuerpo">
@@ -59,6 +61,22 @@ if (isset($_GET['mensaje']) && $_GET['mensaje'] === 'eliminado') {
         </section>
     </section>
 </main>
+<script>
+    const urlParams = new URLSearchParams(window.location.search);
+    const mensaje = urlParams.get('mensaje');
+
+    if (mensaje === 'eliminado') {
+        Swal.fire({
+            title: 'Evento eliminado',
+            text: 'El evento ha sido eliminado correctamente.',
+            icon: 'success',
+            confirmButtonText: 'Aceptar',
+            confirmButtonColor: '#243D51'
+        });
+        // Opcionalmente, limpia la URL
+        window.history.replaceState({}, document.title, window.location.pathname);
+    }
+</script>
 
 <footer>
     <iframe src="../footer/FOOTER.html" frameborder="0" width="100%" height="300px"></iframe>
