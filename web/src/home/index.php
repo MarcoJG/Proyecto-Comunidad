@@ -38,24 +38,47 @@ include __DIR__ . '/../../../backend/src/conexion_BBDD/conexion_db_pm.php';
     ?>
 
     <main>
-        <div>
-            <h2>Bloque de noticias</h2>
-            <p>Las noticias más próximas sobre nuestra comunidad</p>
-            <div class="noticias-container">
-                <div class="noticia">
-                    <a href=""><img src="" alt="Imagen de una puerta de garaje rota"></a>
-                    <a href=""><h3>Puerta del garaje rota</h3></a>
-                    <p>Lorem ipsum dolor...</p>
-                    <a href=""><button>Button</button></a>
-                </div>
-                <div class="noticia">
-                    <a href=""><img src="" alt="Imagen de un ascensor en el bloque 3 averiado"></a>
-                    <a href=""><h3>Ascensor Bloque 3 averiado</h3></a>
-                    <p>Lorem ipsum dolor...</p>
-                    <a href=""><button>Button</button></a>
+        <?php
+        $sql_noticias = "
+            SELECT id_noticias, titulo, contenido, fecha, imagen
+            FROM noticias
+            WHERE fecha >= CURDATE()
+            ORDER BY fecha ASC
+            LIMIT 2
+        ";
+        $stmt_noticias = $pdo->query($sql_noticias);
+
+        if ($stmt_noticias->rowCount() > 0) {
+        ?>
+            <div>
+                <h2>Noticias más cercanas</h2>
+                <p>Las noticias más próximas sobre nuestra comunidad</p>
+                <div class="noticias-container">
+                    <?php
+                    while ($noticia = $stmt_noticias->fetch(PDO::FETCH_ASSOC)) {
+                        $fecha_formateada = date("d/m/Y", strtotime($noticia['fecha']));
+                        $imagen = !empty($noticia['imagen']) ? $noticia['imagen'] : '../../etc/assets/img/bloque.jpg';
+                    ?>
+                        <div class="noticia">
+                            <a href="../noticias/detalle.php?id=<?php echo $noticia['id_noticias']; ?>">
+                                <img src="<?php echo htmlspecialchars($imagen); ?>" alt="Imagen de la noticia">
+                            </a>
+                            <a href="../noticias/detalle.php?id=<?php echo $noticia['id_noticias']; ?>">
+                                <h3><?php echo htmlspecialchars($noticia['titulo']); ?></h3>
+                            </a>
+                            <p><?php echo htmlspecialchars(mb_strimwidth($noticia['contenido'], 0, 100, "...")); ?></p>
+                            <a href="../noticias/detalle.php?id=<?php echo $noticia['id_noticias']; ?>">
+                                <button>Ver más</button>
+                            </a>
+                        </div>
+                    <?php
+                    }
+                    ?>
                 </div>
             </div>
-        </div>
+        <?php
+        }
+        ?>
 
         <?php
         $sql_recientes = "
@@ -70,7 +93,7 @@ include __DIR__ . '/../../../backend/src/conexion_BBDD/conexion_db_pm.php';
         if ($stmt_recientes->rowCount() > 0) {
         ?>
             <section id="bloque-eventos">
-                <h2>Eventos Más Recientes</h2>
+                <h2>Eventos más cercanos</h2>
                 <p>Los eventos más próximos sobre nuestra comunidad</p>
                 <div class="eventos-container">
                     <?php
@@ -141,6 +164,36 @@ include __DIR__ . '/../../../backend/src/conexion_BBDD/conexion_db_pm.php';
         <?php
         }
         ?>
+        <?php
+    $sql_noticia_destacada = "
+        SELECT id_noticias, titulo, contenido, fecha, imagen
+        FROM noticias
+        WHERE es_destacada = 1
+        ORDER BY fecha DESC
+        LIMIT 1
+    ";
+    $stmt_noticia_destacada = $pdo->query($sql_noticia_destacada);
+
+    if ($stmt_noticia_destacada->rowCount() > 0) {
+        $noticia_destacada = $stmt_noticia_destacada->fetch(PDO::FETCH_ASSOC);
+        $fecha_formateada = date("d/m/Y", strtotime($noticia_destacada['fecha']));
+        $imagen = !empty($noticia_destacada['imagen']) ? $noticia_destacada['imagen'] : '../../etc/assets/img/bloque.jpg';
+    ?>
+        <section id="bloqueNoticiaDestacada">
+            <h2>Noticia Destacada</h2>
+            <div>
+                <img src="<?php echo htmlspecialchars($imagen); ?>" alt="Imagen destacada de la noticia">
+                <h3><?php echo htmlspecialchars($noticia_destacada['titulo']); ?></h3>
+                <p><?php echo htmlspecialchars(mb_strimwidth($noticia_destacada['contenido'], 0, 100, "...")); ?></p>
+                <p><strong>Fecha:</strong> <?php echo $fecha_formateada; ?></p>
+                <a href="../noticias/detalle.php?id=<?php echo $noticia_destacada['id_noticias']; ?>">
+                    <button>Ver Detalles</button>
+                </a>
+            </div>
+        </section>
+    <?php
+    }
+    ?>
     </aside>
 
     <footer>
