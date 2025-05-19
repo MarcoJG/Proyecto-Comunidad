@@ -37,12 +37,13 @@
 
 .formulario-noticia input,
 .formulario-noticia textarea {
-    width: 100%;
+    width: calc(100% - 20px); 
     padding: 10px;
     margin-bottom: 12px;
     border: 1px solid #ddd;
     border-radius: 0px;
     font-size: 16px;
+    box-sizing: border-box; 
 }
 
 
@@ -86,4 +87,23 @@
 .formulario-noticia textarea:focus {
     border-color: #243D51;
     outline: none;
+}
+
+.checkbox-destacado {
+    margin-top: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start; 
+}
+
+.checkbox-destacado label {
+    font-size: 16px;
+    color: #243D51;
+    margin-bottom: 5px;
+    display: flex;
+    align-items: center;
+}
+
+.checkbox-destacado input[type="radio"] {
+    margin-right: 10px;
 }

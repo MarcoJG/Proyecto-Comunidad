@@ -36,7 +36,7 @@ if (isset($_GET['mensaje']) && $_GET['mensaje'] === 'eliminado') {
 
     <?php if ($usuarioEsAdminOPresidente): ?>  
         <div style="text-align: right; margin: 20px;">
-            <a href="crear_evento.php" class="boton-evento" style="background-color: #243D51; color: white; padding: 10px 20px; text-decoration: none; border-radius: 5px;">
+            <a href="crear_evento.php" class="boton-evento">
                 Crear evento
             </a>
         </div>
