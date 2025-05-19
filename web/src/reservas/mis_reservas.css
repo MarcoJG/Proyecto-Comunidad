@@ -12,7 +12,7 @@ body {
 }
 
 main {
-    padding-top: 180px;
+    padding-top: 190px;
 }
 
 .fondo-cuerpo {
@@ -27,14 +27,35 @@ h2 {
 
 table {
     width: 80%;
-    margin: 20px auto;
+    margin:  auto;
     border-collapse: collapse;
+    background-color: #f5f5f5
 }
 
 th, td {
-    text-align: left;
+    text-align: justify;
     padding: 12px;
     border-bottom: 1px solid #ddd;
+}
+
+.tr-acciones {
+    text-align: right;
+}
+.td-acciones {
+    text-align: right;
+}
+.tr-fecha {
+    text-align: center;
+    transform: translateX(9%);
+}
+
+.td-fecha {
+    text-align: center;
+    transform: translateX(9%);
+}
+
+.tbody-reservas {
+    background-color: #f9f9f9;
 }
 
 th {
@@ -69,7 +90,6 @@ tr:hover {
     padding: 10px 20px;
     font-size: 16px;
     cursor: pointer;
-    border-radius: 5px;
     text-align: center;
     display: inline-block;
     text-decoration: none;

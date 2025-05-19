@@ -57,23 +57,23 @@ if (isset($_GET['success']) && $_GET['success'] == 2) {
         <?php else: ?>
             <table>
                 <thead>
-                    <tr>
-                        <th>Zona</th>
-                        <th>Fecha de Reserva</th>
-                        <th>Acciones</th>
+                    <tr class="tr-titulo">
+                        <th class="tr-zona">Zona</th>
+                        <th class="tr-fecha">Fecha de Reserva</th>
+                        <th class="tr-acciones">Acciones</th>
                     </tr>
                 </thead>
-                <tbody>
+                <tbody class ="tbody-reservas">
                     <?php foreach ($reservas as $reserva): ?>
                         <tr>
                             <td><?php echo htmlspecialchars($reserva['zona']); ?></td>
-                            <td>
+                            <td class="td-fecha">
                                 <?php 
                                 $fechaReserva = new DateTime($reserva['fecha_reserva']);
                                 echo $fechaReserva->format('d-m-Y H:i');
                                 ?>
                             </td>
-                            <td>
+                            <td class="td-acciones">
                                 <a href="/Proyecto-Comunidad/web/src/reservas/cancelar_reserva.php?id=<?php echo $reserva['id_reserva']; ?>" class="cancelar-reserva">Cancelar reserva</a>
                             </td>
                         </tr>
