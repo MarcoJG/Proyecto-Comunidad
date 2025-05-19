@@ -18,7 +18,6 @@ if (isset($_SESSION['reserva_success']) && $_SESSION['reserva_success']) {
     echo '<div style="background-color: #d4edda; color: #155724; padding: 15px; margin: 20px auto; border: 1px solid #c3e6cb; border-radius: 5px; width: 80%; text-align: center;">';
     echo '✅ ¡Reserva realizada con éxito!';
     echo '</div>';
-
     unset($_SESSION['reserva_success']);
 }
 ?>
@@ -34,7 +33,6 @@ if (isset($_SESSION['reserva_success']) && $_SESSION['reserva_success']) {
 
         <div class="contenedor-eventos">
             <?php
-           
             $zonas = [
                 ['nombre' => 'Piscina', 'imagen' => '../../etc/assets/img/piscina.jpg'],
                 ['nombre' => 'Pista de Tenis', 'imagen' => '../../etc/assets/img/tenis.jpg'],
@@ -60,9 +58,13 @@ if (isset($_SESSION['reserva_success']) && $_SESSION['reserva_success']) {
                 echo '<h3 class="titulo-evento">'.$zona['nombre'].'</h3>';
                 echo '<p class="detalle-evento">'.$mensajes[$zona['nombre']].'</p>';
 
-                // Condición para cambiar el texto del botón
                 if ($zona['nombre'] == 'Todas las Reservas') {
-                    echo '<a href="mis_reservas.php" class="boton-evento">Accede</a>';
+                    $nombreRol = $_SESSION['nombre_rol'] ?? '';
+                    if ($nombreRol === 'Admin') {
+                        echo '<a href="admin_reservas.php" class="boton-evento">Accede</a>';
+                    } else {
+                        echo '<a href="mis_reservas.php" class="boton-evento">Accede</a>';
+                    }
                 } else {
                     echo '<a href="reserva_formulario.php?zona='.urlencode($zona['nombre']).'" class="boton-evento">Reservar</a>';
                 }

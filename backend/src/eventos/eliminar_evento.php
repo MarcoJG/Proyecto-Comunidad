@@ -9,7 +9,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['id_evento'])) {
         $stmt->bindParam(':id_evento', $id_evento, PDO::PARAM_INT);
 
         if ($stmt->execute()) {
-            header("Location: ../../../web/src/eventos/eventos.php?mensaje=eliminado");
+            header("Location: ../../../web/src/eventos/index.php?mensaje=eliminado");
             exit();
         } else {
             echo "Error al borrar el evento.";
