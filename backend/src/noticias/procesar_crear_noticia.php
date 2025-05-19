@@ -19,10 +19,10 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     // Comprobar si el noticia es destacado
     $destacado = isset($_POST['destacado']) ? $_POST['destacado'] : 0;
 
-    if (empty($titulo) || empty($descripcion) || empty($fecha)) {
+    if (empty($titulo) || empty($contenido) || empty($fecha)) {
             $_SESSION['form_data'] = [
                 'titulo' => $titulo,
-                'descripcion' => $descripcion,
+                'descripcion' => $contenido,
                 'fecha' => $fecha,
                 'destacado' => $destacado
             ];
@@ -30,10 +30,10 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             exit();
         }
 
-        if (strlen($titulo) > 100 || strlen($descripcion) > 255) {
+        if (strlen($titulo) > 100 || strlen($contenido) > 255) {
             $_SESSION['form_data'] = [
                 'titulo' => $titulo,
-                'descripcion' => $descripcion,
+                'descripcion' => $contenido,
                 'fecha' => $fecha,
                 'destacado' => $destacado
             ];
@@ -44,7 +44,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         if (strtotime($fecha) <= strtotime('today')) {
             $_SESSION['form_data'] = [
                 'titulo' => $titulo,
-                'descripcion' => $descripcion,
+                'descripcion' => $contenido,
                 'fecha' => $fecha,
                 'destacado' => $destacado
             ];
@@ -97,7 +97,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     try {
          // Verificar si ya existe un noticia destacado
         if ($destacado == 1) {
-            $sql_check = "SELECT id_noticia FROM noticias WHERE es_destacada = 1 LIMIT 1";
+            $sql_check = "SELECT id_noticias FROM noticias WHERE es_destacada = 1 LIMIT 1";
             $result = $pdo->query($sql_check);
 
             if ($result->rowCount() > 0) {
@@ -105,7 +105,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                 $_SESSION['noticia_destacado_existente'] = true;
                 $_SESSION['noticia_destacado_data'] = [
                     'titulo' => $titulo,
-                    'descripcion' => $descripcion,
+                    'descripcion' => $contenido,
                     'fecha' => $fecha,
                     'destacado' => $destacado,
                     'id_usuario' => $id_usuario
@@ -115,7 +115,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             }
         }
         // Insertar en la BBDD
-        $sql = "INSERT INTO noticias (titulo, contenido, fecha, id_usuario,es_destacada, imagen) VALUES (:titulo, :contenido, :fecha, :id_usuario, :es_destacada :imagen)";
+        $sql = "INSERT INTO noticias (titulo, contenido, fecha, id_usuario, es_destacada, imagen) VALUES (:titulo, :contenido, :fecha, :id_usuario, :es_destacada, :imagen)";
         $stmt = $pdo->prepare($sql);
         $stmt->bindValue(':titulo', $titulo, PDO::PARAM_STR);
         $stmt->bindValue(':contenido', $contenido, PDO::PARAM_STR);
