@@ -1,159 +1,176 @@
 /* Importando fuente Roboto */
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
 
-/* Reseteo de estilos */
+/* Reset básico */
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
-/* Fuente y colores principales */
+/* Estilos generales del body */
 body {
     font-family: 'Roboto', sans-serif;
-    background-color: #f5f5f5;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+    background-color: #f9f9f9;
     min-height: 100vh;
 }
 
-footer, header {
+/* Imágenes generales */
+img {
+    width: 150px;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 0;
+}
+
+/* Encabezado y pie */
+header, footer {
     width: 100%;
 }
 
+/* Cabecera fija */
 header {
-    position: sticky;
+    position: fixed;
     top: 0;
     left: 0;
-    width: 100%;
-    background-color: #f5f5f5;
-    z-index: 100;
-    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+    background-color: #fff;
+    z-index: 999;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
-/* Contenedor principal usando GRID */
+/* Pie de página */
+footer {
+    margin-top: 2rem;
+}
+
+/* Layout principal */
 main {
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr; /* Tres columnas de igual ancho */
-    gap: 32px;
-    width: 90%;
-    max-width: 1200px;
-    margin: 40px auto;
-    padding-top: 180px;
+    grid-template-columns: 3fr 1fr;
+    grid-template-areas:
+        "info-superior sidebar-right"
+        "bloque-eventos sidebar-right";
+    gap: 2rem;
+    width: 100%;
+    max-width: 1600px;
+    padding: 2rem;
+    margin: 160px auto 2rem auto; /* espacio superior por header fijo */
+    box-sizing: border-box;
 }
 
-/* Los bloques de noticias y eventos ocuparán las dos primeras columnas */
-main > div:first-child { /* Selecciona el primer div dentro de main (bloque de noticias) */
-    grid-column: 1 / 3;
+#bloque-noticias h2,
+#bloque-eventos h2 {
+    margin-top: 1.5rem; /* Añadido */
+}
+
+/* Áreas de grid */
+#info-superior {
+    grid-area: info-superior;
 }
 
 #bloque-eventos {
-    grid-column: 1 / 3;
+    grid-area: bloque-eventos;
 }
 
-/* Estilos para la barra lateral derecha */
 .sidebar-right {
-    grid-column: 3 / 4; /* Ocupa la tercera columna */
+    grid-area: sidebar-right;
     display: flex;
-    flex-direction: column; /* Apila el calendario y el bloque destacado */
-    gap: 32px; /* Espacio entre el calendario y el bloque destacado */
+    flex-direction: column;
+    gap: 2rem;
 }
 
-/* Estilos para el calendario dentro de la barra lateral */
-#calendario {
-    background-color: #f5f5f5;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    border-radius: 0px;
-    display: grid;
-    gap: 15px;
-    grid-template-columns: 1fr;
-    flex-grow: 1; /* Permite que crezca para igualar la altura */
-}
-
-/* Estilos para el bloque destacado dentro de la barra lateral */
-#bloqueDestacado {
-    background-color: #fff;
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
-    border-radius: 0px;
-    display: grid;
-    gap: 15px;
-    flex-grow: 1; /* Permite que crezca para igualar la altura */
-}
-
-#bloque-noticias h2, #bloque-eventos h2, #bloqueDestacado h2 {
+/* Títulos */
+#bloque-noticias h2,
+#bloque-eventos h2,
+#bloqueDestacado h2 {
     color: #243D51;
     font-weight: 700;
     margin-bottom: 20px;
     font-size: 22px;
 }
 
-#bloque-noticias p, #bloque-eventos p {
+/* Párrafos de bloques */
+#bloque-noticias p,
+#bloque-eventos p {
     margin-bottom: 20px;
 }
 
-.noticias-container, .eventos-container {
+/* Contenedores de noticias/eventos */
+.noticias-container,
+.eventos-container {
     display: grid;
     grid-template-columns: 1fr;
     gap: 20px;
 }
 
-.noticia, .evento {
+/* Tarjetas */
+.noticia,
+.evento {
     display: grid;
     grid-template-columns: 100px 1fr;
     background: #fff;
-    border-radius: 0px;
-    overflow: hidden;
     box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
     padding: 20px;
     align-items: center;
     gap: 20px;
 }
 
-.noticia img, .evento img {
+/* Imágenes de tarjetas */
+.noticia img,
+.evento img {
     width: 100px;
     height: 100px;
-    border-radius: 0px;
+    border-radius: 0;
 }
 
-.noticia h3, .evento h3 {
+/* Textos de tarjetas */
+.noticia h3,
+.evento h3 {
     color: #243D51;
     font-size: 18px;
     font-weight: 700;
     margin-bottom: 5px;
 }
 
-.noticia p, .evento p {
+.noticia p,
+.evento p {
     color: #757575;
     font-size: 14px;
     margin: 5px 0;
 }
 
-.noticia button, .evento button, #bloqueDestacado button {
+/* Botones */
+.noticia button,
+.evento button,
+#bloqueDestacado button {
     background-color: #243D51;
     color: white;
     border: none;
     padding: 12px 20px;
     cursor: pointer;
-    border-radius: 0px;
+    border-radius: 0;
     font-size: 14px;
 }
 
-.noticia button:hover, .evento button:hover, #bloqueDestacado button:hover {
+.noticia button:hover,
+.evento button:hover,
+#bloqueDestacado button:hover {
     background-color: #1a2e3e;
 }
 
-/* Estilo del calendario */
+/* Calendario */
 #calendario {
     background-color: #f5f5f5;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    border-radius: 0px;
+    border-radius: 0;
     display: grid;
     gap: 15px;
     grid-template-columns: 1fr;
     flex-grow: 1;
+    padding: 1rem;
 }
 
+/* Cabecera del calendario */
 .calendar-header {
     display: grid;
     grid-template-columns: 1fr;
@@ -173,7 +190,6 @@ main > div:first-child { /* Selecciona el primer div dentro de main (bloque de n
 #selectedDate {
     font-size: 1.2em;
     color: #243D51;
-    margin: 0;
     margin-right: 5px;
 }
 
@@ -219,7 +235,7 @@ main > div:first-child { /* Selecciona el primer div dentro de main (bloque de n
 .calendar-grid div {
     text-align: center;
     padding: 8px;
-    border-radius: 0px;
+    border-radius: 0;
     cursor: pointer;
     color: #333;
 }
@@ -227,62 +243,53 @@ main > div:first-child { /* Selecciona el primer div dentro de main (bloque de n
 .calendar-grid .selected {
     background-color: #007bff;
     color: white;
-    cursor: pointer;
     border-radius: 50%;
 }
 
-/* Estilo del bloque destacado */
+/* Bloque destacado */
 #bloqueDestacado {
     background-color: #fff;
     box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
-    border-radius: 0px;
+    border-radius: 0;
     display: grid;
     gap: 15px;
     flex-grow: 1;
+    padding: 1rem;
 }
 
 #bloqueDestacado h2 {
     font-size: 20px;
 }
 
-/* Media query para responsive */
+/* Responsive */
 @media (max-width: 768px) {
     main {
-        grid-template-columns: 1fr; /* Una sola columna en pantallas pequeñas */
-    }
-
-    main > div:first-child, /* Bloque de noticias */
-    #bloque-eventos,
-    .sidebar-right {
-        grid-column: 1 / 2; /* Ocupan toda la columna */
+        grid-template-columns: 1fr;
+        grid-template-areas:
+            "info-superior"
+            "bloque-eventos"
+            "sidebar-right";
     }
 
     .sidebar-right {
-        flex-direction: column; /* Asegura la disposición vertical */
+        flex-direction: column;
     }
 
-    #bloque-noticias {
-        margin-bottom: 20px; /* Añade un espacio debajo del bloque de noticias */
-    }
-
-    #bloque-eventos {
-        margin-bottom: 20px; /* Añade un espacio debajo del bloque de eventos */
-    }
-
-    #calendario {
-        margin-bottom: 20px; /* Añade un espacio debajo del calendario */
-    }
-
-    #bloqueDestacado {
-        margin-bottom: 20px;
-    }
-
-    .noticia, .evento {
+    .noticia,
+    .evento {
         grid-template-columns: 1fr;
         text-align: center;
     }
 
-    .noticia img, .evento img {
+    .noticia img,
+    .evento img {
         margin: 0 auto;
+    }
+
+    #calendario,
+    #bloqueDestacado,
+    #bloque-noticias,
+    #bloque-eventos {
+        margin-bottom: 20px;
     }
 }
