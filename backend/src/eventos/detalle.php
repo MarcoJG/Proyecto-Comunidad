@@ -41,6 +41,10 @@ if (isset($_GET['id'])) {
                         <input type='hidden' name='id' value='$id_evento'>
                         <button type='submit' class='boton-evento'>Editar evento</button>
                     </form>
+                    <form method='GET' action='../../../web/src/eventos/index.php'>
+                        <input type='hidden' name='id' value='$id_evento'>
+                        <button type='submit' class='boton-evento'>Volver a Eventos</button>
+                    </form>
                 </div>
             ";
         }
