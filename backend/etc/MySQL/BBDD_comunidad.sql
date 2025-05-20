@@ -181,7 +181,6 @@ INSERT INTO aforo_zona (zona, aforo_maximo) VALUES
 ('Sala de reuniones', 1),
 ('Barbacoa', 2);
 
-ALTER TABLE eventos ADD COLUMN es_destacada TINYINT(1) DEFAULT 0;
 
 ALTER TABLE eventos
 ADD COLUMN valor_destacado TINYINT DEFAULT 5,
