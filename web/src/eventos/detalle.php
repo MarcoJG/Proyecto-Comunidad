@@ -23,13 +23,37 @@ require_once __DIR__ . '/../../../config.php';
     <iframe src="../footer/FOOTER.html" frameborder="0" width="100%" height="300px"></iframe> 
 </footer>
 
+<!-- Modal de confirmación -->
+<div id="modalConfirmacion" class="modal">
+  <div class="modal-contenido">
+    <p>¿Estás seguro de que quieres borrar este evento?</p>
+    <div class="modal-botones">
+        <button id="confirmarBtn">Sí, borrar</button>
+        <button id="cancelarBtn">Cancelar</button>
+    </div>
+  </div>
+</div>
 <script>
+    let formularioAEliminar = null;
+
     function confirmarBorrado(event) {
-        event.preventDefault();
-        if (confirm("¿Estás seguro de que quieres borrar este evento?")) {
-            event.target.submit();
-        }
+        event.preventDefault(); 
+        formularioAEliminar = event.target; 
+        document.getElementById('modalConfirmacion').style.display = 'block'; 
+        return false; 
     }
+
+    document.addEventListener('DOMContentLoaded', function () {
+        document.getElementById('confirmarBtn').addEventListener('click', function () {
+            document.getElementById('modalConfirmacion').style.display = 'none';
+            if (formularioAEliminar) formularioAEliminar.submit(); 
+        });
+
+        document.getElementById('cancelarBtn').addEventListener('click', function () {
+            document.getElementById('modalConfirmacion').style.display = 'none';
+            formularioAEliminar = null; 
+        });
+    });
 </script>
 
 </body>
