@@ -19,40 +19,66 @@ body {
 }
 
 footer, header {
- width: 100%;
+    width: 100%;
 }
-header{
-position: sticky;
-  top: 0;
-  left: 0;
-  width: 100%;
-  background-color: #f5f5f5;
-  z-index: 100;
-  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+
+header {
+    position: sticky;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background-color: #f5f5f5;
+    z-index: 100;
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
 }
+
 /* Contenedor principal usando GRID */
 main {
     display: grid;
-    grid-template-columns: 2fr 1fr; /* 2 columnas */
-    gap: 32px; /* Espaciado mayor */
+    grid-template-columns: 1fr 1fr 1fr; /* Tres columnas de igual ancho */
+    gap: 32px;
     width: 90%;
     max-width: 1200px;
     margin: 40px auto;
     padding-top: 180px;
 }
 
-/* Estilos generales para los bloques */
-.bloque {
-    background-color: #fff;
-    padding: 25px;
-    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
-    border-radius: 0px;
-    display: grid;
-    gap: 20px;
+/* Los bloques de noticias y eventos ocuparán las dos primeras columnas */
+main > div:first-child { /* Selecciona el primer div dentro de main (bloque de noticias) */
+    grid-column: 1 / 3;
 }
 
-#bloque-noticias, #bloque-eventos {
-    grid-column: span 1;
+#bloque-eventos {
+    grid-column: 1 / 3;
+}
+
+/* Estilos para la barra lateral derecha */
+.sidebar-right {
+    grid-column: 3 / 4; /* Ocupa la tercera columna */
+    display: flex;
+    flex-direction: column; /* Apila el calendario y el bloque destacado */
+    gap: 32px; /* Espacio entre el calendario y el bloque destacado */
+}
+
+/* Estilos para el calendario dentro de la barra lateral */
+#calendario {
+    background-color: #f5f5f5;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 0px;
+    display: grid;
+    gap: 15px;
+    grid-template-columns: 1fr;
+    flex-grow: 1; /* Permite que crezca para igualar la altura */
+}
+
+/* Estilos para el bloque destacado dentro de la barra lateral */
+#bloqueDestacado {
+    background-color: #fff;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    border-radius: 0px;
+    display: grid;
+    gap: 15px;
+    flex-grow: 1; /* Permite que crezca para igualar la altura */
 }
 
 #bloque-noticias h2, #bloque-eventos h2, #bloqueDestacado h2 {
@@ -120,18 +146,17 @@ main {
 /* Estilo del calendario */
 #calendario {
     background-color: #f5f5f5;
-    padding: 20px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     border-radius: 0px;
     display: grid;
     gap: 15px;
-    grid-area: 1 / 2 / 2 / 3;
-    grid-template-columns: 1fr; /* Una sola columna */
+    grid-template-columns: 1fr;
+    flex-grow: 1;
 }
 
 .calendar-header {
     display: grid;
-    grid-template-columns: 1fr; /* Una sola columna */
+    grid-template-columns: 1fr;
     gap: 10px;
 }
 
@@ -209,12 +234,11 @@ main {
 /* Estilo del bloque destacado */
 #bloqueDestacado {
     background-color: #fff;
-    padding: 25px;
     box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
     border-radius: 0px;
     display: grid;
     gap: 15px;
-    grid-area: 2 / 2 / 3 / 3; /* Cambiado para la posición */
+    flex-grow: 1;
 }
 
 #bloqueDestacado h2 {
@@ -224,14 +248,40 @@ main {
 /* Media query para responsive */
 @media (max-width: 768px) {
     main {
-        grid-template-columns: 1fr;
+        grid-template-columns: 1fr; /* Una sola columna en pantallas pequeñas */
+    }
+
+    main > div:first-child, /* Bloque de noticias */
+    #bloque-eventos,
+    .sidebar-right {
+        grid-column: 1 / 2; /* Ocupan toda la columna */
+    }
+
+    .sidebar-right {
+        flex-direction: column; /* Asegura la disposición vertical */
+    }
+
+    #bloque-noticias {
+        margin-bottom: 20px; /* Añade un espacio debajo del bloque de noticias */
+    }
+
+    #bloque-eventos {
+        margin-bottom: 20px; /* Añade un espacio debajo del bloque de eventos */
+    }
+
+    #calendario {
+        margin-bottom: 20px; /* Añade un espacio debajo del calendario */
+    }
+
+    #bloqueDestacado {
+        margin-bottom: 20px;
     }
 
     .noticia, .evento {
         grid-template-columns: 1fr;
         text-align: center;
     }
-    
+
     .noticia img, .evento img {
         margin: 0 auto;
     }

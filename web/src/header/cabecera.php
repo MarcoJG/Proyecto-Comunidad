@@ -12,7 +12,6 @@
     <!-- Estilos -->
     <link rel="stylesheet" href="<?= $basePath ?>web/src/header/cabecera.css">
 </head>
-
 <body>
     <header>
         <div class="header-container">
