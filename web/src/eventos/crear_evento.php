@@ -77,7 +77,11 @@ unset($_SESSION['form_data']);
                 </label>
             </div>
 
-            <button type="submit" class="boton-evento">Crear evento</button>
+            <div class="botones-formulario">
+                <button type="submit" class="boton-evento">Crear evento</button>
+                <a href="/Proyecto-Comunidad/web/src/eventos/index.php" class="boton-evento boton-secundario">Volver a Eventos</a>
+            </div>
+
         </form>
     </main>
 
