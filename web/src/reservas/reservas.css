@@ -51,7 +51,7 @@ label {
 
 input[type="date"],
 select,
-button {
+.boton-reserva {
     padding: 10px;
     border: 1px solid #ddd;
     border-radius: 0px;

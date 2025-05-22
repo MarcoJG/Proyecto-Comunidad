@@ -10,7 +10,7 @@ header {
     left: 0;
     width: 100%;
     background-color: #f5f5f5;
-    z-index: 100;
+    z-index: 1000;
 }
 
 /* Estilos para el contenedor principal del header */
@@ -124,3 +124,128 @@ header {
 .user-dropdown-content a:hover {
     background-color: #ddd;
 }
+
+
+    
+.hamburger,
+.mobile-menu {
+  display: none;
+}
+
+
+@media screen and (max-width: 1500px) {
+  /* Oculta solo los elementos del header principal */
+  header > .header-container > .nav-container,
+  header > .header-container > .buttons-container,
+  header > .header-container > .user-info-container {
+    display: none !important;
+    
+  }
+  .nav-container a.nav-link {
+    margin: 0;
+  }
+
+
+  .hamburger {
+    display: block;
+    background-color: #243d51;
+    color: white;
+    border: none;
+    font-size: 1.5rem;
+    padding: 0.5rem 1rem;
+    cursor: pointer;
+    z-index: 1001;
+    margin-right: 5%;
+  }
+
+.hamburger .icon-close {
+  display: none;
+}
+
+.hamburger.active .icon-menu {
+  display: none;
+}
+
+.hamburger.active .icon-close {
+  display: inline;
+}
+
+  .mobile-menu .nav-container{
+    display: flex;
+    flex-direction: column;
+    background-color: white;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    z-index: 1000;
+    position: relative;
+    top: 0;
+    width: 90%;
+    left: 5%; 
+  }
+
+  .mobile-menu.active {
+    max-height: 1000px;
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .mobile-menu{
+    display: flex;
+  flex-direction: column;
+  max-height: 0;
+  overflow: hidden;
+  opacity: 0;
+  transform: translateY(-10px);
+  transition: max-height 0.5s ease, opacity 0.4s ease, transform 0.4s ease;
+}
+  }
+
+  .mobile-menu .nav-link {
+    padding: 1rem;
+    border-bottom: 1px solid #ccc;
+    text-decoration: none;
+    color: #333;
+    font-weight: bold;
+  }
+
+  .mobile-menu .buttons-container,
+  .mobile-menu .user-info-container {
+    margin-top: 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    margin-top: 1rem;
+  }
+
+  .mobile-menu .boton-login {
+    width: 50%;
+    padding: 0.6rem;
+    background-color: #243d51;
+    border: none;
+    color: white;
+    font-size: 1rem;
+    margin: 0;
+  }
+
+  .mobile-menu .user-info-container {
+    text-align: center;
+    display: block;
+  }
+  .mobile-menu .user-dropdown {
+    width: 100%;
+  }
+
+  .mobile-menu .user-dropdown-content {
+    position: static;
+    width: 100%;
+    box-shadow: none;
+  }
+  .user-dropdown {
+    padding-bottom: 2rem;
+  }
+
+  .user-dropdown-content.show {
+  display: block;
+  background-color: #f5f5f5;
+}
+

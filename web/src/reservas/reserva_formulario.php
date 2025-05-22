@@ -46,7 +46,7 @@ $zona = isset($_GET['zona']) ? htmlspecialchars($_GET['zona']) : 'Zona desconoci
             <option value="tarde">Tarde</option>
         </select>
 
-        <button type="submit">Reservar</button>
+        <button class= "boton-reserva" type="submit">Reservar</button>
     </form>
 </main>
 
