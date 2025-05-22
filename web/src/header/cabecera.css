@@ -169,7 +169,7 @@ header {
 .hamburger.active .icon-close {
   display: inline;
 }
- 
+
   .mobile-menu .nav-container{
     display: flex;
     flex-direction: column;
@@ -177,14 +177,26 @@ header {
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
     z-index: 1000;
     position: relative;
-    top: 100%; /* Justo debajo del header */
+    top: 0;
     width: 90%;
     left: 5%; 
   }
 
   .mobile-menu.active {
+    max-height: 1000px;
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .mobile-menu{
     display: flex;
-    flex-direction: column ;
+  flex-direction: column;
+  max-height: 0;
+  overflow: hidden;
+  opacity: 0;
+  transform: translateY(-10px);
+  transition: max-height 0.5s ease, opacity 0.4s ease, transform 0.4s ease;
+}
   }
 
   .mobile-menu .nav-link {
@@ -236,4 +248,4 @@ header {
   display: block;
   background-color: #f5f5f5;
 }
-}
+
