@@ -2,7 +2,7 @@
 session_start();
 include __DIR__ . '/../conexion_BBDD/conexion_db_pm.php';
 
-// Verificar si el usuario tiene permiso para editar/borrar (Admin o Presidente)
+// Verificar permisos para editar/borrar (Admin o Presidente)
 $usuarioPuedeEditar = isset($_SESSION['id_usuario']) && isset($_SESSION["nombre_rol"]) && in_array($_SESSION["nombre_rol"], ["Admin", "Presidente"]);
 
 if (isset($_GET['id'])) {
@@ -21,10 +21,13 @@ if (isset($_GET['id'])) {
 
 
         echo "
-                     <form method='GET' action='../../../web/src/eventos/index.php'>
-                        <input type='hidden' name='id' value='$id_evento'>
-                        <button type='submit' class='boton-evento-volver'>Volver a Eventos</button>
-                    </form>
+            <div class='contenedor-volver'>
+              <form method='GET' action='../../../web/src/eventos/index.php'>
+                 <input type='hidden' name='id' value='$id_evento'>
+                 <button type='submit' class='boton-evento-volver'>Volver a Eventos</button>
+              </form>
+            </div>
+         
             <div class='evento-header'>
                 <div class='evento-imagen'>
                     <img src='" . $imagen . "' alt='Imagen del evento'>
@@ -54,11 +57,9 @@ if (isset($_GET['id'])) {
                 </div>
             ";
         }
-
     } else {
         echo "<p>Evento no encontrado.</p>";
     }
 } else {
     echo "<p>ID del evento no proporcionado.</p>";
 }
-?>
