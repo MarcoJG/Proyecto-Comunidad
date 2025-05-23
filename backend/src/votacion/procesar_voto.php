@@ -1,11 +1,6 @@
 <?php
 session_start();
 
-// Líneas de depuración (puedes comentarlas o borrarlas si ya no las necesitas)
-// ini_set('display_errors', 1);
-// ini_set('display_startup_errors', 1);
-// error_reporting(E_ALL);
-
 $basePath = '/Proyecto-Comunidad/';
 
 require_once __DIR__ . '/../conexion_BBDD/conexion_db_pm.php';

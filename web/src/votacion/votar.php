@@ -25,10 +25,10 @@ if ($id_votacion === null || !is_numeric($id_votacion)) {
 
 $id_usuario = $_SESSION['id_usuario'];
 $ya_voto = false;
-$id_opcion_votada_usuario = null; // Variable para almacenar la opción que el usuario votó
+$id_opcion_votada_usuario = null;
 $votacion_activa = false;
-$votacion_info = null; // Para guardar el título y descripción de la votación
-$opciones_votacion = []; // Para guardar las opciones de voto
+$votacion_info = null; 
+$opciones_votacion = []; 
 
 try {
     // 1. Verificar si la votación existe y está activa
@@ -40,13 +40,12 @@ try {
     if ($votacion_info) {
         $votacion_activa = true;
 
-        // 2. Obtener las opciones de esta votación
+        
         $stmt_opciones = $pdo->prepare("SELECT id_opcion, texto_opcion FROM opciones_votacion WHERE votacion_id = ?");
         $stmt_opciones->execute([$id_votacion]);
         $opciones_votacion = $stmt_opciones->fetchAll(PDO::FETCH_ASSOC);
 
-        // 3. Verificar si el usuario ya votó en esta votación específica
-        // Y OBTENER LA OPCIÓN VOTADA si ya lo hizo.
+        
         $stmt_verificar_voto = $pdo->prepare("SELECT id_opcion_votada FROM voto WHERE id_usuario = ? AND id_votacion = ?");
         $stmt_verificar_voto->execute([$id_usuario, $id_votacion]);
         $resultado_voto = $stmt_verificar_voto->fetch(PDO::FETCH_ASSOC);
@@ -57,7 +56,7 @@ try {
         }
 
     } else {
-        // Votación no encontrada o no activa
+        
         header("Location: " . $basePath . "web/src/votacion/ver_votacion.php?error=votacion_no_disponible");
         exit();
     }
@@ -68,7 +67,7 @@ try {
     exit();
 }
 
-// Mensaje de éxito si el voto fue registrado (viene de procesar_voto.php)
+
 $mensaje_exito = isset($_GET['success_voto']) && $_GET['success_voto'] == 1 ? "¡Tu voto ha sido registrado exitosamente!" : '';
 // Mensaje de error si ya votó o hubo un problema
 $mensaje_error = isset($_GET['error_voto']) && $_GET['error_voto'] == 'ya_votaste' ? "Ya has votado en esta encuesta. ¡Gracias por tu participación!" : '';

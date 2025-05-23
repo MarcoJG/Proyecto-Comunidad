@@ -1,7 +1,7 @@
 <?php
 
 session_start();
-// Asegúrate de que $basePath sea correcto para la raíz de tu proyecto web
+
 $basePath = '/Proyecto-Comunidad/'; 
 
 // Incluye el archivo de conexión a la base de datos
@@ -23,16 +23,7 @@ $id_usuario_actual = $_SESSION['id_usuario'];
 if (isset($_SESSION['nombre_rol']) && $_SESSION['nombre_rol'] === 'Admin') {
     $es_administrador = true;
 } else {
-    // Si por alguna razón 'nombre_rol' no estuviera en sesión,
-    // o como fallback de seguridad, podrías consultar la DB.
-    // Aunque con tu setup actual, debería estar en $_SESSION['nombre_rol'].
-    // Si quieres ser ultra seguro, podrías consultar el rol_id de la DB:
-    // $stmt_rol = $pdo->prepare("SELECT r.nombre FROM usuarios u JOIN roles r ON u.id_roles = r.id_roles WHERE u.id_usuario = ?");
-    // $stmt_rol->execute([$id_usuario_actual]);
-    // $user_nombre_rol = $stmt_rol->fetchColumn();
-    // if ($user_nombre_rol === 'Admin') {
-    //     $es_administrador = true;
-    // }
+   
 }
 
 
@@ -78,7 +69,7 @@ if (isset($_SESSION['nombre_rol']) && $_SESSION['nombre_rol'] === 'Admin') {
         <div id="votaciones-list">
             <?php
             try {
-                // Obtener la fecha y hora actual para filtrar votaciones activas
+                
                 $now = date('Y-m-d H:i:s');
 
                 // Consulta para obtener las votaciones activas
@@ -116,10 +107,9 @@ if (isset($_SESSION['nombre_rol']) && $_SESSION['nombre_rol'] === 'Admin') {
                         // --- NUEVA DISPOSICIÓN DE BOTONES ---
                         echo '<div class="votacion-footer">'; // Contenedor Flex para los botones
 
-                            // Botón de Votar (siempre visible para usuarios)
+                            
                             echo '<div class="votacion-left-button">';
-                                // Usamos un enlace, no un formulario para el botón votar, para ir a la página de votación.
-                                // Ya tienes el enlace 'votar.php' con el ID de la votación.
+                                
                                 echo '<a href="' . $basePath . 'web/src/votacion/votar.php?votacion_id=' . htmlspecialchars($votacion['id_votacion']) . '" class="btn-votar">Votar</a>';
                             echo '</div>'; // Cierra votacion-left-button
 
@@ -130,10 +120,10 @@ if (isset($_SESSION['nombre_rol']) && $_SESSION['nombre_rol'] === 'Admin') {
                                     echo '<input type="hidden" name="id_votacion_a_eliminar" value="' . htmlspecialchars($votacion['id_votacion']) . '">';
                                     echo '<button type="submit" class="btn-eliminar">Eliminar</button>';
                                     echo '</form>';
-                                echo '</div>'; // Cierra votacion-right-button
+                                echo '</div>'; 
                             }
-                        echo '</div>'; // Cierra votacion-footer
-                        // --- FIN NUEVA DISPOSICIÓN DE BOTONES ---
+                        echo '</div>'; 
+                       
                         
                         echo '</div>'; // Cierre de votacion-card
                     }
