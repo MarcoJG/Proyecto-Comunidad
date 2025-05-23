@@ -62,13 +62,10 @@ include __DIR__ . '/../../../backend/src/conexion_BBDD/conexion_db_pm.php';
                             $imagen = !empty($noticia['imagen']) ? $noticia['imagen'] : '../../etc/assets/img/bloque.jpg';
                         ?>
                             <div class="noticia">
-                                <a href="../noticias/detalle.php?id=<?php echo $noticia['id_noticias']; ?>">
-                                    <img src="<?php echo htmlspecialchars($imagen); ?>" alt="Imagen de la noticia">
-                                </a>
-                                <a href="../noticias/detalle.php?id=<?php echo $noticia['id_noticias']; ?>">
-                                    <h3><?php echo htmlspecialchars($noticia['titulo']); ?></h3>
-                                </a>
+                                <img src="<?php echo htmlspecialchars($imagen); ?>" alt="Imagen de la noticia">
+                                <h3><?php echo htmlspecialchars($noticia['titulo']); ?></h3>
                                 <p><?php echo htmlspecialchars(mb_strimwidth($noticia['contenido'], 0, 100, "...")); ?></p>
+                                <p><strong>Fecha:</strong> <?php echo $fecha_formateada; ?></p>
                                 <a href="../noticias/detalle.php?id=<?php echo $noticia['id_noticias']; ?>">
                                     <button>Ver más</button>
                                 </a>
@@ -120,8 +117,6 @@ include __DIR__ . '/../../../backend/src/conexion_BBDD/conexion_db_pm.php';
             }
             ?>
         </section>
-        <!-- FIN bloque marrón -->
-
         <!-- INICIO sidebar derecho: calendario + destacados -->
         <div class="sidebar-right">
             <section id="calendario">
@@ -144,9 +139,7 @@ include __DIR__ . '/../../../backend/src/conexion_BBDD/conexion_db_pm.php';
                     <div class="calendar-grid" id="calendarGrid"></div>
                 </div>
             </section>
-
             <?php
-            // Obtenemos ambos destacados antes de pintar
             $sql_evento_destacado = "SELECT id_evento, titulo, descripcion, fecha FROM eventos WHERE es_destacada = 1 LIMIT 1";
             $stmt_evento_destacado = $pdo->query($sql_evento_destacado);
 
