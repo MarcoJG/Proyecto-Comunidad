@@ -5,19 +5,16 @@ ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 $basePath = '/Proyecto-Comunidad/'; // Asegúrate de que esto coincida con la URL base de tu proyecto
 
-// Incluye el archivo de conexión a la base de datos.
-// Ajusta la ruta si es necesario. Desde 'web/src/votacion/', sube 3 niveles para llegar a la raíz de 'Proyecto-Comunidad/',
-// y luego baja a 'backend/src/conexion_BBDD/'
+
 require_once __DIR__ . '/../../../backend/src/conexion_BBDD/conexion_db_pm.php';
 
-// Redirecciona si el usuario no ha iniciado sesión
+
 if (!isset($_SESSION['id_usuario'])) {
     header("Location: " . $basePath . "web/src/login/index.php");
     exit();
 }
 
-// Obtener el ID de la votación de la URL (GET)
-// Es crucial que esta página reciba el ID de la votación para saber qué mostrar.
+
 $id_votacion = $_GET['votacion_id'] ?? null;
 
 // Si no se proporciona un ID de votación válido, redirigir o mostrar un error

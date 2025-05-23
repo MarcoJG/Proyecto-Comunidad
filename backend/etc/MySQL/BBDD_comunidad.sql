@@ -198,3 +198,10 @@ WHERE valor_destacado IS NULL;
 UPDATE noticias
 SET valor_destacado = 5
 WHERE valor_destacado IS NULL;
+
+--Tabla que faltaba para votaciones
+CREATE TABLE opciones_votacion (
+    id_opcion INT AUTO_INCREMENT PRIMARY KEY,
+    votacion_id INT NOT NULL,
+    texto_opcion VARCHAR(255) NOT NULL,
+    FOREIGN KEY (votacion_id) REFERENCES votacion(id_votacion) ON DELETE CASCADE);
