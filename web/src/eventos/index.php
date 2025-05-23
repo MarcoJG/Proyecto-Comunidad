@@ -8,11 +8,9 @@ if (!isset($_SESSION["id_usuario"]) || !isset($_SESSION["nombre_rol"])) {
     exit();
 }
 
-// Normalizar el rol del usuario para evitar problemas por mayúsculas o espacios
 $nombreRol = trim(strtolower($_SESSION["nombre_rol"]));
 $usuarioEsAdminOPresidente = ($nombreRol === 'admin' || $nombreRol === 'presidente');
 
-// Mostrar mensaje si se eliminó un evento
 if (isset($_GET['mensaje']) && $_GET['mensaje'] === 'eliminado') {
     echo "<p style='color: green; text-align:center; margin-top: 20px;'>Evento eliminado correctamente.</p>";
 }
@@ -73,7 +71,7 @@ if (isset($_GET['mensaje']) && $_GET['mensaje'] === 'eliminado') {
             confirmButtonText: 'Aceptar',
             confirmButtonColor: '#243D51'
         });
-        // Opcionalmente, limpia la URL
+        // Limpiar la URL
         window.history.replaceState({}, document.title, window.location.pathname);
     }
 </script>

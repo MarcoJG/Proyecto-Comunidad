@@ -11,17 +11,19 @@ require_once __DIR__ . '/../../../config.php';
 </head>
 <body class="fondo-cuerpo">
 
-<header>
-    <?php include $_SERVER['DOCUMENT_ROOT'] . $basePath . 'web/src/header/cabecera.php'; ?>
-</header>
-
 <div class="contenedor-principal">
-    <?php include '../../../backend/src/eventos/detalle.php'; ?>
+
+    <div class="contenedor-volver flotante">
+    <form method="GET" action="index.php">
+        <button type="submit" class="boton-evento-volver">Volver a Eventos</button>
+    </form>
 </div>
 
-<footer> 
-    <iframe src="../footer/FOOTER.html" frameborder="0" width="100%" height="300px"></iframe> 
-</footer>
+    <section class="detalle-evento-wrapper">
+        <?php include '../../../backend/src/eventos/detalle.php'; ?>
+    </section>
+
+</div>
 
 <!-- Modal de confirmación -->
 <div id="modalConfirmacion" class="modal">
