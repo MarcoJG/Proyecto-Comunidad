@@ -120,8 +120,6 @@ include __DIR__ . '/../../../backend/src/conexion_BBDD/conexion_db_pm.php';
             }
             ?>
         </section>
-        <!-- FIN bloque marrón -->
-
         <!-- INICIO sidebar derecho: calendario + destacados -->
         <div class="sidebar-right">
             <section id="calendario">
@@ -144,9 +142,7 @@ include __DIR__ . '/../../../backend/src/conexion_BBDD/conexion_db_pm.php';
                     <div class="calendar-grid" id="calendarGrid"></div>
                 </div>
             </section>
-
             <?php
-            // Obtenemos ambos destacados antes de pintar
             $sql_evento_destacado = "SELECT id_evento, titulo, descripcion, fecha FROM eventos WHERE es_destacada = 1 LIMIT 1";
             $stmt_evento_destacado = $pdo->query($sql_evento_destacado);
 
