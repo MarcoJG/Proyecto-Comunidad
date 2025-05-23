@@ -2,7 +2,9 @@
 header('Content-Type: application/json');
 header('Access-Control-Allow-Origin: *');
 header('Access-Control-Allow-Methods: POST');
-session_start();
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
 require_once '../conexion_BBDD/conexion_db_pm.php';
 
 function esAdmin() {

@@ -6,7 +6,9 @@ require '../../../lib/phpmailer/PHPMailer.php';
 require '../../../lib/phpmailer/SMTP.php';
 require '../../../lib/phpmailer/Exception.php';
 include '../conexion_BBDD/conexion_db_pm.php';
-session_start();
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
 
 function sendVerificationEmail($correo, $token) {
     $mail = new PHPMailer(true);

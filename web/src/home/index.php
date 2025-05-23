@@ -62,13 +62,10 @@ include __DIR__ . '/../../../backend/src/conexion_BBDD/conexion_db_pm.php';
                             $imagen = !empty($noticia['imagen']) ? $noticia['imagen'] : '../../etc/assets/img/bloque.jpg';
                         ?>
                             <div class="noticia">
-                                <a href="../noticias/detalle.php?id=<?php echo $noticia['id_noticias']; ?>">
-                                    <img src="<?php echo htmlspecialchars($imagen); ?>" alt="Imagen de la noticia">
-                                </a>
-                                <a href="../noticias/detalle.php?id=<?php echo $noticia['id_noticias']; ?>">
-                                    <h3><?php echo htmlspecialchars($noticia['titulo']); ?></h3>
-                                </a>
+                                <img src="<?php echo htmlspecialchars($imagen); ?>" alt="Imagen de la noticia">
+                                <h3><?php echo htmlspecialchars($noticia['titulo']); ?></h3>
                                 <p><?php echo htmlspecialchars(mb_strimwidth($noticia['contenido'], 0, 100, "...")); ?></p>
+                                <p><strong>Fecha:</strong> <?php echo $fecha_formateada; ?></p>
                                 <a href="../noticias/detalle.php?id=<?php echo $noticia['id_noticias']; ?>">
                                     <button>Ver más</button>
                                 </a>
