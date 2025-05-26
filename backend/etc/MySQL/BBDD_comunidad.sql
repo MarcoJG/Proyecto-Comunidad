@@ -38,6 +38,7 @@ CREATE TABLE IF NOT EXISTS eventos (
 );
 
 CREATE TABLE IF NOT EXISTS votacion (
+    titulo VARCHAR(255) NOT NULL,
     id_votacion INT AUTO_INCREMENT PRIMARY KEY,
     descripcion VARCHAR(255) NOT NULL,
     fecha_inicio DATETIME,
@@ -200,3 +201,10 @@ WHERE valor_destacado IS NULL;
 
 ALTER TABLE noticias ADD imagen VARCHAR(255) DEFAULT '/Proyecto-Comunidad/web/etc/assets/img/bloque.jpg';
 ALTER TABLE eventos ADD imagen VARCHAR(255) DEFAULT '/Proyecto-Comunidad/web/etc/assets/img/bloque.jpg';
+
+CREATE TABLE opciones_votacion (
+    id_opcion INT AUTO_INCREMENT PRIMARY KEY,
+    votacion_id INT NOT NULL,
+    texto_opcion VARCHAR(255) NOT NULL,
+    FOREIGN KEY (votacion_id) REFERENCES votacion(id_votacion) ON DELETE CASCADE);
+
