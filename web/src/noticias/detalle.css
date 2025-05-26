@@ -61,3 +61,44 @@ body.fondo-cuerpo {
     color: #243D51;
     font-size: 18px;
 }
+button.boton-noticia {
+    all: unset;
+    background-color: #243D51 !important;
+    color: #fff !important;
+    padding: 10px 20px !important;
+    text-decoration: none !important;
+    border: none !important;
+    cursor: pointer !important;
+}
+
+.boton-noticia:hover {
+    background-color: #1c2f3d !important;
+}
+
+form {
+    margin-top: 30px;
+}
+
+.botones-admin {
+    display: flex;
+    gap: 15px;
+    margin-top: 30px;
+}
+
+.boton-noticia-volver {
+    
+    background-color: #243D51 !important;
+    color: #fff !important;
+    padding: 10px 20px !important;
+    border: none !important;
+    cursor: pointer !important;
+    text-decoration: none !important;
+    display: inline-block !important;  
+    width: auto !important;           
+}
+
+.contenedor-volver {
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 20px;
+}

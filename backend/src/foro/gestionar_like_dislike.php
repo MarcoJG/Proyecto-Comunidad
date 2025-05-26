@@ -2,7 +2,9 @@
 header('Content-Type: application/json');
 header('Access-Control-Allow-Origin: *');
 header('Access-Control-Allow-Methods: POST');
-session_start(); // Iniciar sesión
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+} // Iniciar sesión
 require_once '../conexion_BBDD/conexion_db_pm.php';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {

@@ -54,7 +54,6 @@ main {
     padding: 10px 20px;
     text-decoration: none;
     border: none;
-    border-radius: 5px;
     cursor: pointer;
     font-size: 13px;
     display: inline-block;
@@ -80,6 +79,15 @@ main {
     padding: 15px;
     border: 1px solid #ddd;
     margin-top: 10px;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.evento:hover {
+    transform: translateY(-5px); 
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15); 
+    border-color: #bbb; 
+    background-color: #fdfdfd; 
+    cursor: default; 
 }
 
 
@@ -126,3 +134,9 @@ main {
     gap: 5px; 
 }
 
+.noticia-imagen img {
+    width: 150px;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 0;
+}

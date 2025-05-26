@@ -181,7 +181,6 @@ INSERT INTO aforo_zona (zona, aforo_maximo) VALUES
 ('Sala de reuniones', 1),
 ('Barbacoa', 2);
 
-ALTER TABLE eventos ADD COLUMN es_destacada TINYINT(1) DEFAULT 0;
 
 ALTER TABLE eventos
 ADD COLUMN valor_destacado TINYINT DEFAULT 5,
@@ -205,3 +204,5 @@ CREATE TABLE opciones_votacion (
     votacion_id INT NOT NULL,
     texto_opcion VARCHAR(255) NOT NULL,
     FOREIGN KEY (votacion_id) REFERENCES votacion(id_votacion) ON DELETE CASCADE);
+ALTER TABLE noticias ADD imagen VARCHAR(255) DEFAULT '/Proyecto-Comunidad/web/etc/assets/img/bloque.jpg';
+ALTER TABLE eventos ADD imagen VARCHAR(255) DEFAULT '/Proyecto-Comunidad/web/etc/assets/img/bloque.jpg';

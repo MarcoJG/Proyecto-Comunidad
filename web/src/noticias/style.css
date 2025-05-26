@@ -79,7 +79,27 @@ header {
     margin-top: 5px;
 }
 
+.estrella {
+    font-size: 24px;
+    color: #ccc;
+    cursor: pointer;
+    margin-left: 10px;
+    user-select: none;
+    transition: color 0.3s ease;
+}
 
+.estrella.seleccionada {
+    color: #f39c12; 
+}
+
+.eventos-destacado {
+    margin-top: 10px;
+}
+
+.estrellas {
+    display: flex;
+    gap: 5px; 
+}
 
 .boton-noticia {
     background-color: #243D51;
@@ -96,4 +116,23 @@ header {
     background-color: #1c2f3d;
 }
 
+.noticia {
+    display: flex;
+    gap: 20px;
+    background-color: #fff;
+    padding: 15px;
+    border: 1px solid #ddd;
+    margin-top: 10px;
+
+   
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.noticia:hover {
+    transform: translateY(-5px); 
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15); 
+    border-color: #bbb;
+    background-color: #fdfdfd; 
+    cursor: default;
+}
 

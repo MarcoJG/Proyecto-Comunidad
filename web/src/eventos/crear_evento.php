@@ -1,9 +1,9 @@
 <?php
 session_start();
 
-if (!isset($_SESSION['nombre_rol']) || $_SESSION['nombre_rol'] !== 'Admin') {
-    header("Location: ../../../web/src/eventos/acceso_denegado.php");
-    exit();
+if (!isset($_SESSION["nombre_rol"]) || !in_array($_SESSION["nombre_rol"], ["Admin", "Presidente"])) {
+    echo "<p>No tienes permiso para acceder a esta página.</p>";
+    exit;
 }
 
 // Recuperar datos del formulario en caso de error
@@ -52,15 +52,18 @@ unset($_SESSION['form_data']);
             echo "<p class='error'>$error_message</p>";
         }
         ?>
-        <form action="../../../backend/src/eventos/procesar_crear_evento.php" method="POST" class="formulario-evento">
+        <form action="../../../backend/src/eventos/procesar_crear_evento.php" method="POST" class="formulario-evento" enctype="multipart/form-data">
             <label for="titulo">Título del evento:</label>
             <input type="text" id="titulo" name="titulo" maxlength="100" required value="<?= htmlspecialchars($titulo_guardado) ?>">
+
+            <label for="descripcion">Descripción:</label>
+            <textarea id="descripcion" name="descripcion" maxlength="255" required><?= htmlspecialchars($descripcion_guardado) ?></textarea>
 
             <label for="fecha">Fecha del evento:</label>
             <input type="date" id="fecha" name="fecha" required min="<?= date('Y-m-d', strtotime('+1 day')) ?>" value="<?= htmlspecialchars($fecha_guardada) ?>">
 
-            <label for="descripcion">Descripción:</label>
-            <textarea id="descripcion" name="descripcion" maxlength="255" required><?= htmlspecialchars($descripcion_guardado) ?></textarea>
+            <label for="imagen">Imagen del evento:</label>
+            <input type="file" name="imagen" accept="image/*">
 
             <!-- Evento es destacado -->
             <label for="destacado">¿Es evento destacado?</label>
@@ -74,7 +77,11 @@ unset($_SESSION['form_data']);
                 </label>
             </div>
 
-            <button type="submit" class="boton-evento">Crear evento</button>
+            <div class="botones-formulario">
+                <button type="submit" class="boton-evento">Crear evento</button>
+                <a href="/Proyecto-Comunidad/web/src/eventos/index.php" class="boton-evento boton-secundario">Volver a Eventos</a>
+            </div>
+
         </form>
     </main>
 
