@@ -23,15 +23,9 @@ $zona = isset($_GET['zona']) ? htmlspecialchars($_GET['zona']) : 'Zona desconoci
 </head>
 <body class="fondo-cuerpo">
 
-<header>
-    <?php
-        define('BASE_PATH', '../header/');
-        include(BASE_PATH . 'cabecera.php');
-    ?>
-</header>
 
-<main class="formulario-reserva">
-    <h2>Reservar: <?php echo $zona; ?></h2>
+<main class="formulario-reserva"> 
+    <h2>Reservar: <?php echo $zona; ?></h2> <br>
 
     <form action="../../../backend/src/reservas/procesar_reserva.php" method="POST">
         <input type="hidden" name="zona" value="<?php echo $zona; ?>">
@@ -46,8 +40,12 @@ $zona = isset($_GET['zona']) ? htmlspecialchars($_GET['zona']) : 'Zona desconoci
             <option value="tarde">Tarde</option>
         </select>
 
-        <button class= "boton-reserva" type="submit">Reservar</button>
-    </form>
+        <div class="botones-reserva">
+    <button class="boton-reserva" type="submit">Reservar</button>
+    <a href="/../Proyecto-Comunidad/web/src/reservas/reservas.php" class="boton-reserva boton-volver">Volver a Reservas</a>
+</div>
+
+            </form>
 </main>
 
 <script>

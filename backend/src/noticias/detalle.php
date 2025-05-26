@@ -4,7 +4,7 @@ if (session_status() === PHP_SESSION_NONE) {
 }
 include __DIR__ . '/../conexion_BBDD/conexion_db_pm.php';
 
-// Verificar si el usuario tiene permiso para editar/borrar (Admin o Presidente)
+// Verificar si el usuario puede editar/borrar (Admin o Presidente)
 $usuarioPuedeEditar = isset($_SESSION['id_usuario']) && isset($_SESSION["nombre_rol"]) && in_array($_SESSION["nombre_rol"], ["Admin", "Presidente"]);
 
 if (isset($_GET['id'])) {
@@ -16,18 +16,20 @@ if (isset($_GET['id'])) {
     if ($resultado->rowCount() > 0) {
         $noticia = $resultado->fetch();
 
-         // Verificar si la imagen está vacía y asignar la ruta por defecto si es necesario
+        // Verificar si la imagen está vacía y asignar la ruta por defecto si es necesario
         $imagen = !empty($noticia['imagen']) ? $noticia['imagen'] : '/Proyecto-Comunidad/web/etc/assets/img/bloque.jpg';
 
         // Escapar la ruta de la imagen
         $imagen = htmlspecialchars($imagen, ENT_QUOTES, 'UTF-8');
 
-
         echo "
-                    <form method='GET' action='../../../web/src/noticias/index.php'>
-                        <input type='hidden' name='id' value='$id_noticia'>
-                        <button type='submit' class='boton-noticia-volver'>Volver a Noticias</button>
-                    </form>
+            <div class='contenedor-volver'>
+                <form method='GET' action='../../../web/src/noticias/index.php'>
+                    <input type='hidden' name='id' value='$id_noticia'>
+                    <button type='submit' class='boton-noticia-volver'>Volver a Noticias</button>
+                </form>
+            </div>
+
             <div class='noticia-header'>
                 <div class='noticia-imagen'>
                     <img src='" . $imagen . "' alt='Imagen de la noticia'>
@@ -37,6 +39,7 @@ if (isset($_GET['id'])) {
                     <p class='detalle-noticia'>" . date('d/m/Y', strtotime($noticia['fecha'])) . "</p>
                 </div>
             </div>
+
             <div class='descripcion-noticia'>
                 <p>" . nl2br(htmlspecialchars($noticia['contenido'])) . "</p>
             </div>
@@ -59,7 +62,7 @@ if (isset($_GET['id'])) {
         }
 
     } else {
-        echo "<p>Noticia no encontrado.</p>";
+        echo "<p>Noticia no encontrada.</p>";
     }
 } else {
     echo "<p>ID de la noticia no proporcionado.</p>";
