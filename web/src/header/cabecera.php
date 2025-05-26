@@ -1,7 +1,16 @@
 <?php
-    session_start();
-    $basePath = '/Proyecto-Comunidad/';
 
+// Asegúrate de que la sesión se haya iniciado en los archivos principales que incluyen esta cabecera.
+// Si no es el caso, descomenta la siguiente línea.
+session_start(); // Es crucial que la sesión esté iniciada para acceder a $_SESSION
+
+$basePath = '/Proyecto-Comunidad/';
+
+// Lógica para verificar si el usuario es administrador
+$es_administrador = false;
+if (isset($_SESSION['nombre_rol']) && $_SESSION['nombre_rol'] === 'Admin') {
+    $es_administrador = true;
+}
 ?>
 
 <!DOCTYPE html>
