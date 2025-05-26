@@ -38,6 +38,7 @@ CREATE TABLE IF NOT EXISTS eventos (
 );
 
 CREATE TABLE IF NOT EXISTS votacion (
+    titulo VARCHAR(255) NOT NULL,
     id_votacion INT AUTO_INCREMENT PRIMARY KEY,
     descripcion VARCHAR(255) NOT NULL,
     fecha_inicio DATETIME,
