@@ -49,3 +49,36 @@ document.addEventListener('DOMContentLoaded', function() {
 
     getUserInfo(); // Obtener la información del usuario al cargar la página
 });
+
+    document.addEventListener("DOMContentLoaded", () => {
+  const hamburger = document.getElementById("hamburger");
+  const mobileMenu = document.getElementById("mobileMenu");
+
+  hamburger.addEventListener("click", () => {
+    hamburger.classList.toggle("active");
+    mobileMenu.classList.toggle("active");
+  });
+
+  const welcome = document.getElementById("welcome-message");
+  const welcomeMobile = document.getElementById("welcome-message-mobile");
+  const email = document.getElementById("user-email");
+  const emailMobile = document.getElementById("user-email-mobile");
+  const userInfoMobile = document.getElementById("user-info-mobile");
+  
+
+  if (welcome && welcomeMobile) welcomeMobile.textContent = welcome.textContent;
+  if (email && emailMobile) emailMobile.textContent = email.textContent;
+  if (userInfoMobile) userInfoMobile.style.display = "block";
+});
+
+  const dropdownButtons = document.querySelectorAll(".user-dropdown-btn");
+
+  dropdownButtons.forEach(button => {
+    button.addEventListener("click", () => {
+      const dropdownContent = button.nextElementSibling;
+      if (dropdownContent) {
+        dropdownContent.classList.toggle("show");
+      }
+    });
+  });
+    

@@ -69,7 +69,6 @@ button.boton-evento {
     padding: 10px 20px !important;
     text-decoration: none !important;
     border: none !important;
-    border-radius: 5px !important;
     cursor: pointer !important;
 }
 
@@ -86,3 +85,68 @@ form {
     gap: 15px;
     margin-top: 30px;
 }
+
+.boton-evento-volver {
+    all: unset;
+    background-color: #243D51 !important;
+    color: #fff !important;
+    padding: 10px 20px !important;
+    text-decoration: none !important;
+    border: none !important;
+    cursor: pointer !important;
+    margin-bottom: 2rem;
+    margin-top: -20px;
+    
+}
+
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 1000;
+  left: 0; top: 0;
+  width: 100%; height: 100%;
+  background-color: rgba(0,0,0,0.5);
+}
+
+.modal-contenido {
+  background-color: white;
+  margin: 15% auto;
+  padding: 20px;
+  border-radius: 0px;
+  width: 300px;
+  text-align: center;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+}
+
+.modal-botones button {
+  margin: 10px;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 0px;
+  cursor: pointer;
+}
+
+#confirmarBtn {
+  background-color: #1c2f3d;
+  color: white;
+}
+
+#cancelarBtn {
+  background-color: #f1aa37;
+  color: white;
+}
+
+.contenedor-volver {
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 1rem;
+}
+
+.detalle-evento-wrapper {
+    background-color: #fff;
+    padding: 40px;
+    border-radius: 8px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.08);
+    margin-bottom: 40px;
+}
+

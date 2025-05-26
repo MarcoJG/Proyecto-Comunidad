@@ -6,11 +6,11 @@ if (!isset($_SESSION['nombre_rol']) || $_SESSION['nombre_rol'] !== 'Admin') {
     exit();
 }
 
-
 // Recuperar datos del formulario en caso de error
 $titulo_guardado = $_SESSION['form_data']['titulo'] ?? '';
-$descripcion_guardado = $_SESSION['form_data']['descripcion'] ?? '';
+$descripcion_guardado = $_SESSION['form_data']['contenido'] ?? '';
 $fecha_guardada = $_SESSION['form_data']['fecha'] ?? '';
+$destacado_guardado = $_SESSION['form_data']['destacado'] ?? 0;
 
 // Limpiar datos de sesión después de usarlos
 unset($_SESSION['form_data']);
@@ -22,7 +22,7 @@ unset($_SESSION['form_data']);
 <head>
     <meta charset="UTF-8">
     <title>Crear Noticia</title>
-    <link rel="stylesheet" href="/../Proyecto-Comunidad/web/src/noticias/crear_noticia.css">
+    <link rel="stylesheet" href="/Proyecto-Comunidad/web/src/noticias/crear_noticia.css">
 </head>
 
 <body class="fondo-cuerpo">
@@ -52,17 +52,35 @@ unset($_SESSION['form_data']);
             echo "<p class='error'>$error_message</p>";
         }
         ?>
-        <form action="../../../backend/src/noticias/procesar_crear_noticia.php" method="POST" class="formulario-noticia">
+
+        <form action="../../../backend/src/noticias/procesar_crear_noticia.php" method="POST" class="formulario-noticia" enctype="multipart/form-data">
             <label for="titulo">Título de la noticia:</label>
             <input type="text" id="titulo" name="titulo" maxlength="100" required value="<?= htmlspecialchars($titulo_guardado) ?>">
+
+            <label for="contenido">Descripción:</label>
+            <textarea id="contenido" name="contenido" maxlength="255" required><?= htmlspecialchars($descripcion_guardado) ?></textarea>
 
             <label for="fecha">Fecha de la noticia:</label>
             <input type="date" id="fecha" name="fecha" required min="<?= date('Y-m-d', strtotime('+1 day')) ?>" value="<?= htmlspecialchars($fecha_guardada) ?>">
 
-            <label for="descripcion">Descripción:</label>
-            <textarea id="descripcion" name="descripcion" maxlength="255" required><?= htmlspecialchars($descripcion_guardado) ?></textarea>
+            <label for="imagen">Imagen de la noticia:</label>
+            <input type="file" name="imagen" accept="image/*">
 
-            <button type="submit" class="boton-noticia">Crear noticia</button>
+            <label for="destacado">¿Es noticia destacada?</label>
+            <div class="checkbox-destacado">
+                <label>
+                    <input type="radio" name="destacado" value="1" <?= $destacado_guardado == 1 ? 'checked' : '' ?>> Sí
+                </label>
+                <label>
+                    <input type="radio" name="destacado" value="0" <?= $destacado_guardado == 0 ? 'checked' : '' ?>> No
+                </label>
+            </div>
+
+           
+            <div class="botones-formulario">
+                <button type="submit" class="boton-noticia">Crear noticia</button>
+                <a href="/Proyecto-Comunidad/web/src/noticias/index.php" class="boton-noticia boton-secundario">Volver a noticias</a>
+            </div>
         </form>
     </main>
 

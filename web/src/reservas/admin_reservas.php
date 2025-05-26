@@ -1,83 +1,100 @@
+<?php
+session_start();
+
+$rolPermitido = in_array($_SESSION["nombre_rol"] ?? '', ["Admin", "Presidente"]);
+
+if (!$rolPermitido) {
+    header("Location: ../eventos/acceso_denegado.php");
+    exit();
+}
+?>
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gestión de Reservas</title>
+    <title>Reservas Activas de la Comunidad</title>
+    <link rel="stylesheet" href="admin_reservas.css"> 
+   
 </head>
-<body>
-    <h1>Gestión de Reservas</h1>
+<body class="fondo-cuerpo">
+    
 
-    <!-- Filtro de usuario -->
-    <form id="filtro-form">
-        <label for="usuario_id">Filtrar por Usuario:</label>
-        <select name="usuario_id" id="usuario_id">
-            <option value="">--Todos los usuarios--</option>
-        </select>
-        <button type="submit">Filtrar</button>
-    </form>
+    <main class="contenedor-principal">
+    <div class="titulo-con-boton">
+        <h2 class="titulo-eventos">Reservas Activas de la Comunidad</h2>
+        <a href="reservas.php" class="boton-evento boton-volver">Volver a Reservas</a>
+    </div>
+    <div id="contenedor-reservas">Cargando reservas...</div>
+</main>
 
-    <!-- Tabla de Reservas -->
-    <h2>Reservas</h2>
-    <table id="tabla-reservas" border="1">
-        <thead>
-            <tr>
-                <th>ID Reserva</th>
-                <th>Usuario</th>
-                <th>Fecha Reserva</th>
-                <th>Detalles</th>
-            </tr>
-        </thead>
-        <tbody>
-            <!-- Aquí se llenarán las filas con JavaScript -->
-        </tbody>
-    </table>
+
+    <footer>
+        <iframe src="../footer/FOOTER.html" frameborder="0" width="100%" height="300px"></iframe>
+    </footer>
 
     <script>
-        // Función para cargar las reservas
-        async function cargarReservas(usuarioId = '') {
-            const url = `../backend/admin_reservas.php?usuario_id=${usuarioId}`;
-            const response = await fetch(url);
-            const reservas = await response.json();
-            
-            // Limpiar la tabla
-            const tabla = document.getElementById('tabla-reservas').getElementsByTagName('tbody')[0];
-            tabla.innerHTML = '';
-            
-            // Rellenar la tabla con reservas
-            reservas.forEach(reserva => {
-                const row = tabla.insertRow();
-                row.insertCell(0).textContent = reserva.id_reserva;
-                row.insertCell(1).textContent = reserva.usuario;
-                row.insertCell(2).textContent = reserva.fecha_reserva;
-                row.insertCell(3).textContent = reserva.detalles;
+    document.addEventListener("DOMContentLoaded", () => {
+        fetch("/Proyecto-Comunidad/backend/src/reservas/admin_reservas_logic.php")
+            .then(res => res.json())
+            .then(data => {
+                const contenedor = document.getElementById("contenedor-reservas");
+
+                if (data.error) {
+                    contenedor.innerHTML = `<p style="color:red;">${data.error}</p>`;
+                    return;
+                }
+
+                if (data.length === 0) {
+                    contenedor.innerHTML = "<p>No hay reservas activas.</p>";
+                    return;
+                }
+
+                // Agrupar reservas por zona
+                const zonasAgrupadas = {};
+
+                data.forEach(reserva => {
+                    const zona = reserva.zona;
+
+                    if (!zonasAgrupadas[zona]) {
+                        zonasAgrupadas[zona] = [];
+                    }
+
+                    zonasAgrupadas[zona].push(reserva);
+                });
+
+                // Generar HTML
+                let htmlFinal = '';
+
+                for (const [zona, reservas] of Object.entries(zonasAgrupadas)) {
+                    htmlFinal += `<h3 style="margin-top: 30px; text-align: center;">Zona: ${zona}</h3>`;
+                    htmlFinal += `<table>
+                        <thead>
+                            <tr>
+                                <th>Usuario</th>
+                                <th>Fecha y Hora</th>
+                            </tr>
+                        </thead>
+                        <tbody>`;
+
+                    reservas.forEach(reserva => {
+                        htmlFinal += `<tr>
+                            <td>${reserva.nombre_usuario}</td>
+                            <td>${new Date(reserva.fecha_reserva).toLocaleString()}</td>
+                        </tr>`;
+                    });
+
+                    htmlFinal += `</tbody></table>`;
+                }
+
+                contenedor.innerHTML = htmlFinal;
+            })
+            .catch(err => {
+                console.error("❌ Error al hacer fetch:", err);
+                document.getElementById("contenedor-reservas").innerHTML = `<p style="color:red;">Error al cargar las reservas.</p>`;
             });
-        }
+    });
+</script>
 
-        // Cargar usuarios para el filtro
-        async function cargarUsuarios() {
-            const response = await fetch('../backend/api_usuarios.php'); 
-            const usuarios = await response.json();
-            const select = document.getElementById('usuario_id');
-            usuarios.forEach(usuario => {
-                const option = document.createElement('option');
-                option.value = usuario.id;
-                option.textContent = usuario.nombre;
-                select.appendChild(option);
-            });
-        }
-
-        cargarUsuarios();
-
-        // Manejar filtro
-        document.getElementById('filtro-form').addEventListener('submit', function(event) {
-            event.preventDefault();
-            const usuarioId = document.getElementById('usuario_id').value;
-            cargarReservas(usuarioId);
-        });
-
-        // Cargar las reservas al inicio
-        cargarReservas();
-    </script>
 </body>
 </html>

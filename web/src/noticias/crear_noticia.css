@@ -1,14 +1,13 @@
 * {
     font-family: Arial, sans-serif;
+    box-sizing: border-box;
 }
-
 
 .fondo-cuerpo {
     background-color: #f5f5f5;
     margin: 0;
     padding: 0;
 }
-
 
 .contenedor-principal {
     max-width: 800px;
@@ -18,14 +17,19 @@
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-
-.titulo-noticia {
+.titulo-noticia,
+.titulo-noticias {
     color: #243D51;
     font-size: 24px;
     text-align: left;
     margin-bottom: 20px;
 }
 
+.formulario-noticia {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
 
 .formulario-noticia label {
     font-size: 16px;
@@ -33,7 +37,6 @@
     margin-bottom: 8px;
     display: block;
 }
-
 
 .formulario-noticia input,
 .formulario-noticia textarea {
@@ -45,45 +48,69 @@
     font-size: 16px;
 }
 
-
 .formulario-noticia input[type="date"] {
     background-color: #f9f9f9;
 }
-
-
-.formulario-noticia button {
-    background-color: #243D51;
-    color: #fff;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 0px;
-    cursor: pointer;
-    font-size: 16px;
-    transition: background-color 0.3s ease;
-}
-
-
-.formulario-noticia button:hover {
-    background-color: #1c2f3d;
-}
-
-
-.formulario-noticia .detalle-noticia {
-    color: #9c907d;
-    font-size: 14px;
-    margin-top: 5px;
-}
-
-
-.formulario-noticia {
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-}
-
 
 .formulario-noticia input:focus,
 .formulario-noticia textarea:focus {
     border-color: #243D51;
     outline: none;
+}
+
+.checkbox-destacado {
+    margin-top: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.checkbox-destacado label {
+    font-size: 16px;
+    color: #243D51;
+    margin-bottom: 5px;
+    display: flex;
+    align-items: center;
+}
+
+.checkbox-destacado input[type="radio"] {
+    margin-right: 10px;
+}
+
+.botones-formulario {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-top: 10px;
+}
+
+.boton-noticia,
+.boton-noticia:link,
+.boton-noticia:visited,
+.boton-noticia:hover {
+    display: inline-block;
+    background-color: #243D51;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 0;
+    cursor: pointer;
+    font-size: 16px;
+    text-decoration: none;
+    transition: background-color 0.3s ease;
+}
+
+.boton-noticia.boton-secundario {
+    background-color: #9c907d !important;
+    color: white !important;
+}
+
+.boton-noticia.boton-secundario:hover {
+    background-color: #7a6f62 !important;
+}
+
+.error {
+    color: red;
+    font-weight: bold;
+    margin-bottom: 20px;
 }

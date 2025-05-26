@@ -1,5 +1,7 @@
 <?php
-session_start();
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
 
 include __DIR__ . '/../conexion_BBDD/conexion_db_pm.php';
 
@@ -49,7 +51,48 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         header("Location: ../../../web/src/eventos/crear_evento.php?error=fecha_invalida");
         exit();
     }
+    // Imagen por defecto
+    $rutaImagenBD = '/Proyecto-Comunidad/web/etc/assets/img/bloque.jpg';
 
+    // Procesar imagen si se ha subido
+    if (isset($_FILES['imagen']) && $_FILES['imagen']['error'] === UPLOAD_ERR_OK) {
+        $nombreArchivo = $_FILES['imagen']['name'];
+        $tipoArchivo = $_FILES['imagen']['type'];
+        $rutaTemporal = $_FILES['imagen']['tmp_name'];
+
+        $permitidos = ['image/jpeg', 'image/png', 'image/gif', 'image/webp'];
+    if (in_array($tipoArchivo, $permitidos)) {
+        $hashArchivo = md5_file($rutaTemporal);
+        $directorioDestino = __DIR__ . '/../../../web/etc/assets/img/';
+        $archivosExistentes = scandir($directorioDestino);
+        $imagenEncontrada = false;
+
+        foreach ($archivosExistentes as $archivo) {
+            if (in_array(pathinfo($archivo, PATHINFO_EXTENSION), ['jpg', 'jpeg', 'png', 'gif', 'webp'])) {
+                $rutaCompleta = $directorioDestino . $archivo;
+                if (is_file($rutaCompleta) && md5_file($rutaCompleta) === $hashArchivo) {
+                    $rutaImagenBD = '/Proyecto-Comunidad/web/etc/assets/img/' . $archivo;
+                    $imagenEncontrada = true;
+                    break;
+                }
+            }
+        }
+
+        if (!$imagenEncontrada) {
+            $nombreUnico = basename($nombreArchivo); // Puedes cambiar por $hashArchivo si prefieres
+            $rutaDestino = $directorioDestino . $nombreUnico;
+
+            // Crear carpeta si no existe
+            if (!is_dir(dirname($rutaDestino))) {
+                mkdir(dirname($rutaDestino), 0755, true);
+            }
+
+            if (move_uploaded_file($rutaTemporal, $rutaDestino)) {
+                $rutaImagenBD = '/Proyecto-Comunidad/web/etc/assets/img/' . $nombreUnico;
+            }
+        }
+    }
+    }
     try {
         // Verificar si ya existe un evento destacado
         if ($destacado == 1) {
@@ -72,15 +115,16 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         }
 
         // Insertar si no hay conflicto
-        $sql = "INSERT INTO eventos (titulo, descripcion, fecha, id_usuario, es_destacada)
-                VALUES (:titulo, :descripcion, :fecha, :id_usuario, :es_destacada)";
+        $sql = "INSERT INTO eventos (titulo, descripcion, fecha, id_usuario, es_destacada, imagen)
+                VALUES (:titulo, :descripcion, :fecha, :id_usuario, :es_destacada, :imagen)";
         $stmt = $pdo->prepare($sql);
         $stmt->execute([
             ':titulo' => $titulo,
             ':descripcion' => $descripcion,
             ':fecha' => $fecha,
             ':id_usuario' => $id_usuario,
-            ':es_destacada' => $destacado
+            ':es_destacada' => $destacado,
+            ':imagen' => $rutaImagenBD
         ]);
 
         header("Location: /Proyecto-Comunidad/web/src/eventos/index.php");
