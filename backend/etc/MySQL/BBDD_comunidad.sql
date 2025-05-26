@@ -217,4 +217,3 @@ CREATE TABLE opciones_votacion (
     votacion_id INT NOT NULL,
     texto_opcion VARCHAR(255) NOT NULL,
     FOREIGN KEY (votacion_id) REFERENCES votacion(id_votacion) ON DELETE CASCADE);
-ALTER TABLE eventos ADD imagen VARCHAR(255) DEFAULT '/Proyecto-Comunidad/web/etc/assets/img/bloque.jpg';
